@@ -1,0 +1,1 @@
+ffmpeg -y -noauto_conversion_filters -print_graphs_file mermaid.mmd -print_graphs_format mermaid -i "U:\TestMedia\Test\Test.mkv" -i "U:\TestMedia\Test\Test.en.srt" -i "U:\TestMedia\subtitle_burnin\subtitlevideo.ass" -map 0:0 -c:v copy -map 0:3 -c:a:0 copy -map 0:4 -c:a:1 copy -map 0:7 -c:s:0 dvbsub -map 1:0 -c:s:1 ass -map 2:0 -c:s:2 copy out2.mkv

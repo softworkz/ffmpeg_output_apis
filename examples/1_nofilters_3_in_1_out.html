@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>FFmpeg Graph</title>
+</head>
+<body>
+  <style>
+html {
+    font-family: Roboto;
+    color: #666;
+    height: 100%;
+}
+body {
+    padding: 1.7rem 1.7rem 3.5rem 1.7rem;
+    background-color: #f9f9f9;
+    margin: 0;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+div#banner {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin-left: 0.6vw;
+    margin-bottom: 1.5rem;
+}
+div#header {
+    background-image: url(https://trac.ffmpeg.org/ffmpeg-logo.png);
+    aspect-ratio: 1 / 1;
+    width: 1.6rem;
+    background-size: cover;
+}
+h1 {
+    margin: 0 0.5rem;
+    font-size: 1.2rem;
+}
+pre.mermaid {
+    flex: 1;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    overflow: overlay;
+    color: transparent;
+    box-shadow: 2px 2px 25px 0px #00000010;
+}
+pre.mermaid svg {
+    max-width: unset !important;
+    width: auto;
+    height: auto;
+    margin: 0;
+}
+pre.mermaid svg * {
+    user-select: none;
+}
+  </style>
+  <div id="banner">
+    <div id="header"></div>
+    <h1>FFmpeg Execution Graph</h1>
+  </div>
+  <pre class="mermaid">
+%%{init: {"theme": "base","curve": "stepAfter","rankSpacing": 10,"nodeSpacing": 10,"themeCSS": ".root { --ff-colvideo: #6eaa7b; --ff-colaudio: #477fb3; --ff-colsubtitle: #ad76ab; --ff-coltext: #666; } .cluster span { color: var(--ff-coltext); } .node.ff-filter rect { rx: 10; ry: 10; stroke-width: 1px; stroke: #d3d3d3; fill:url(#ff-filtergradient); filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.1));} .node.ff-decoder rect, .node.ff-encoder rect { stroke-width: 1px; stroke: #d3d3d3; fill:url(#ff-filtergradient); filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.1));} .node.ff-inputfile .label foreignObject, .node.ff-outputfile .label foreignObject { overflow: visible; } .cluster.ff-inputfile .cluster-label foreignObject div:not(foreignObject div div), .cluster.ff-outputfile .cluster-label foreignObject div:not(foreignObject div div) { display: table !important; } .nodeLabel div.ff-inputfile, .nodeLabel div.ff-outputfile { font-size: 1.1rem; font-weight: 500; min-width: 14rem; width: 100%; display: flex; color: var(--ff-coltext); margin-top: 0.1rem; line-height: 1.35; padding-bottom: 1.9rem; } .nodeLabel div.ff-outputfile { flex-direction: row-reverse; } .ff-inputfile .index, .ff-outputfile .index { order: 2; color: var(--ff-coltext); text-align: center; border-radius: 0.45rem; border: 0.18em solid #666666db; font-weight: 600; padding: 0 0.3em; opacity: 0.8; } .ff-inputfile .index::before { content: \'In \'; } .ff-outputfile .index::before { content: \'Out \'; } .ff-inputfile .demuxer_name, .ff-outputfile .muxer_name { flex: 1; order: 1; font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: center; max-width: 8rem; align-content: center; margin: 0.2rem 0.4rem 0 0.4rem } .ff-inputfile .file_extension, .ff-outputfile .file_extension { order: 0; background-color: #888; color: white; text-align: center; border-radius: 0.45rem; font-weight: 600; padding: 0 0.4em; align-content: center; opacity: 0.8; } .ff-inputfile .url, .ff-outputfile .url { order: 4; text-align: center; position: absolute; left: 0; right: 0; bottom:0.75rem; font-size: 0.7rem; font-weight: 400; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin: 0 0.3rem; direction: rtl; color: #999; } .node.ff-inputstream rect, .node.ff-outputstream rect { padding: 0 !important; margin: 0 !important; border: none !important; fill: #fcfcfc; stroke: #e5e5e5 !important; height: 2.7rem; transform: translateY(0.2rem); filter: none; rx: 3; ry: 3;} .node.ff-inputstream .label foreignObject, .node.ff-outputstream .label foreignObject { transform: translateY(-0.2%); overflow: visible; } .node.ff-inputstream .label foreignObject div:not(foreignObject div div), .node.ff-outputstream .label foreignObject div:not(foreignObject div div) { display: block !important; line-height: 1.5 !important; } .nodeLabel div.ff-inputstream, .nodeLabel div.ff-outputstream { font-size: 1.0rem; font-weight: 500; min-width: 12rem; width: 100%; display: flex; } .nodeLabel div.ff-outputstream { flex-direction: row-reverse; } .ff-inputstream .name, .ff-outputstream .name { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: left; align-content: center; margin-bottom: -0.15rem; } .ff-inputstream .index, .ff-outputstream .index { flex: 0 0 1.4rem; background-color: #888; color: white; text-align: center; border-radius: 0.3rem; font-weight: 600; margin-right: -0.3rem; margin-left: 0.4rem; opacity: 0.8; } .ff-outputstream .index { margin-right: 0.6rem; margin-left: -0.4rem; } .ff-inputstream::before, .ff-outputstream::before { font-variant-emoji: text; flex: 0 0 2rem; margin-left: -0.8rem; margin-right: 0.2rem; } .ff-outputstream::before { margin-left: 0.2rem; margin-right: -0.6rem; } .ff-inputstream.video::before, .ff-outputstream.video::before { content: \'\\239A\'; color: var(--ff-colvideo); font-size: 2.25rem; line-height: 0.5; font-weight: bold; } .ff-inputstream.audio::before, .ff-outputstream.audio::before { content: \'\\1F39D\'; color: var(--ff-colaudio); font-size: 1.75rem; line-height: 0.9; } .ff-inputstream.subtitle::before, .ff-outputstream.subtitle::before { content: \'\\1AC\'; color: var(--ff-colsubtitle); font-size: 1.2rem; line-height: 1.1; transform: scaleX(1.5); margin-top: 0.050rem; } .ff-inputstream.attachment::before, .ff-outputstream.attachment::before { content: \'\\1F4CE\'; font-size: 1.3rem; line-height: 1.15; } .ff-inputstream.data::before, .ff-outputstream.data::before { content: \'\\27E8\\2219\\2219\\2219\\27E9\'; font-size: 1.15rem; line-height: 1.17; letter-spacing: -0.3px; } path.flowchart-link[id|=\'video\'] { stroke: var(--ff-colvideo); } path.flowchart-link[id|=\'audio\'] { stroke: var(--ff-colaudio); } path.flowchart-link[id|=\'subtitle\'] { stroke: var(--ff-colsubtitle); } marker.marker path { fill: context-stroke; } .edgeLabel foreignObject { transform: translateY(-1rem); } .edgeLabel p { background: transparent; white-space: nowrap; margin: 1rem 0.5rem !important; font-weight: 500; color: var(--ff-coltext); } .edgeLabel, .labelBkg { background: transparent;} .edgeLabels .edgeLabel *{ font-size: 0.8rem;} .node.ff-filter .label foreignObject { transform: translateY(-0.4rem); overflow: visible; } .nodeLabel div.ff-filter { font-size: 1.0rem; font-weight: 500; text-transform: uppercase; min-width: 5.5rem; margin-bottom: 0.5rem; } .nodeLabel div.ff-filter span { color: inherit; } .ff-inputfiles rect, .ff-outputfiles rect, .ff-inputstreams rect, .ff-outputstreams rect, .ff-decoders rect, .ff-encoders rect { stroke-width: 0; stroke: transparent; filter: none !important; fill: transparent !important; display: none !important; } .cluster rect { stroke: #dfdfdf !important; transform: translateY(-2.3rem); filter: drop-shadow( 1px 2px 2px rgba(185,185,185,0.2)) !important; rx: 8; ry: 8; } .cluster.ff-inputfile rect, .cluster.ff-outputfile rect { transform: translateY(-1.8rem); } .cluster.ff-filters rect { stroke-dasharray: 6 !important; stroke-width: 1.3px; stroke: #d1d1d1 !important; filter: none !important; } .cluster-label { font-size: 1.1rem; } .cluster-label .nodeLabel { display: block; font-weight: 500; color: var(--ff-coltext); } .cluster-label div { max-width: unset !important; padding: 3px; } .cluster.ff-filters div.ff-filters .id { display: none; } .cluster.ff-filters div.ff-filters .name { margin-right: 0.5rem; font-size: 0.9rem; } .cluster.ff-filters div.ff-filters .description { font-weight: 400; font-size: 0.75rem; vertical-align: middle; color: #777;     font-family: Cascadia Code, Lucida Console, monospace; } .nodeLabel div.ff-decoder, .nodeLabel div.ff-encoder { font-size: 0.85rem; font-weight: 500; min-width: 3.5rem; } .cluster-label foreignObject { transform: translateY(-0.7rem); } ","fontFamily": "Roboto,Segoe UI,sans-serif","themeVariables": { "clusterBkg": "white", "primaryBorderColor": "gray", "lineColor": "gray", "secondaryTextColor": "gray", "tertiaryBorderColor": "gray", "primaryTextColor": "#666", "secondaryTextColor": "red" },"flowchart": { "subGraphTitleMargin": { "top": -15, "bottom": 20 }, "diagramPadding": 20, "curve": "stepAfter" } }}%%
+
+flowchart LR
+  gradient_def@{ shape: text, label: "<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"><defs><linearGradient id="ff-filtergradient" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:hsla(0, 0%, 30%, 0.02);"/><stop offset="50%" style="stop-color:hsla(0, 0%, 30%, 0);"/><stop offset="100%" style="stop-color:hsla(0, 0%, 30%, 0.05);"/></linearGradient></defs></svg>" }
+
+
+  subgraph G0_Inputs["<div class="ff-inputfiles"></div>"]
+
+    subgraph Input_2["<div class="ff-inputfile"><span class="index">2</span><span class="demuxer_name">ass</span><span class="file_extension">ass</span><span class="url">U:\TestMedia\subtitle_burnin\subtitlevideo.ass</span></div>"]
+
+      subgraph InputStreams_2["<div class="ff-inputstreams"></div>"]
+
+        r_in_2_0("<div class="ff-inputstream subtitle"><span class="name">ASS (Advanced SSA) subtitle</span><span class="index">0</span></div>"):::ff-inputstream
+      end
+      class InputStreams_2 ff-inputstreams
+    end
+    class Input_2 ff-inputfile
+
+    subgraph Input_1["<div class="ff-inputfile"><span class="index">1</span><span class="demuxer_name">srt</span><span class="file_extension">srt</span><span class="url">U:\TestMedia\Test\Test.en.srt</span></div>"]
+
+      subgraph InputStreams_1["<div class="ff-inputstreams"></div>"]
+
+        r_in_1_0("<div class="ff-inputstream subtitle"><span class="name">SubRip subtitle</span><span class="index">0</span></div>"):::ff-inputstream
+      end
+      class InputStreams_1 ff-inputstreams
+    end
+    class Input_1 ff-inputfile
+
+    subgraph Input_0["<div class="ff-inputfile"><span class="index">0</span><span class="demuxer_name">matroska,webm</span><span class="file_extension">mkv</span><span class="url">U:\TestMedia\Test.mkv</span></div>"]
+
+      subgraph InputStreams_0["<div class="ff-inputstreams"></div>"]
+
+        r_in_0_0("<div class="ff-inputstream video"><span class="name">H.265 / HEVC (High Efficiency Video Coding)</span><span class="index">0</span></div>"):::ff-inputstream
+
+        r_in_0_1("<div class="ff-inputstream audio"><span class="name">TrueHD</span><span class="index">1</span></div>"):::ff-inputstream
+
+        r_in_0_2("<div class="ff-inputstream audio"><span class="name">TrueHD</span><span class="index">2</span></div>"):::ff-inputstream
+
+        r_in_0_3("<div class="ff-inputstream audio"><span class="name">ATSC A/52A (AC-3)</span><span class="index">3</span></div>"):::ff-inputstream
+
+        r_in_0_4("<div class="ff-inputstream audio"><span class="name">ATSC A/52A (AC-3)</span><span class="index">4</span></div>"):::ff-inputstream
+
+        r_in_0_5("<div class="ff-inputstream subtitle"><span class="name">HDMV Presentation Graphic Stream subtitles</span><span class="index">5</span></div>"):::ff-inputstream
+
+        r_in_0_6("<div class="ff-inputstream subtitle"><span class="name">HDMV Presentation Graphic Stream subtitles</span><span class="index">6</span></div>"):::ff-inputstream
+
+        r_in_0_7("<div class="ff-inputstream subtitle"><span class="name">HDMV Presentation Graphic Stream subtitles</span><span class="index">7</span></div>"):::ff-inputstream
+
+        r_in_0_8("<div class="ff-inputstream video"><span class="name">Motion JPEG</span><span class="index">8</span></div>"):::ff-inputstream
+
+        r_in_0_9("<div class="ff-inputstream attachment"><span class="name">Attachment</span><span class="index">9</span></div>"):::ff-inputstream
+      end
+      class InputStreams_0 ff-inputstreams
+    end
+    class Input_0 ff-inputfile
+  end
+  class G0_Inputs ff-inputfiles
+
+
+  subgraph G0_Decoders["<div class="ff-decoders"></div>"]
+
+    in_0_7(["<div class="ff-decoder subtitle"><span class="name">pgssub</span></div>"]):::ff-decoder
+
+    in_1_0(["<div class="ff-decoder subtitle"><span class="name">srt</span></div>"]):::ff-decoder
+  end
+  class G0_Decoders ff-decoders
+
+  r_in_0_7 subtitle-r_in_0_7-in_0_7@==> in_0_7
+  r_in_1_0 subtitle-r_in_1_0-in_1_0@==> in_1_0
+
+  subgraph G0_Encoders["<div class="ff-encoders"></div>"]
+
+    out__0_3(["<div class="ff-encoder subtitle"><span class="name">dvbsub</span></div>"]):::ff-encoder
+
+    out__0_4(["<div class="ff-encoder subtitle"><span class="name">ass</span></div>"]):::ff-encoder
+  end
+  class G0_Encoders ff-encoders
+
+  out__0_3 subtitle-out__0_3-r_out__0_3@==> r_out__0_3
+  out__0_4 subtitle-out__0_4-r_out__0_4@==> r_out__0_4
+
+  subgraph G0_Outputs["<div class="ff-outputfiles"></div>"]
+
+    subgraph Output_0["<div class="ff-outputfile"><span class="index">0</span><span class="muxer_name">matroska</span><span class="file_extension">mkv</span><span class="url">out2.mkv</span></div>"]
+
+      subgraph OutputStreams_0["<div class="ff-outputstreams"></div>"]
+
+        r_out__0_0("<div class="ff-outputstream video"><span class="name">H.265 / HEVC (High Efficiency Video Coding)</span><span class="index">0</span></div>"):::ff-outputstream
+
+        r_out__0_1("<div class="ff-outputstream audio"><span class="name">ATSC A/52A (AC-3)</span><span class="index">1</span></div>"):::ff-outputstream
+
+        r_out__0_2("<div class="ff-outputstream audio"><span class="name">ATSC A/52A (AC-3)</span><span class="index">2</span></div>"):::ff-outputstream
+
+        r_out__0_3("<div class="ff-outputstream subtitle"><span class="name">DVB subtitles</span><span class="index">3</span></div>"):::ff-outputstream
+
+        r_out__0_4("<div class="ff-outputstream subtitle"><span class="name">ASS (Advanced SSA) subtitle</span><span class="index">4</span></div>"):::ff-outputstream
+
+        r_out__0_5("<div class="ff-outputstream subtitle"><span class="name">ASS (Advanced SSA) subtitle</span><span class="index">5</span></div>"):::ff-outputstream
+      end
+      class OutputStreams_0 ff-outputstreams
+    end
+    class Output_0 ff-outputfile
+  end
+  class G0_Outputs ff-outputfiles
+
+
+  r_in_0_0 video-r_in_0_0-r_out__0_0@== "<span>Stream Copy</span><br>&nbsp;" ==> r_out__0_0
+  r_in_0_3 audio-r_in_0_3-r_out__0_1@== "<span>Stream Copy</span><br>&nbsp;" ==> r_out__0_1
+  r_in_0_4 audio-r_in_0_4-r_out__0_2@== "<span>Stream Copy</span><br>&nbsp;" ==> r_out__0_2
+  in_0_7 subtitle-in_0_7-out__0_3@== "<span>Transcode</span><br>&nbsp;" ==> out__0_3
+  in_1_0 subtitle-in_1_0-out__0_4@== "<span>Transcode</span><br>&nbsp;" ==> out__0_4
+  r_in_2_0 subtitle-r_in_2_0-r_out__0_5@== "<span>Stream Copy</span><br>&nbsp;" ==> r_out__0_5
+
+  </pre>
+  <script type="module">
+    import vanillaJsWheelZoom from 'https://cdn.jsdelivr.net/npm/vanilla-js-wheel-zoom@9.0.4/+esm';
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    function initViewer() {
+        var element = document.querySelector('.mermaid svg')
+        vanillaJsWheelZoom.create('pre.mermaid svg', { type: 'html', smoothTimeDrag: 0, width: element.clientWidth, height: element.clientHeight, maxScale: 3 });
+    }
+    mermaid.initialize({ startOnLoad: false });
+    document.fonts.ready.then(() => { mermaid.run({ querySelector: '.mermaid', postRenderCallback: initViewer }); });
+  </script>
+</body>
+</html>

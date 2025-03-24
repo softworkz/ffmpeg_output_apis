@@ -1,0 +1,870 @@
+ "root": [
+    {
+        "_name": "chapter",
+        "_parents": "chapters",
+        "_children": "chapter_tags",
+        "int": "end",
+        "int": "id",
+        "string": "time_base",
+        "int": "start",
+        "string": "start_time",
+        "string": "end_time",
+        "relations": [
+            {
+                "src_id": "chapter",
+                "dest_id": "chapter_tags",
+                "linktype": 2
+            }
+        ]
+    },
+    {
+        "_name": "chapter_tags",
+        "_parents": "chapter",
+        "string": "title"
+    },
+    {
+        "_name": "chapters",
+        "_parents": "root",
+        "_children": "chapter",
+        "relations": [
+            {
+                "src_id": "chapters",
+                "dest_id": "chapter",
+                "linktype": 0
+            }
+        ]
+    },
+    {
+        "_name": "error",
+        "_parents": "root"
+    },
+    {
+        "_name": "format",
+        "_parents": "root",
+        "_children": "format_tags",
+        "string": "filename",
+        "int": "nb_streams",
+        "int": "nb_programs",
+        "int": "nb_stream_groups",
+        "string": "format_name",
+        "string": "format_long_name",
+        "string": "start_time",
+        "string": "duration",
+        "string": "size",
+        "string": "bit_rate",
+        "int": "probe_score",
+        "relations": [
+            {
+                "src_id": "format",
+                "dest_id": "format_tags",
+                "linktype": 2
+            }
+        ]
+    },
+    {
+        "_name": "format_tags",
+        "_parents": "format",
+        "string": "ENCODER"
+    },
+    {
+        "_name": "frame",
+        "_parents": "frames",
+        "_children": "frame_tags, frame_side_data_list, logs",
+        "int": "key_frame",
+        "int": "channels",
+        "int": "pts",
+        "string": "pts_time",
+        "string": "pix_fmt",
+        "string": "pkt_dts_time",
+        "string": "media_type",
+        "int": "duration",
+        "string": "channel_layout",
+        "int": "crop_bottom",
+        "string": "duration_time",
+        "int": "stream_index",
+        "int": "interlaced_frame",
+        "int": "height",
+        "int": "crop_top",
+        "int": "width",
+        "string": "pict_type",
+        "string": "color_primaries",
+        "string": "pkt_dts",
+        "int": "best_effort_timestamp",
+        "int": "top_field_first",
+        "string": "pkt_pos",
+        "string": "pkt_size",
+        "int": "crop_right",
+        "string": "color_range",
+        "string": "sample_fmt",
+        "int": "repeat_pict",
+        "int": "crop_left",
+        "int": "nb_samples",
+        "string": "best_effort_timestamp_time",
+        "string": "sample_aspect_ratio",
+        "string": "color_space",
+        "string": "color_transfer",
+        "string": "chroma_location",
+        "relations": [
+            {
+                "src_id": "frame",
+                "dest_id": "frame_tags",
+                "linktype": 2
+            },
+            {
+                "src_id": "frame",
+                "dest_id": "frame_side_data_list",
+                "linktype": 2
+            },
+            {
+                "src_id": "frame",
+                "dest_id": "logs",
+                "linktype": 2
+            }
+        ]
+    },
+    {
+        "_name": "frames",
+        "_parents": "root",
+        "_children": "frame, subtitle",
+        "relations": [
+            {
+                "src_id": "frames",
+                "dest_id": "frame",
+                "linktype": 0
+            },
+            {
+                "src_id": "frames",
+                "dest_id": "subtitle",
+                "linktype": 0
+            }
+        ]
+    },
+    {
+        "_name": "frame_tags",
+        "_parents": "frame"
+    },
+    {
+        "_name": "frame_side_data_list",
+        "_parents": "frame",
+        "_children": "frame_side_data",
+        "relations": [
+            {
+                "src_id": "frame_side_data_list",
+                "dest_id": "frame_side_data",
+                "linktype": 0
+            }
+        ]
+    },
+    {
+        "_name": "frame_side_data",
+        "_parents": "frame_side_data_list",
+        "_children": "timecodes, frame_side_data_components",
+        "string": "side_data_type",
+        "relations": [
+            {
+                "src_id": "frame_side_data",
+                "dest_id": "timecodes",
+                "linktype": 2
+            },
+            {
+                "src_id": "frame_side_data",
+                "dest_id": "frame_side_data_components",
+                "linktype": 2
+            }
+        ]
+    },
+    {
+        "_name": "timecodes",
+        "_parents": "frame_side_data",
+        "_children": "timecode",
+        "relations": [
+            {
+                "src_id": "timecodes",
+                "dest_id": "timecode",
+                "linktype": 0
+            }
+        ]
+    },
+    {
+        "_name": "timecode",
+        "_parents": "timecodes"
+    },
+    {
+        "_name": "frame_side_data_components",
+        "_parents": "frame_side_data",
+        "_children": "frame_side_data_component",
+        "relations": [
+            {
+                "src_id": "frame_side_data_components",
+                "dest_id": "frame_side_data_component",
+                "linktype": 0
+            }
+        ]
+    },
+    {
+        "_name": "frame_side_data_component",
+        "_parents": "frame_side_data_components",
+        "_children": "frame_side_data_pieces",
+        "relations": [
+            {
+                "src_id": "frame_side_data_component",
+                "dest_id": "frame_side_data_pieces",
+                "linktype": 2
+            }
+        ]
+    },
+    {
+        "_name": "frame_side_data_pieces",
+        "_parents": "frame_side_data_component",
+        "_children": "frame_side_data_piece",
+        "relations": [
+            {
+                "src_id": "frame_side_data_pieces",
+                "dest_id": "frame_side_data_piece",
+                "linktype": 0
+            }
+        ]
+    },
+    {
+        "_name": "frame_side_data_piece",
+        "_parents": "frame_side_data_pieces"
+    },
+    {
+        "_name": "log",
+        "_parents": "logs"
+    },
+    {
+        "_name": "logs",
+        "_parents": "frame",
+        "_children": "log",
+        "relations": [
+            {
+                "src_id": "logs",
+                "dest_id": "log",
+                "linktype": 0
+            }
+        ]
+    },
+    {
+        "_name": "library_version",
+        "_parents": "library_versions",
+        "int": "micro",
+        "int": "version",
+        "string": "name",
+        "int": "major",
+        "int": "minor",
+        "string": "ident"
+    },
+    {
+        "_name": "library_versions",
+        "_parents": "root",
+        "_children": "library_version",
+        "relations": [
+            {
+                "src_id": "library_versions",
+                "dest_id": "library_version",
+                "linktype": 0
+            }
+        ]
+    },
+    {
+        "_name": "packet",
+        "_parents": "packets, packets_and_frames",
+        "_children": "packet_tags, packet_side_data_list",
+        "int": "duration",
+        "string": "duration_time",
+        "string": "size",
+        "string": "pos",
+        "string": "codec_type",
+        "int": "stream_index",
+        "int": "pts",
+        "string": "pts_time",
+        "int": "dts",
+        "string": "dts_time",
+        "string": "flags",
+        "relations": [
+            {
+                "src_id": "packet",
+                "dest_id": "packet_tags",
+                "linktype": 2
+            },
+            {
+                "src_id": "packet",
+                "dest_id": "packet_side_data_list",
+                "linktype": 2
+            }
+        ]
+    },
+    {
+        "_name": "packet_tags",
+        "_parents": "packet"
+    },
+    {
+        "_name": "packets",
+        "_parents": "root",
+        "_children": "packet",
+        "relations": [
+            {
+                "src_id": "packets",
+                "dest_id": "packet",
+                "linktype": 0
+            }
+        ]
+    },
+    {
+        "_name": "packets_and_frames",
+        "_children": "packet",
+        "relations": [
+            {
+                "src_id": "packets_and_frames",
+                "dest_id": "packet",
+                "linktype": 0
+            }
+        ]
+    },
+    {
+        "_name": "packet_side_data_list",
+        "_parents": "packet",
+        "_children": "packet_side_data",
+        "relations": [
+            {
+                "src_id": "packet_side_data_list",
+                "dest_id": "packet_side_data",
+                "linktype": 0
+            }
+        ]
+    },
+    {
+        "_name": "packet_side_data",
+        "_parents": "packet_side_data_list"
+    },
+    {
+        "_name": "pixel_format",
+        "_parents": "pixel_formats",
+        "_children": "pixel_format_flags, pixel_format_components",
+        "string": "log2_chroma_w",
+        "string": "log2_chroma_h",
+        "string": "name",
+        "int": "nb_components",
+        "int": "bits_per_pixel",
+        "relations": [
+            {
+                "src_id": "pixel_format",
+                "dest_id": "pixel_format_flags",
+                "linktype": 2
+            },
+            {
+                "src_id": "pixel_format",
+                "dest_id": "pixel_format_components",
+                "linktype": 2
+            }
+        ]
+    },
+    {
+        "_name": "pixel_format_flags",
+        "_parents": "pixel_format",
+        "int": "big_endian",
+        "int": "palette",
+        "int": "bitstream",
+        "int": "hwaccel",
+        "int": "planar",
+        "int": "rgb",
+        "int": "alpha"
+    },
+    {
+        "_name": "component",
+        "_parents": "pixel_format_components",
+        "int": "index",
+        "int": "bit_depth"
+    },
+    {
+        "_name": "pixel_format_components",
+        "_parents": "pixel_format",
+        "_children": "component",
+        "relations": [
+            {
+                "src_id": "pixel_format_components",
+                "dest_id": "component",
+                "linktype": 0
+            }
+        ]
+    },
+    {
+        "_name": "pixel_formats",
+        "_parents": "root",
+        "_children": "pixel_format",
+        "relations": [
+            {
+                "src_id": "pixel_formats",
+                "dest_id": "pixel_format",
+                "linktype": 0
+            }
+        ]
+    },
+    {
+        "_name": "program_stream_disposition",
+        "_parents": "program_stream"
+    },
+    {
+        "_name": "program_stream_tags",
+        "_parents": "program_stream"
+    },
+    {
+        "_name": "program",
+        "_parents": "programs",
+        "_children": "program_tags, program_streams",
+        "relations": [
+            {
+                "src_id": "program",
+                "dest_id": "program_tags",
+                "linktype": 2
+            },
+            {
+                "src_id": "program",
+                "dest_id": "program_streams",
+                "linktype": 2
+            }
+        ]
+    },
+    {
+        "_name": "program_streams",
+        "_parents": "program",
+        "_children": "program_stream",
+        "relations": [
+            {
+                "src_id": "program_streams",
+                "dest_id": "program_stream",
+                "linktype": 0
+            }
+        ]
+    },
+    {
+        "_name": "program_stream",
+        "_parents": "program_streams",
+        "_children": "program_stream_disposition, program_stream_tags",
+        "relations": [
+            {
+                "src_id": "program_stream",
+                "dest_id": "program_stream_disposition",
+                "linktype": 2
+            },
+            {
+                "src_id": "program_stream",
+                "dest_id": "program_stream_tags",
+                "linktype": 2
+            }
+        ]
+    },
+    {
+        "_name": "program_tags",
+        "_parents": "program"
+    },
+    {
+        "_name": "program_version",
+        "_parents": "root",
+        "string": "version",
+        "string": "copyright",
+        "string": "compiler_ident",
+        "string": "configuration"
+    },
+    {
+        "_name": "programs",
+        "_parents": "root",
+        "_children": "program",
+        "relations": [
+            {
+                "src_id": "programs",
+                "dest_id": "program",
+                "linktype": 0
+            }
+        ]
+    },
+    {
+        "_name": "stream_group_stream_disposition",
+        "_parents": "stream_group_stream"
+    },
+    {
+        "_name": "stream_group_stream_tags",
+        "_parents": "stream_group_stream"
+    },
+    {
+        "_name": "stream_group",
+        "_parents": "stream_groups",
+        "_children": "stream_group_tags, stream_group_disposition, stream_group_components, stream_group_streams",
+        "relations": [
+            {
+                "src_id": "stream_group",
+                "dest_id": "stream_group_tags",
+                "linktype": 2
+            },
+            {
+                "src_id": "stream_group",
+                "dest_id": "stream_group_disposition",
+                "linktype": 2
+            },
+            {
+                "src_id": "stream_group",
+                "dest_id": "stream_group_components",
+                "linktype": 2
+            },
+            {
+                "src_id": "stream_group",
+                "dest_id": "stream_group_streams",
+                "linktype": 2
+            }
+        ]
+    },
+    {
+        "_name": "stream_group_components",
+        "_parents": "stream_group",
+        "_children": "stream_group_component",
+        "relations": [
+            {
+                "src_id": "stream_group_components",
+                "dest_id": "stream_group_component",
+                "linktype": 0
+            }
+        ]
+    },
+    {
+        "_name": "stream_group_component",
+        "_parents": "stream_group_components",
+        "_children": "component",
+        "relations": [
+            {
+                "src_id": "stream_group_component",
+                "dest_id": "component",
+                "linktype": 2
+            }
+        ]
+    },
+    {
+        "_name": "component",
+        "_parents": "stream_group_component",
+        "_children": "subcomponent_entry",
+        "relations": [
+            {
+                "src_id": "component",
+                "dest_id": "subcomponent_entry",
+                "linktype": 0
+            }
+        ]
+    },
+    {
+        "_name": "subcomponent_entry",
+        "_parents": "component",
+        "_children": "stream_group_pieces",
+        "relations": [
+            {
+                "src_id": "subcomponent_entry",
+                "dest_id": "stream_group_pieces",
+                "linktype": 2
+            }
+        ]
+    },
+    {
+        "_name": "stream_group_pieces",
+        "_parents": "subcomponent_entry",
+        "_children": "stream_group_piece",
+        "relations": [
+            {
+                "src_id": "stream_group_pieces",
+                "dest_id": "stream_group_piece",
+                "linktype": 0
+            }
+        ]
+    },
+    {
+        "_name": "stream_group_piece",
+        "_parents": "stream_group_pieces",
+        "_children": "subpiece",
+        "relations": [
+            {
+                "src_id": "stream_group_piece",
+                "dest_id": "subpiece",
+                "linktype": 2
+            }
+        ]
+    },
+    {
+        "_name": "subpiece",
+        "_parents": "stream_group_piece",
+        "_children": "subpiece_entry",
+        "relations": [
+            {
+                "src_id": "subpiece",
+                "dest_id": "subpiece_entry",
+                "linktype": 0
+            }
+        ]
+    },
+    {
+        "_name": "subpiece_entry",
+        "_parents": "subpiece",
+        "_children": "block",
+        "relations": [
+            {
+                "src_id": "subpiece_entry",
+                "dest_id": "block",
+                "linktype": 2
+            }
+        ]
+    },
+    {
+        "_name": "block",
+        "_parents": "subpiece_entry",
+        "_children": "block_entry",
+        "relations": [
+            {
+                "src_id": "block",
+                "dest_id": "block_entry",
+                "linktype": 0
+            }
+        ]
+    },
+    {
+        "_name": "block_entry",
+        "_parents": "block"
+    },
+    {
+        "_name": "stream_group_streams",
+        "_parents": "stream_group",
+        "_children": "stream_group_stream",
+        "relations": [
+            {
+                "src_id": "stream_group_streams",
+                "dest_id": "stream_group_stream",
+                "linktype": 0
+            }
+        ]
+    },
+    {
+        "_name": "stream_group_stream",
+        "_parents": "stream_group_streams",
+        "_children": "stream_group_stream_disposition, stream_group_stream_tags",
+        "relations": [
+            {
+                "src_id": "stream_group_stream",
+                "dest_id": "stream_group_stream_disposition",
+                "linktype": 2
+            },
+            {
+                "src_id": "stream_group_stream",
+                "dest_id": "stream_group_stream_tags",
+                "linktype": 2
+            }
+        ]
+    },
+    {
+        "_name": "stream_group_disposition",
+        "_parents": "stream_group"
+    },
+    {
+        "_name": "stream_group_tags",
+        "_parents": "stream_group"
+    },
+    {
+        "_name": "stream_groups",
+        "_parents": "root",
+        "_children": "stream_group",
+        "relations": [
+            {
+                "src_id": "stream_groups",
+                "dest_id": "stream_group",
+                "linktype": 0
+            }
+        ]
+    },
+    {
+        "_name": "root",
+        "_children": "chapters, format, frames, programs, stream_groups, streams, packets, error, program_version, library_versions, pixel_formats",
+        "relations": [
+            {
+                "src_id": "root",
+                "dest_id": "chapters",
+                "linktype": 2
+            },
+            {
+                "src_id": "root",
+                "dest_id": "format",
+                "linktype": 2
+            },
+            {
+                "src_id": "root",
+                "dest_id": "frames",
+                "linktype": 2
+            },
+            {
+                "src_id": "root",
+                "dest_id": "programs",
+                "linktype": 2
+            },
+            {
+                "src_id": "root",
+                "dest_id": "stream_groups",
+                "linktype": 2
+            },
+            {
+                "src_id": "root",
+                "dest_id": "streams",
+                "linktype": 2
+            },
+            {
+                "src_id": "root",
+                "dest_id": "packets",
+                "linktype": 2
+            },
+            {
+                "src_id": "root",
+                "dest_id": "error",
+                "linktype": 2
+            },
+            {
+                "src_id": "root",
+                "dest_id": "program_version",
+                "linktype": 2
+            },
+            {
+                "src_id": "root",
+                "dest_id": "library_versions",
+                "linktype": 2
+            },
+            {
+                "src_id": "root",
+                "dest_id": "pixel_formats",
+                "linktype": 2
+            }
+        ]
+    },
+    {
+        "_name": "stream",
+        "_parents": "streams",
+        "_children": "stream_disposition, stream_tags, stream_side_data_list",
+        "string": "bits_per_raw_sample",
+        "string": "duration",
+        "string": "bit_rate",
+        "string": "max_bit_rate",
+        "string": "nb_read_packets",
+        "string": "nb_frames",
+        "string": "nb_read_frames",
+        "string": "codec_long_name",
+        "string": "profile",
+        "int": "coded_width",
+        "int": "coded_height",
+        "int": "closed_captions",
+        "int": "film_grain",
+        "int": "has_b_frames",
+        "string": "sample_aspect_ratio",
+        "string": "display_aspect_ratio",
+        "string": "pix_fmt",
+        "int": "level",
+        "string": "color_range",
+        "string": "color_space",
+        "string": "color_transfer",
+        "string": "color_primaries",
+        "string": "chroma_location",
+        "string": "field_order",
+        "int": "refs",
+        "string": "is_avc",
+        "string": "nal_length_size",
+        "int": "bits_per_sample",
+        "int": "initial_padding",
+        "string": "codec_type",
+        "string": "codec_tag_string",
+        "string": "codec_tag",
+        "int": "width",
+        "int": "height",
+        "string": "id",
+        "string": "r_frame_rate",
+        "string": "avg_frame_rate",
+        "string": "time_base",
+        "int": "start_pts",
+        "string": "start_time",
+        "int": "duration_ts",
+        "int": "index",
+        "string": "codec_name",
+        "string": "sample_fmt",
+        "string": "sample_rate",
+        "int": "channels",
+        "string": "channel_layout",
+        "int": "extradata_size",
+        "relations": [
+            {
+                "src_id": "stream",
+                "dest_id": "stream_disposition",
+                "linktype": 2
+            },
+            {
+                "src_id": "stream",
+                "dest_id": "stream_tags",
+                "linktype": 2
+            },
+            {
+                "src_id": "stream",
+                "dest_id": "stream_side_data_list",
+                "linktype": 2
+            }
+        ]
+    },
+    {
+        "_name": "stream_disposition",
+        "_parents": "stream",
+        "int": "timed_thumbnails",
+        "int": "non_diegetic",
+        "int": "captions",
+        "int": "descriptions",
+        "int": "metadata",
+        "int": "dependent",
+        "int": "still_image",
+        "int": "default",
+        "int": "dub",
+        "int": "original",
+        "int": "comment",
+        "int": "lyrics",
+        "int": "karaoke",
+        "int": "forced",
+        "int": "hearing_impaired",
+        "int": "visual_impaired",
+        "int": "clean_effects",
+        "int": "attached_pic",
+        "int": "multilayer"
+    },
+    {
+        "_name": "streams",
+        "_parents": "root",
+        "_children": "stream",
+        "relations": [
+            {
+                "src_id": "streams",
+                "dest_id": "stream",
+                "linktype": 0
+            }
+        ]
+    },
+    {
+        "_name": "stream_tags",
+        "_parents": "stream",
+        "string": "language",
+        "string": "DURATION"
+    },
+    {
+        "_name": "stream_side_data_list",
+        "_parents": "stream",
+        "_children": "stream_side_data",
+        "relations": [
+            {
+                "src_id": "stream_side_data_list",
+                "dest_id": "stream_side_data",
+                "linktype": 0
+            }
+        ]
+    },
+    {
+        "_name": "stream_side_data",
+        "_parents": "stream_side_data_list"
+    },
+    {
+        "_name": "subtitle",
+        "_parents": "frames"
+    }
+}
