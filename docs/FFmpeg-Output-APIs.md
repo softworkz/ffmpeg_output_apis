@@ -1,7 +1,6 @@
-
-
 # FFmpeg Output APIs
-## for Text and Diagramming
+
+#### for Text and Diagramming
 
 This is a collection of efforts in improving output and presentation of FFmpeg.
 
