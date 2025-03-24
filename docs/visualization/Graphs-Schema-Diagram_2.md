@@ -3,72 +3,70 @@
 ## Execution Graph Schema Diagram
 
 ```mermaid
----
-config:
-  curve: step
-  er:
-    layout: elk
-  themeCSS:
-    - '.er.entityBox { fill: orange; rx: 5; ry: 5; stroke-width: 1px !important;      stroke: #e9e9e9 !important;      fill: url(#ff-filtergradient) !important;      filter: drop-shadow(0px 0px 5.5px rgba(0, 0, 0, 0.15));  fill: white !important;  } '
-    - '.entityLabel { fill: #33333394;  } '
-    - 'g  .entityLabel:first-of-type {
-        font-size: 0.75rem !important;   
-        font-weight: 600 !important;   
-        text-transform: uppercase;
-        min-width: 5.5rem;
-        fill: #33333394 !important; 
-        margin-bottom: 0.1rem; } '
-    - '.attributeBoxEven, .attributeBoxOdd {
-        fill: transparent; 
-        stroke: #dfdfdf;
-        filter: drop-shadow(0px 0px 2.2px rgba(0, 0, 0, 0.15));
-        stroke-width: 0.4; rx: 2; ry: 2;
-        clip-path: fill-box; } '
-    - >-
-      path.er.relationshipLine { marker-end: none !important; marker-start: none
-      !important;  stroke: gray;      stroke-width: 1;      fill: none;     
-      filter: drop-shadow(0px 0px 9px rgba(0, 0, 0, 0.5));  } 
-    - null
-  theme: base
----
 erDiagram
-  root {  }
+
+  root {
+  }
+
   root ||--|| graphs : ""
   root ||--|| inputfiles : ""
   root ||--|| outputfiles : ""
   root ||--|| decoders : ""
   root ||--|| encoders : ""
   root ||--|| streamlinks : ""
-  graphs {}
+
+  graphs {
+  }
+
+
   graphs ||--o{ graph : ""
+
   graph {
       int graph_index 
       string description 
   }
+
+
   graph ||--|| graph_inputs : ""
   graph ||--|| graph_outputs : ""
   graph ||--|| filters : ""
+
   graph_inputs {
   }
+
+
   graph_inputs ||--o{ graph_input : ""
+
   graph_input {
       int input_index 
       string media_type 
   }
+
+
+
   graph_outputs {
   }
+
+
   graph_outputs ||--o{ graph_output : ""
+
   graph_output {
       int output_index 
       string name 
       string media_type 
   }
+
+
+
   filters {
       string name 
       string description 
       string id 
   }
+
+
   filters ||--o{ filter : ""
+
   filter {
       string filter_name 
       string description 
@@ -78,11 +76,17 @@ erDiagram
       string hw_device_type 
       int extra_hw_frames 
   }
+
+
   filter ||--|| filter_inputs : ""
   filter ||--|| filter_outputs : ""
+
   filter_inputs {
   }
+
+
   filter_inputs ||--o{ filter_input : ""
+
   filter_input {
       int input_index 
       string pad_name 
@@ -98,10 +102,16 @@ erDiagram
       string color_space 
       string time_base 
   }
+
+
   filter_input ||--|| hw_frames_context : ""
+
   filter_outputs {
   }
+
+
   filter_outputs ||--o{ filter_output : ""
+
   filter_output {
       string dest_filter_id FK
       int output_index 
@@ -117,7 +127,10 @@ erDiagram
       string color_space 
       string time_base 
   }
+
+
   filter_output ||--|| hw_frames_context : ""
+
   hw_frames_context {
       int height 
       int has_hw_frames_context 
@@ -127,65 +140,107 @@ erDiagram
       int width 
       int initial_pool_size 
   }
+
+
+
   inputfiles {
   }
+
+
   inputfiles ||--o{ inputfile : ""
+
   inputfile {
       string index 
       string demuxer_name 
       string file_extension 
       string url 
   }
+
+
   inputfile ||--|| inputstreams : ""
+
   inputstreams {
   }
+
+
   inputstreams ||--o{ inputstream : ""
+
   inputstream {
       string id PK
       string name 
       string index 
       string media_type 
   }
+
+
+
   outputfiles {
   }
+
+
   outputfiles ||--o{ outputfile : ""
+
   outputfile {
       string index 
       string muxer_name 
       string file_extension 
       string url 
   }
+
+
   outputfile ||--|| outputstreams : ""
+
   outputstreams {
   }
+
+
   outputstreams ||--o{ outputstream : ""
+
   outputstream {
       string id PK
       string name 
       string index 
       string media_type 
   }
+
+
+
   streamlinks {
   }
+
+
   streamlinks ||--o{ streamlink : ""
+
   streamlink {
       string dest_stream_id FK
       string source_stream_id FK
       string operation 
       string media_type 
   }
+
+
+
   decoders {
   }
+
+
   decoders ||--o{ decoder : ""
+
   decoder {
       string source_id FK
       string id PK
       string name 
       string media_type 
   }
+
+
+
   encoders {
   }
+
+
   encoders ||--o{ encoder : ""
+
   encoder {
       string id PK
       string dest_id FK
@@ -193,8 +248,8 @@ erDiagram
       string media_type 
   }
 
-```
 
+```
 
 ### Command Line
 

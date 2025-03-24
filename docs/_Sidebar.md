@@ -7,7 +7,7 @@
 
 #  Graph Data Output
 
-- (work in progress)
+- Entities
 
 #  Self-Writing Data Schema
 
