@@ -1,4 +1,4 @@
- "root": [
+[
     {
         "_name": "root",
         "_children": "graphs, inputfiles, outputfiles, decoders, encoders, streamlinks",
@@ -51,8 +51,8 @@
         "_name": "graph",
         "_parents": "graphs",
         "_children": "graph_inputs, graph_outputs, filters",
-        "int": "graph_index",
-        "string": "description",
+        "graph_index": "int",
+        "description": "string",
         "relations": [
             {
                 "src_id": "graph",
@@ -88,8 +88,8 @@
         "_name": "graph_input",
         "_id_field": "filter_id",
         "_parents": "graph_inputs",
-        "int": "input_index",
-        "string": "media_type"
+        "input_index": "string",
+        "media_type": "int"
     },
     {
         "_name": "graph_outputs",
@@ -108,18 +108,18 @@
         "_name": "graph_output",
         "_id_field": "filter_id",
         "_parents": "graph_outputs",
-        "int": "output_index",
-        "string": "name",
-        "string": "media_type"
+        "output_index": "string",
+        "name": "int",
+        "media_type": "int"
     },
     {
         "_name": "filters",
         "_id_field": "graph_id",
         "_parents": "graph",
         "_children": "filter",
-        "string": "name",
-        "string": "description",
-        "string": "id",
+        "name": "int",
+        "description": "int",
+        "id": "int",
         "relations": [
             {
                 "src_id": "filters",
@@ -133,13 +133,13 @@
         "_id_field": "filter_id",
         "_parents": "filters",
         "_children": "filter_inputs, filter_outputs",
-        "string": "filter_name",
-        "string": "description",
-        "int": "nb_inputs",
-        "int": "nb_outputs",
-        "int": "has_hw_device_context",
-        "string": "hw_device_type",
-        "int": "extra_hw_frames",
+        "filter_name": "int",
+        "description": "int",
+        "nb_inputs": "string",
+        "nb_outputs": "string",
+        "has_hw_device_context": "string",
+        "hw_device_type": "int",
+        "extra_hw_frames": "string",
         "relations": [
             {
                 "src_id": "filter",
@@ -172,19 +172,19 @@
         "_children": "hw_frames_context",
         "_src_id_field": "source_filter_id",
         "_dest_id_field": "filter_id",
-        "int": "input_index",
-        "string": "pad_name",
-        "string": "source_filter_id",
-        "string": "source_pad_name",
-        "string": "filter_id",
-        "string": "media_type",
-        "string": "format",
-        "int": "width",
-        "int": "height",
-        "string": "sar",
-        "string": "color_range",
-        "string": "color_space",
-        "string": "time_base",
+        "input_index": "string",
+        "pad_name": "int",
+        "source_filter_id": "int",
+        "source_pad_name": "int",
+        "filter_id": "int",
+        "media_type": "int",
+        "format": "int",
+        "width": "string",
+        "height": "string",
+        "sar": "int",
+        "color_range": "int",
+        "color_space": "int",
+        "time_base": "int",
         "relations": [
             {
                 "src_id": "filter_input",
@@ -212,19 +212,19 @@
         "_children": "hw_frames_context",
         "_src_id_field": "filter_id",
         "_dest_id_field": "dest_filter_id",
-        "string": "dest_filter_id",
-        "int": "output_index",
-        "string": "pad_name",
-        "string": "dest_pad_name",
-        "string": "filter_id",
-        "string": "media_type",
-        "string": "format",
-        "int": "width",
-        "int": "height",
-        "string": "sar",
-        "string": "color_range",
-        "string": "color_space",
-        "string": "time_base",
+        "dest_filter_id": "int",
+        "output_index": "string",
+        "pad_name": "int",
+        "dest_pad_name": "int",
+        "filter_id": "int",
+        "media_type": "int",
+        "format": "int",
+        "width": "string",
+        "height": "string",
+        "sar": "int",
+        "color_range": "int",
+        "color_space": "int",
+        "time_base": "int",
         "relations": [
             {
                 "src_id": "filter_output",
@@ -236,13 +236,13 @@
     {
         "_name": "hw_frames_context",
         "_parents": "filter_input, filter_output",
-        "int": "height",
-        "int": "has_hw_frames_context",
-        "string": "hw_device_type",
-        "string": "hw_pixel_format",
-        "string": "sw_pixel_format",
-        "int": "width",
-        "int": "initial_pool_size"
+        "height": "string",
+        "has_hw_frames_context": "string",
+        "hw_device_type": "int",
+        "hw_pixel_format": "int",
+        "sw_pixel_format": "int",
+        "width": "string",
+        "initial_pool_size": "string"
     },
     {
         "_name": "inputfiles",
@@ -262,10 +262,10 @@
         "_id_field": "id",
         "_parents": "inputfiles",
         "_children": "inputstreams",
-        "string": "index",
-        "string": "demuxer_name",
-        "string": "file_extension",
-        "string": "url",
+        "index": "string",
+        "demuxer_name": "string",
+        "file_extension": "string",
+        "url": "string",
         "relations": [
             {
                 "src_id": "inputfile",
@@ -291,10 +291,10 @@
         "_name": "inputstream",
         "_id_field": "id",
         "_parents": "inputstreams",
-        "string": "id",
-        "string": "name",
-        "string": "index",
-        "string": "media_type"
+        "id": "string",
+        "name": "string",
+        "index": "string",
+        "media_type": "string"
     },
     {
         "_name": "outputfiles",
@@ -314,10 +314,10 @@
         "_id_field": "id",
         "_parents": "outputfiles",
         "_children": "outputstreams",
-        "string": "index",
-        "string": "muxer_name",
-        "string": "file_extension",
-        "string": "url",
+        "index": "string",
+        "muxer_name": "string",
+        "file_extension": "string",
+        "url": "string",
         "relations": [
             {
                 "src_id": "outputfile",
@@ -343,10 +343,10 @@
         "_name": "outputstream",
         "_id_field": "id",
         "_parents": "outputstreams",
-        "string": "id",
-        "string": "name",
-        "string": "index",
-        "string": "media_type"
+        "id": "string",
+        "name": "string",
+        "index": "string",
+        "media_type": "string"
     },
     {
         "_name": "streamlinks",
@@ -365,10 +365,10 @@
         "_parents": "streamlinks",
         "_src_id_field": "source_stream_id",
         "_dest_id_field": "dest_stream_id",
-        "string": "dest_stream_id",
-        "string": "source_stream_id",
-        "string": "operation",
-        "string": "media_type"
+        "dest_stream_id": "string",
+        "source_stream_id": "string",
+        "operation": "string",
+        "media_type": "string"
     },
     {
         "_name": "decoders",
@@ -388,10 +388,10 @@
         "_parents": "decoders",
         "_src_id_field": "source_id",
         "_dest_id_field": "id",
-        "string": "source_id",
-        "string": "id",
-        "string": "name",
-        "string": "media_type"
+        "source_id": "string",
+        "id": "string",
+        "name": "string",
+        "media_type": "string"
     },
     {
         "_name": "encoders",
@@ -411,9 +411,9 @@
         "_parents": "encoders",
         "_src_id_field": "id",
         "_dest_id_field": "dest_id",
-        "string": "id",
-        "string": "dest_id",
-        "string": "name",
-        "string": "media_type"
+        "id": "string",
+        "dest_id": "string",
+        "name": "string",
+        "media_type": "string"
     }
-}
+]

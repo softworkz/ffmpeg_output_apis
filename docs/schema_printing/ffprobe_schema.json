@@ -1,4 +1,4 @@
- "root": [
+[
     {
         "_name": "chapter",
         "_parents": "chapters",
@@ -867,4 +867,4 @@
         "_name": "subtitle",
         "_parents": "frames"
     }
-}
+]
