@@ -101,7 +101,7 @@ That's what [the original GH action](https://github.com/impresscms-dev/strip-mar
 
 But as we need to flatten the hierarchy, it's not sufficient to remove the .md extension, we also need to fix all the internal links (hyperlinks and image source links) for the hierarchy change.
 
-[My fork of that action](https://github.com/impresscms-dev/strip-markdown-extensions-from-links-action) adds those capabilities. It also does some beautification to the sidebar.
+[My fork of that action](https://github.com/impresscms-dev/strip-markdown-extensions-from-links-action) adds those capabilities. It also applies some beautification to the sidebar as the default rendering creates very small text for the links.
 
 ### Copy images to wiki/wiki folder
 
