@@ -73,31 +73,22 @@ With the new section flags from above, the individual sections can be marked app
 
 This table shows the mapping of execution graph sections to diagram content:
 
-<style type="text/css">
-.tg  {border-collapse:collapse;border-color:#ccc;border-spacing:0;}
-.tg td{background-color:#fff;border-color:#ccc;border-style:solid;border-width:1px;color:#333;
-  font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:4px 10px;word-break:normal;}
-.tg th{background-color:#f0f0f0;border-color:#ccc;border-style:solid;border-width:1px;color:#333;
-  font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:4px 10px;word-break:normal;}
-.tg .tg-lboi{border-color:inherit;text-align:left;vertical-align:middle}
-.tg .tg-c3ow{border-color:inherit;text-align:center;vertical-align:top}
-.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
-</style>
-<table class="tg" style="undefined;table-layout: fixed; width: 882px"><colgroup>
-<col style="width: 212px">
-<col style="width: 61px">
-<col style="width: 61px">
-<col style="width: 61px">
-<col style="width: 61px">
-<col style="width: 426px">
+
+<table><colgroup>
+<col align="left">
+<col align="center">
+<col align="center">
+<col align="center">
+<col align="center">
+<col align="left">
 </colgroup>
 <thead>
   <tr>
     <th class="tg-0pky"></th>
-    <th class="tg-c3ow">Sub-graph</th>
+    <th class="tg-c3ow">Subgraph</th>
     <th class="tg-c3ow">Shape</th>
     <th class="tg-c3ow">Link</th>
-    <th class="tg-c3ow">Print Tags</th>
+    <th class="tg-c3ow">PrintTags</th>
     <th class="tg-0pky">Notes</th>
   </tr></thead>
 <tbody>

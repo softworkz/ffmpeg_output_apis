@@ -10,9 +10,9 @@
 - [Execution Graph Entities](execution_graph/Execution-Graph-Entities.md)
 - [Translating Data to a Diagram](execution_graph/Translating-to-Diagram.md)
 
-#  Self-Writing Data Schema
+# Data Schema
 
-- (work in progress)
+- [Self Printing Data Schema](schema_writing/Self-Printing-Data-Schema.md)
 
 #  Data Visualization
 
