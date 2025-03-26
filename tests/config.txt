@@ -1,4 +1,4 @@
-FFBIN_PATH=v:\ffbuild\msvc\bin\x64\ffmpegd.exe
+FFBIN_PATH=ffmpeg.exe
 MEDIA_PATH=media\
 EXTRA_ARGUMENTS=-hide_banner
 REM EXTRA_ARGUMENTS=-hide_banner -loglevel verbose
