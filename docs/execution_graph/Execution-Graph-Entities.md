@@ -123,3 +123,5 @@ Let's go through the elements briefly:
 
 The original intent was to output filtergraphs, filters, both of their inputs and outputs but no more. The author had a solution for a decade which was gathering additional information from FFmpeg's log outputs in order to complement the filtergraph data with additional information and visualize a larger context. Obviously that's a tough path for the majority of users and not suitable for occasional users, so eventually the scope was extended for providing the full picture in the output for everyone and easily.
 
+
+(to be continued...)

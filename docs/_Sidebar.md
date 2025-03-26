@@ -7,15 +7,13 @@
 
 #  Writing Graph Data 
 
-- Feature Spec
-    - [Execution Graph Entities](execution_graph/Execution-Graph-Entities.md)
+- [Execution Graph Entities](execution_graph/Execution-Graph-Entities.md)
 - Examples
     - [Data output Examples](https://github.com/softworkz/ffmpeg_output_apis/tree/master/examples)
 
 # Data Visualization
 
-- Feature Spec
-    - [Translating Data to a Diagram](execution_graph/Translating-to-Diagram.md)
+- [Translating Data to a Diagram](execution_graph/Translating-to-Diagram.md)
 - Examples
   - [1 - Simple](visualization/Graphs-Example1.md)
   - [2 - Filtering and HWA](visualization/Graphs-Example2.md)
