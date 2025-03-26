@@ -342,4 +342,4 @@ Invisible subgraph sections are:
 The image below includes those subgraphs that are normally invisible:
 
 
-![Execution Graph Colored](execution_graph_colored.png)
+[![Execution Graph Colored](execution_graph_colored.png)](execution_graph_colored.png)
