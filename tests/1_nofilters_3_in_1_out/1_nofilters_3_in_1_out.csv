@@ -1,0 +1,30 @@
+inputfile,2,ass,ssa,media\video_1.de.ssa,inputstream,r_in_2_0,ASS (Advanced SSA) subtitle,0,subtitle
+
+inputfile,1,srt,srt,media\video_1.en.srt,inputstream,r_in_1_0,SubRip subtitle,0,subtitle
+
+inputfile,0,"matroska,webm",mkv,media\video_1.mkv,inputstream,r_in_0_0,H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10,0,video
+inputstream,r_in_0_1,DCA (DTS Coherent Acoustics),1,audio
+inputstream,r_in_0_2,DCA (DTS Coherent Acoustics),2,audio
+inputstream,r_in_0_3,HDMV Presentation Graphic Stream subtitles,3,subtitle
+inputstream,r_in_0_4,DVD subtitles,4,subtitle
+inputstream,r_in_0_5,HDMV Presentation Graphic Stream subtitles,5,subtitle
+inputstream,r_in_0_6,HDMV Presentation Graphic Stream subtitles,6,subtitle
+inputstream,r_in_0_7,DVD subtitles,7,subtitle
+
+decoder,r_in_0_7,in_0_7,dvdsub,subtitle
+decoder,r_in_1_0,in_1_0,srt,subtitle
+encoder,out__0_3,r_out__0_3,dvbsub,subtitle
+encoder,out__0_4,r_out__0_4,ass,subtitle
+outputfile,0,matroska,mkv,temp.mkv,outputstream,r_out__0_0,H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10,0,video
+outputstream,r_out__0_1,DCA (DTS Coherent Acoustics),1,audio
+outputstream,r_out__0_2,DCA (DTS Coherent Acoustics),2,audio
+outputstream,r_out__0_3,DVB subtitles,3,subtitle
+outputstream,r_out__0_4,ASS (Advanced SSA) subtitle,4,subtitle
+outputstream,r_out__0_5,ASS (Advanced SSA) subtitle,5,subtitle
+
+streamlink,r_out__0_0,r_in_0_0,Stream Copy,video
+streamlink,r_out__0_1,r_in_0_1,Stream Copy,audio
+streamlink,r_out__0_2,r_in_0_2,Stream Copy,audio
+streamlink,out__0_3,in_0_7,Transcode,subtitle
+streamlink,out__0_4,in_1_0,Transcode,subtitle
+streamlink,r_out__0_5,r_in_2_0,Stream Copy,subtitle

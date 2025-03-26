@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ffprobe>
+    <graphs>
+    </graphs>
+
+    <inputfiles>
+        <inputfile index="2" demuxer_name="ass" file_extension="ass" url="U:\TestMedia\Test.ass">
+            <inputstreams>
+                <inputstream id="r_in_2_0" name="ASS (Advanced SSA) subtitle" index="0"/>
+            </inputstreams>
+        </inputfile>
+        <inputfile index="1" demuxer_name="srt" file_extension="srt" url="U:\TestMedia\Test.srt">
+            <inputstreams>
+                <inputstream id="r_in_1_0" name="SubRip subtitle" index="0"/>
+            </inputstreams>
+        </inputfile>
+        <inputfile index="0" demuxer_name="matroska,webm" file_extension="mkv" url="U:\TestMedia\Test.mkv">
+            <inputstreams>
+                <inputstream id="r_in_0_0" name="H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10" index="0"/>
+                <inputstream id="r_in_0_1" name="DCA (DTS Coherent Acoustics)" index="1"/>
+                <inputstream id="r_in_0_2" name="DCA (DTS Coherent Acoustics)" index="2"/>
+                <inputstream id="r_in_0_3" name="HDMV Presentation Graphic Stream subtitles" index="3"/>
+                <inputstream id="r_in_0_4" name="DVD subtitles" index="4"/>
+                <inputstream id="r_in_0_5" name="HDMV Presentation Graphic Stream subtitles" index="5"/>
+                <inputstream id="r_in_0_6" name="HDMV Presentation Graphic Stream subtitles" index="6"/>
+                <inputstream id="r_in_0_7" name="DVD subtitles" index="7"/>
+            </inputstreams>
+        </inputfile>
+    </inputfiles>
+
+    <decoders>
+        <decoder source_id="r_in_0_7" id="in_0_7" name="dvdsub"/>
+        <decoder source_id="r_in_1_0" id="in_1_0" name="srt"/>
+        <decoder source_id="r_in_2_0" id="in_2_0" name="ssa"/>
+    </decoders>
+
+    <encoders>
+        <encoder id="out__0_3" dest_id="r_out__0_3" name="dvbsub"/>
+        <encoder id="out__0_4" dest_id="r_out__0_4" name="ass"/>
+        <encoder id="out__0_5" dest_id="r_out__0_5" name="ass"/>
+    </encoders>
+
+    <outputfiles>
+        <outputfile index="0" muxer_name="matroska" file_extension="mkv" url="out2.mkv">
+            <outputstreams>
+                <outputstream id="r_out__0_0" name="H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10" index="0"/>
+                <outputstream id="r_out__0_1" name="DCA (DTS Coherent Acoustics)" index="1"/>
+                <outputstream id="r_out__0_2" name="DCA (DTS Coherent Acoustics)" index="2"/>
+                <outputstream id="r_out__0_3" name="DVB subtitles" index="3"/>
+                <outputstream id="r_out__0_4" name="ASS (Advanced SSA) subtitle" index="4"/>
+                <outputstream id="r_out__0_5" name="ASS (Advanced SSA) subtitle" index="5"/>
+            </outputstreams>
+        </outputfile>
+    </outputfiles>
+
+    <streamlinks>
+        <streamlink dest_stream_id="r_out__0_0" source_stream_id="r_in_0_0" operation="Stream Copy"/>
+        <streamlink dest_stream_id="r_out__0_1" source_stream_id="r_in_0_1" operation="Stream Copy"/>
+        <streamlink dest_stream_id="r_out__0_2" source_stream_id="r_in_0_2" operation="Stream Copy"/>
+        <streamlink dest_stream_id="out__0_3" source_stream_id="in_0_7" operation="Transcode"/>
+        <streamlink dest_stream_id="out__0_4" source_stream_id="in_1_0" operation="Transcode"/>
+        <streamlink dest_stream_id="out__0_5" source_stream_id="in_2_0" operation="Transcode"/>
+    </streamlinks>
+</ffprobe>

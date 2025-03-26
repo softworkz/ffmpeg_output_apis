@@ -1,0 +1,180 @@
+[INPUTFILE]
+index=2
+demuxer_name=ass
+file_extension=ssa
+url=media\video_1.de.ssa
+[INPUTSTREAM]
+id=r_in_2_0
+name=ASS (Advanced SSA) subtitle
+index=0
+media_type=subtitle
+[/INPUTSTREAM]
+[/INPUTFILE]
+[INPUTFILE]
+index=1
+demuxer_name=srt
+file_extension=srt
+url=media\video_1.en.srt
+[INPUTSTREAM]
+id=r_in_1_0
+name=SubRip subtitle
+index=0
+media_type=subtitle
+[/INPUTSTREAM]
+[/INPUTFILE]
+[INPUTFILE]
+index=0
+demuxer_name=matroska,webm
+file_extension=mkv
+url=media\video_1.mkv
+[INPUTSTREAM]
+id=r_in_0_0
+name=H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10
+index=0
+media_type=video
+[/INPUTSTREAM]
+[INPUTSTREAM]
+id=r_in_0_1
+name=DCA (DTS Coherent Acoustics)
+index=1
+media_type=audio
+[/INPUTSTREAM]
+[INPUTSTREAM]
+id=r_in_0_2
+name=DCA (DTS Coherent Acoustics)
+index=2
+media_type=audio
+[/INPUTSTREAM]
+[INPUTSTREAM]
+id=r_in_0_3
+name=HDMV Presentation Graphic Stream subtitles
+index=3
+media_type=subtitle
+[/INPUTSTREAM]
+[INPUTSTREAM]
+id=r_in_0_4
+name=DVD subtitles
+index=4
+media_type=subtitle
+[/INPUTSTREAM]
+[INPUTSTREAM]
+id=r_in_0_5
+name=HDMV Presentation Graphic Stream subtitles
+index=5
+media_type=subtitle
+[/INPUTSTREAM]
+[INPUTSTREAM]
+id=r_in_0_6
+name=HDMV Presentation Graphic Stream subtitles
+index=6
+media_type=subtitle
+[/INPUTSTREAM]
+[INPUTSTREAM]
+id=r_in_0_7
+name=DVD subtitles
+index=7
+media_type=subtitle
+[/INPUTSTREAM]
+[/INPUTFILE]
+[DECODER]
+source_id=r_in_0_7
+id=in_0_7
+name=dvdsub
+media_type=subtitle
+[/DECODER]
+[DECODER]
+source_id=r_in_1_0
+id=in_1_0
+name=srt
+media_type=subtitle
+[/DECODER]
+[ENCODER]
+id=out__0_3
+dest_id=r_out__0_3
+name=dvbsub
+media_type=subtitle
+[/ENCODER]
+[ENCODER]
+id=out__0_4
+dest_id=r_out__0_4
+name=ass
+media_type=subtitle
+[/ENCODER]
+[OUTPUTFILE]
+index=0
+muxer_name=matroska
+file_extension=mkv
+url=temp.mkv
+[OUTPUTSTREAM]
+id=r_out__0_0
+name=H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10
+index=0
+media_type=video
+[/OUTPUTSTREAM]
+[OUTPUTSTREAM]
+id=r_out__0_1
+name=DCA (DTS Coherent Acoustics)
+index=1
+media_type=audio
+[/OUTPUTSTREAM]
+[OUTPUTSTREAM]
+id=r_out__0_2
+name=DCA (DTS Coherent Acoustics)
+index=2
+media_type=audio
+[/OUTPUTSTREAM]
+[OUTPUTSTREAM]
+id=r_out__0_3
+name=DVB subtitles
+index=3
+media_type=subtitle
+[/OUTPUTSTREAM]
+[OUTPUTSTREAM]
+id=r_out__0_4
+name=ASS (Advanced SSA) subtitle
+index=4
+media_type=subtitle
+[/OUTPUTSTREAM]
+[OUTPUTSTREAM]
+id=r_out__0_5
+name=ASS (Advanced SSA) subtitle
+index=5
+media_type=subtitle
+[/OUTPUTSTREAM]
+[/OUTPUTFILE]
+[STREAMLINK]
+dest_stream_id=r_out__0_0
+source_stream_id=r_in_0_0
+operation=Stream Copy
+media_type=video
+[/STREAMLINK]
+[STREAMLINK]
+dest_stream_id=r_out__0_1
+source_stream_id=r_in_0_1
+operation=Stream Copy
+media_type=audio
+[/STREAMLINK]
+[STREAMLINK]
+dest_stream_id=r_out__0_2
+source_stream_id=r_in_0_2
+operation=Stream Copy
+media_type=audio
+[/STREAMLINK]
+[STREAMLINK]
+dest_stream_id=out__0_3
+source_stream_id=in_0_7
+operation=Transcode
+media_type=subtitle
+[/STREAMLINK]
+[STREAMLINK]
+dest_stream_id=out__0_4
+source_stream_id=in_1_0
+operation=Transcode
+media_type=subtitle
+[/STREAMLINK]
+[STREAMLINK]
+dest_stream_id=r_out__0_5
+source_stream_id=r_in_2_0
+operation=Stream Copy
+media_type=subtitle
+[/STREAMLINK]

@@ -1,0 +1,12 @@
+FFBIN_PATH=v:\ffbuild\msvc\bin\x64\ffmpegd.exe
+MEDIA_PATH=media\
+EXTRA_ARGUMENTS=-hide_banner
+REM EXTRA_ARGUMENTS=-hide_banner -loglevel verbose
+
+REM Space-separated test script names (without .cmd):
+REM TEST_NAMES=1_nofilters_3_in_1_out 3_complex_graphs
+TEST_NAMES=1_nofilters_3_in_1_out 2_hwa_qsv 3_complex_graphs
+
+REM Each pair of extension:format separated by a space
+EXTENSION_PAIRS="json:json" "xml:xml" "csv:csv" "flat.txt:flat" "csv:csv" "ini:ini" "default.txt:default" "mmd:mermaid" "compat.mmd:mermaid=link_coloring=0" "html:mermaidhtml"
+REM EXTENSION_PAIRS=json:json

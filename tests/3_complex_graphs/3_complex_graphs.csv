@@ -1,0 +1,127 @@
+graph,0,Graph 0.0,Graph_0_0,"[0:0]yadif@jf_x,split[split_1][split_2];[split_2]scale=size=512x256[scaled_1];[split_1][scaled_1]overlay[f1_out0]",graph_input,0,0:0,G0_graph_0_input_from_stream_0_0,buffer,video
+,graph_output,0,#0:0,G0_out__0_0,buffersink,video
+,filter,yadif,Deinterlace the input image.,1,1,filter_input,0,default,in_0_0,default,G0_yadif_jf_x,video,yuv420p,1920,800,1:1,tv,1/1000
+,filter_output,G0_Parsed_split_1,0,default,default,G0_yadif_jf_x,video,yuv420p,1920,800,1:1,tv,1/2000
+
+filter,split,Pass on the input to N video outputs.,1,0,filter_input,0,default,G0_yadif_jf_x,default,G0_Parsed_split_1,video,yuv420p,1920,800,1:1,tv,1/2000
+,filter_output,G0_Parsed_overlay_3,0,output0,main,G0_Parsed_split_1,video,yuv420p,1920,800,1:1,tv,1/2000
+filter_output,G0_Parsed_scale_2,1,output1,default,G0_Parsed_split_1,video,yuv420p,1920,800,1:1,tv,1/2000
+
+filter,scale,Scale the input video size and/or convert the image format.,1,1,filter_input,0,default,G0_Parsed_split_1,output1,G0_Parsed_scale_2,video,yuv420p,1920,800,1:1,tv,1/2000
+,filter_output,G0_Parsed_overlay_3,0,default,overlay,G0_Parsed_scale_2,video,yuva420p,512,256,6:5,tv,1/2000
+
+filter,overlay,Overlay a video source on top of the input.,2,1,filter_input,0,main,G0_Parsed_split_1,output0,G0_Parsed_overlay_3,video,yuv420p,1920,800,1:1,tv,1/2000
+filter_input,1,overlay,G0_Parsed_scale_2,default,G0_Parsed_overlay_3,video,yuva420p,512,256,6:5,tv,1/2000
+,filter_output,G0_format,0,default,default,G0_Parsed_overlay_3,video,yuv420p,1920,800,1:1,tv,1/2000
+
+filter,buffer,"Buffer video frames, and make them accessible to the filterchain.",0,1,,filter_output,G0_yadif_jf_x,0,default,default,G0_graph_0_input_from_stream_0_0,video,yuv420p,1920,800,1:1,tv,1/1000
+
+filter,buffersink,"Buffer video frames, and make them available to the end of the filter graph.",1,0,filter_input,0,default,G0_format,default,G0_out__0_0,video,yuv420p,1920,800,1:1,tv,1/2000
+,
+filter,format,Convert the input video to one of the specified pixel formats.,1,1,filter_input,0,default,G0_Parsed_overlay_3,default,G0_format,video,yuv420p,1920,800,1:1,tv,1/2000
+,filter_output,out__0_0,0,default,default,G0_format,video,yuv420p,1920,800,1:1,tv,1/2000
+
+
+graph,1,Graph 2.1,Graph_2_1,"[0:2]asplit[f3_out],a3dscope,[0:0]overlay[f2_out]",graph_input,0,0:2,G2_graph_1_in_0_2,abuffer,audio
+graph_input,1,0:0,G2_graph_1_input_from_stream_0_0,buffer,video
+,graph_output,0,#1:1,G2_out__1_1,abuffersink,audio
+graph_output,1,#1:0,G2_out__1_0,buffersink,video
+,filter,asplit,Pass on the audio input to N audio outputs.,1,0,filter_input,0,default,in_0_2,default,G2_Parsed_asplit_0,audio,5.1(side),6,48000,1/48000
+,filter_output,G2_auto_aresample_1,0,output0,default,G2_Parsed_asplit_0,audio,5.1(side),6,48000,1/48000
+filter_output,G2_Parsed_a3dscope_1,1,output1,default,G2_Parsed_asplit_0,audio,5.1(side),6,48000,1/48000
+
+filter,a3dscope,Convert input audio to 3d scope video output.,1,1,filter_input,0,default,G2_Parsed_asplit_0,output1,G2_Parsed_a3dscope_1,audio,5.1(side),6,48000,1/48000
+,filter_output,G2_auto_scale_0,0,default,default,G2_Parsed_a3dscope_1,video,rgba,1280,720,1:1,pc,gbr,1/25
+
+filter,overlay,Overlay a video source on top of the input.,2,1,filter_input,0,main,in_0_0,default,G2_Parsed_overlay_2,video,yuv420p,1920,800,1:1,tv,1/1000
+filter_input,1,overlay,G2_auto_scale_0,default,G2_Parsed_overlay_2,video,yuva420p,1280,720,1:1,tv,1/25
+,filter_output,G2_format,0,default,default,G2_Parsed_overlay_2,video,yuv420p,1920,800,1:1,tv,1/1000
+
+filter,abuffer,"Buffer audio frames, and make them accessible to the filterchain.",0,1,,filter_output,G2_Parsed_asplit_0,0,default,default,G2_graph_1_in_0_2,audio,5.1(side),6,48000,1/48000
+
+filter,buffer,"Buffer video frames, and make them accessible to the filterchain.",0,1,,filter_output,G2_Parsed_overlay_2,0,default,main,G2_graph_1_input_from_stream_0_0,video,yuv420p,1920,800,1:1,tv,1/1000
+
+filter,abuffersink,"Buffer audio frames, and make them available to the end of the filter graph.",1,0,filter_input,0,default,G2_format_out__1_1,default,G2_out__1_1,audio,stereo,2,48000,1/48000
+,
+filter,aformat,Convert the input audio to one of the specified formats.,1,1,filter_input,0,default,G2_auto_aresample_1,default,G2_format_out__1_1,audio,stereo,2,48000,1/48000
+,filter_output,out__1_1,0,default,default,G2_format_out__1_1,audio,stereo,2,48000,1/48000
+
+filter,buffersink,"Buffer video frames, and make them available to the end of the filter graph.",1,0,filter_input,0,default,G2_format,default,G2_out__1_0,video,yuv420p,1920,800,1:1,tv,1/1000
+,
+filter,format,Convert the input video to one of the specified pixel formats.,1,1,filter_input,0,default,G2_Parsed_overlay_2,default,G2_format,video,yuv420p,1920,800,1:1,tv,1/1000
+,filter_output,out__1_0,0,default,default,G2_format,video,yuv420p,1920,800,1:1,tv,1/1000
+
+filter,scale,Scale the input video size and/or convert the image format.,1,1,filter_input,0,default,G2_Parsed_a3dscope_1,default,G2_auto_scale_0,video,rgba,1280,720,1:1,pc,gbr,1/25
+,filter_output,G2_Parsed_overlay_2,0,default,overlay,G2_auto_scale_0,video,yuva420p,1280,720,1:1,tv,1/25
+
+filter,aresample,Resample audio data.,1,1,filter_input,0,default,G2_Parsed_asplit_0,output0,G2_auto_aresample_1,audio,5.1(side),6,48000,1/48000
+,filter_output,G2_format_out__1_1,0,default,default,G2_auto_aresample_1,audio,stereo,2,48000,1/48000
+
+
+graph,-1,Graph 3.-1,Graph_3_-1,"aecho,volume",graph_input,0,G3_graph__1_in_0_2,abuffer,audio
+,graph_output,0,#0:1,G3_out__0_1,abuffersink,audio
+,filter,aecho,Add echoing to the audio.,1,1,filter_input,0,default,in_0_2,default,G3_Parsed_aecho_0,audio,5.1(side),6,48000,1/48000
+,filter_output,G3_Parsed_volume_1,0,default,default,G3_Parsed_aecho_0,audio,5.1(side),6,48000,1/48000
+
+filter,volume,Change input volume.,1,1,filter_input,0,default,G3_Parsed_aecho_0,default,G3_Parsed_volume_1,audio,5.1(side),6,48000,1/48000
+,filter_output,G3_format_out__0_1,0,default,default,G3_Parsed_volume_1,audio,5.1(side),6,48000,1/48000
+
+filter,abuffer,"Buffer audio frames, and make them accessible to the filterchain.",0,1,,filter_output,G3_Parsed_aecho_0,0,default,default,G3_graph__1_in_0_2,audio,5.1(side),6,48000,1/48000
+
+filter,abuffersink,"Buffer audio frames, and make them available to the end of the filter graph.",1,0,filter_input,0,default,G3_format_out__0_1,default,G3_out__0_1,audio,5.1(side),6,48000,1/48000
+,
+filter,aformat,Convert the input audio to one of the specified formats.,1,1,filter_input,0,default,G3_Parsed_volume_1,default,G3_format_out__0_1,audio,5.1(side),6,48000,1/48000
+,filter_output,out__0_1,0,default,default,G3_format_out__0_1,audio,5.1(side),6,48000,1/48000
+
+
+graph,-1,Graph 1.-1,Graph_1_-1,"aecho,volume",graph_input,0,G1_graph__1_in_0_1,abuffer,audio
+,graph_output,0,#0:2,G1_out__0_2,abuffersink,audio
+,filter,aecho,Add echoing to the audio.,1,1,filter_input,0,default,in_0_1,default,G1_Parsed_aecho_0,audio,7.1,8,48000,1/48000
+,filter_output,G1_auto_aresample_0,0,default,default,G1_Parsed_aecho_0,audio,7.1,8,48000,1/48000
+
+filter,volume,Change input volume.,1,1,filter_input,0,default,G1_auto_aresample_0,default,G1_Parsed_volume_1,audio,7.1,8,48000,1/48000
+,filter_output,G1_format_out__0_2,0,default,default,G1_Parsed_volume_1,audio,7.1,8,48000,1/48000
+
+filter,abuffer,"Buffer audio frames, and make them accessible to the filterchain.",0,1,,filter_output,G1_Parsed_aecho_0,0,default,default,G1_graph__1_in_0_1,audio,7.1,8,48000,1/48000
+
+filter,abuffersink,"Buffer audio frames, and make them available to the end of the filter graph.",1,0,filter_input,0,default,G1_format_out__0_2,default,G1_out__0_2,audio,7.1,8,48000,1/48000
+,
+filter,aformat,Convert the input audio to one of the specified formats.,1,1,filter_input,0,default,G1_Parsed_volume_1,default,G1_format_out__0_2,audio,7.1,8,48000,1/48000
+,filter_output,out__0_2,0,default,default,G1_format_out__0_2,audio,7.1,8,48000,1/48000
+
+filter,aresample,Resample audio data.,1,1,filter_input,0,default,G1_Parsed_aecho_0,default,G1_auto_aresample_0,audio,7.1,8,48000,1/48000
+,filter_output,G1_Parsed_volume_1,0,default,default,G1_auto_aresample_0,audio,7.1,8,48000,1/48000
+
+
+inputfile,0,"matroska,webm",mkv,media\video_1.mkv,inputstream,r_in_0_0,H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10,0,video
+inputstream,r_in_0_1,DCA (DTS Coherent Acoustics),1,audio
+inputstream,r_in_0_2,DCA (DTS Coherent Acoustics),2,audio
+inputstream,r_in_0_3,HDMV Presentation Graphic Stream subtitles,3,subtitle
+inputstream,r_in_0_4,DVD subtitles,4,subtitle
+inputstream,r_in_0_5,HDMV Presentation Graphic Stream subtitles,5,subtitle
+inputstream,r_in_0_6,HDMV Presentation Graphic Stream subtitles,6,subtitle
+inputstream,r_in_0_7,DVD subtitles,7,subtitle
+
+decoder,r_in_0_0,in_0_0,h264,video
+decoder,r_in_0_1,in_0_1,dca,audio
+decoder,r_in_0_2,in_0_2,dca,audio
+decoder,r_in_0_3,in_0_3,pgssub,subtitle
+decoder,r_in_0_6,in_0_6,pgssub,subtitle
+encoder,out__0_0,r_out__0_0,libx264,video
+encoder,out__0_1,r_out__0_1,libvorbis,audio
+encoder,out__0_2,r_out__0_2,libvorbis,audio
+encoder,out__0_3,r_out__0_3,dvbsub,subtitle
+encoder,out__1_0,r_out__1_0,libx264,video
+encoder,out__1_1,r_out__1_1,mp2,audio
+encoder,out__1_2,r_out__1_2,dvbsub,subtitle
+outputfile,1,mpegts,ts,temp.ts,outputstream,r_out__1_0,H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10,0,video
+outputstream,r_out__1_1,MP2 (MPEG audio layer 2),1,audio
+outputstream,r_out__1_2,DVB subtitles,2,subtitle
+
+outputfile,0,matroska,mkv,out1.mkv,outputstream,r_out__0_0,H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10,0,video
+outputstream,r_out__0_1,Vorbis,1,audio
+outputstream,r_out__0_2,Vorbis,2,audio
+outputstream,r_out__0_3,DVB subtitles,3,subtitle
+
+streamlink,out__0_3,in_0_3,Transcode,subtitle
+streamlink,out__1_2,in_0_6,Transcode,subtitle

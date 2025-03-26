@@ -1,0 +1,419 @@
+{
+    "graphs": [
+        {
+            "graph_index": 0,
+            "name": "Graph 0.0",
+            "id": "Graph_0_0",
+            "description": "[0:0]scale_qsv=w=512:h=256[f1_out0]",
+            "graph_inputs": [
+                {
+                    "input_index": 0,
+                    "link_label": "0:0",
+                    "filter_id": "G0_graph_0_input_from_stream_0_0",
+                    "filter_name": "buffer",
+                    "media_type": "video"
+                }
+            ],
+            "graph_outputs": [
+                {
+                    "output_index": 0,
+                    "name": "#0:0",
+                    "filter_id": "G0_out__0_0",
+                    "filter_name": "buffersink",
+                    "media_type": "video"
+                }
+            ],
+            "filters": [
+                {
+                    "filter_name": "scale_qsv",
+                    "filter_inputs": [
+                        {
+                            "source_filter_id": "in_0_0",
+                            "filter_id": "G0_Parsed_scale_qsv_0",
+                            "format": "qsv | nv12",
+                            "width": 1920,
+                            "height": 800,
+                            "sar": "1:1",
+                            "time_base": "1/1000",
+                            "hw_frames_context": {
+                                "hw_device_type": "qsv",
+                                "hw_pixel_format": "qsv",
+                                "sw_pixel_format": "nv12"
+                            }
+                        }
+                    ],
+                    "filter_outputs": [
+                        {
+                            "dest_filter_id": "G0_format",
+                            "filter_id": "G0_Parsed_scale_qsv_0",
+                            "format": "qsv | nv12",
+                            "width": 512,
+                            "height": 256,
+                            "sar": "1:1",
+                            "time_base": "583/13978",
+                            "hw_frames_context": {
+                                "hw_device_type": "qsv",
+                                "hw_pixel_format": "qsv",
+                                "sw_pixel_format": "nv12"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "filter_name": "buffer",
+                    "filter_inputs": [
+
+                    ],
+                    "filter_outputs": [
+                        {
+                            "dest_filter_id": "G0_Parsed_scale_qsv_0",
+                            "filter_id": "G0_graph_0_input_from_stream_0_0",
+                            "format": "qsv | nv12",
+                            "width": 1920,
+                            "height": 800,
+                            "sar": "1:1",
+                            "time_base": "1/1000",
+                            "hw_frames_context": {
+                                "hw_device_type": "qsv",
+                                "hw_pixel_format": "qsv",
+                                "sw_pixel_format": "nv12"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "filter_name": "buffersink",
+                    "filter_inputs": [
+                        {
+                            "source_filter_id": "G0_format",
+                            "filter_id": "G0_out__0_0",
+                            "format": "qsv | nv12",
+                            "width": 512,
+                            "height": 256,
+                            "sar": "1:1",
+                            "time_base": "583/13978",
+                            "hw_frames_context": {
+                                "hw_device_type": "qsv",
+                                "hw_pixel_format": "qsv",
+                                "sw_pixel_format": "nv12"
+                            }
+                        }
+                    ],
+                    "filter_outputs": [
+
+                    ]
+                },
+                {
+                    "filter_name": "format",
+                    "filter_inputs": [
+                        {
+                            "source_filter_id": "G0_Parsed_scale_qsv_0",
+                            "filter_id": "G0_format",
+                            "format": "qsv | nv12",
+                            "width": 512,
+                            "height": 256,
+                            "sar": "1:1",
+                            "time_base": "583/13978",
+                            "hw_frames_context": {
+                                "hw_device_type": "qsv",
+                                "hw_pixel_format": "qsv",
+                                "sw_pixel_format": "nv12"
+                            }
+                        }
+                    ],
+                    "filter_outputs": [
+                        {
+                            "dest_filter_id": "out__0_0",
+                            "filter_id": "G0_format",
+                            "format": "qsv | nv12",
+                            "width": 512,
+                            "height": 256,
+                            "sar": "1:1",
+                            "time_base": "583/13978",
+                            "hw_frames_context": {
+                                "hw_device_type": "qsv",
+                                "hw_pixel_format": "qsv",
+                                "sw_pixel_format": "nv12"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "graph_index": -1,
+            "name": "Graph 1.-1",
+            "id": "Graph_1_-1",
+            "description": "aecho,volume",
+            "graph_inputs": [
+                {
+                    "input_index": 0,
+                    "filter_id": "G1_graph__1_in_0_1",
+                    "filter_name": "abuffer",
+                    "media_type": "audio"
+                }
+            ],
+            "graph_outputs": [
+                {
+                    "output_index": 0,
+                    "name": "#0:1",
+                    "filter_id": "G1_out__0_1",
+                    "filter_name": "abuffersink",
+                    "media_type": "audio"
+                }
+            ],
+            "filters": [
+                {
+                    "filter_name": "aecho",
+                    "filter_inputs": [
+                        {
+                            "source_filter_id": "in_0_1",
+                            "filter_id": "G1_Parsed_aecho_0",
+                            "channel_layout": "7.1",
+                            "channels": "8",
+                            "sample_rate": "48000",
+                            "time_base": "1/48000"
+                        }
+                    ],
+                    "filter_outputs": [
+                        {
+                            "dest_filter_id": "G1_auto_aresample_0",
+                            "filter_id": "G1_Parsed_aecho_0",
+                            "channel_layout": "7.1",
+                            "channels": "8",
+                            "sample_rate": "48000",
+                            "time_base": "1/48000"
+                        }
+                    ]
+                },
+                {
+                    "filter_name": "volume",
+                    "filter_inputs": [
+                        {
+                            "source_filter_id": "G1_auto_aresample_0",
+                            "filter_id": "G1_Parsed_volume_1",
+                            "channel_layout": "7.1",
+                            "channels": "8",
+                            "sample_rate": "48000",
+                            "time_base": "1/48000"
+                        }
+                    ],
+                    "filter_outputs": [
+                        {
+                            "dest_filter_id": "G1_format_out__0_1",
+                            "filter_id": "G1_Parsed_volume_1",
+                            "channel_layout": "7.1",
+                            "channels": "8",
+                            "sample_rate": "48000",
+                            "time_base": "1/48000"
+                        }
+                    ]
+                },
+                {
+                    "filter_name": "abuffer",
+                    "filter_inputs": [
+
+                    ],
+                    "filter_outputs": [
+                        {
+                            "dest_filter_id": "G1_Parsed_aecho_0",
+                            "filter_id": "G1_graph__1_in_0_1",
+                            "channel_layout": "7.1",
+                            "channels": "8",
+                            "sample_rate": "48000",
+                            "time_base": "1/48000"
+                        }
+                    ]
+                },
+                {
+                    "filter_name": "abuffersink",
+                    "filter_inputs": [
+                        {
+                            "source_filter_id": "G1_format_out__0_1",
+                            "filter_id": "G1_out__0_1",
+                            "channel_layout": "7.1",
+                            "channels": "8",
+                            "sample_rate": "48000",
+                            "time_base": "1/48000"
+                        }
+                    ],
+                    "filter_outputs": [
+
+                    ]
+                },
+                {
+                    "filter_name": "aformat",
+                    "filter_inputs": [
+                        {
+                            "source_filter_id": "G1_Parsed_volume_1",
+                            "filter_id": "G1_format_out__0_1",
+                            "channel_layout": "7.1",
+                            "channels": "8",
+                            "sample_rate": "48000",
+                            "time_base": "1/48000"
+                        }
+                    ],
+                    "filter_outputs": [
+                        {
+                            "dest_filter_id": "out__0_1",
+                            "filter_id": "G1_format_out__0_1",
+                            "channel_layout": "7.1",
+                            "channels": "8",
+                            "sample_rate": "48000",
+                            "time_base": "1/48000"
+                        }
+                    ]
+                },
+                {
+                    "filter_name": "aresample",
+                    "filter_inputs": [
+                        {
+                            "source_filter_id": "G1_Parsed_aecho_0",
+                            "filter_id": "G1_auto_aresample_0",
+                            "channel_layout": "7.1",
+                            "channels": "8",
+                            "sample_rate": "48000",
+                            "time_base": "1/48000"
+                        }
+                    ],
+                    "filter_outputs": [
+                        {
+                            "dest_filter_id": "G1_Parsed_volume_1",
+                            "filter_id": "G1_auto_aresample_0",
+                            "channel_layout": "7.1",
+                            "channels": "8",
+                            "sample_rate": "48000",
+                            "time_base": "1/48000"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "inputfiles": [
+        {
+            "index": "0",
+            "demuxer_name": "matroska,webm",
+            "file_extension": "mkv",
+            "url": "U:\\TestMedia\\Test.mkv",
+            "inputstreams": [
+                {
+                    "id": "r_in_0_0",
+                    "name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+                    "index": "0"
+                },
+                {
+                    "id": "r_in_0_1",
+                    "name": "DCA (DTS Coherent Acoustics)",
+                    "index": "1"
+                },
+                {
+                    "id": "r_in_0_2",
+                    "name": "DCA (DTS Coherent Acoustics)",
+                    "index": "2"
+                },
+                {
+                    "id": "r_in_0_3",
+                    "name": "HDMV Presentation Graphic Stream subtitles",
+                    "index": "3"
+                },
+                {
+                    "id": "r_in_0_4",
+                    "name": "DVD subtitles",
+                    "index": "4"
+                },
+                {
+                    "id": "r_in_0_5",
+                    "name": "HDMV Presentation Graphic Stream subtitles",
+                    "index": "5"
+                },
+                {
+                    "id": "r_in_0_6",
+                    "name": "HDMV Presentation Graphic Stream subtitles",
+                    "index": "6"
+                },
+                {
+                    "id": "r_in_0_7",
+                    "name": "DVD subtitles",
+                    "index": "7"
+                }
+            ]
+        }
+    ],
+    "decoders": [
+        {
+            "source_id": "r_in_0_0",
+            "id": "in_0_0",
+            "name": "h264_qsv"
+        },
+        {
+            "source_id": "r_in_0_1",
+            "id": "in_0_1",
+            "name": "dca"
+        },
+        {
+            "source_id": "r_in_0_3",
+            "id": "in_0_3",
+            "name": "pgssub"
+        }
+    ],
+    "encoders": [
+        {
+            "id": "out__0_0",
+            "dest_id": "r_out__0_0",
+            "name": "hevc_qsv"
+        },
+        {
+            "id": "out__0_1",
+            "dest_id": "r_out__0_1",
+            "name": "libvorbis"
+        },
+        {
+            "id": "out__0_2",
+            "dest_id": "r_out__0_2",
+            "name": "dvbsub"
+        }
+    ],
+    "outputfiles": [
+        {
+            "index": "0",
+            "muxer_name": "matroska",
+            "file_extension": "mkv",
+            "url": "out1.mkv",
+            "outputstreams": [
+                {
+                    "id": "r_out__0_0",
+                    "name": "H.265 / HEVC (High Efficiency Video Coding)",
+                    "index": "0"
+                },
+                {
+                    "id": "r_out__0_1",
+                    "name": "Vorbis",
+                    "index": "1"
+                },
+                {
+                    "id": "r_out__0_2",
+                    "name": "DVB subtitles",
+                    "index": "2"
+                },
+                {
+                    "id": "r_out__0_3",
+                    "name": "DVD subtitles",
+                    "index": "3"
+                }
+            ]
+        }
+    ],
+    "streamlinks": [
+        {
+            "dest_stream_id": "out__0_2",
+            "source_stream_id": "in_0_3",
+            "operation": "Transcode"
+        },
+        {
+            "dest_stream_id": "r_out__0_3",
+            "source_stream_id": "r_in_0_7",
+            "operation": "Stream Copy"
+        }
+    ]
+}
