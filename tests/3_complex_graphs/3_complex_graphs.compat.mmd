@@ -3,71 +3,56 @@
 flowchart LR
   gradient_def@{ shape: text, label: "<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"><defs><linearGradient id="ff-filtergradient" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:hsla(0, 0%, 30%, 0.02);"/><stop offset="50%" style="stop-color:hsla(0, 0%, 30%, 0);"/><stop offset="100%" style="stop-color:hsla(0, 0%, 30%, 0.05);"/></linearGradient></defs></svg>" }
 
-  subgraph Graph_0_0["<div class="ff-filters"><span class="name">Graph 0.0</span><span class="description">[0:0]yadif@jf_x,split[split_1][split_2];[split_2]scale=size=512x256[scaled_1];[split_1][scaled_1]overlay[f1_out0]</span><span class="id">Graph_0_0</span></div>"]
+  subgraph Graph_2_0["<div class="ff-filters"><span class="name">Graph 2.0</span><span class="description">[0:0]yadif@jf_x,split[split_1][split_2];[split_2]scale=size=512x256[scaled_1];[split_1][scaled_1]overlay[f1_out0]</span><span class="id">Graph_2_0</span></div>"]
 
-    G0_yadif_jf_x("<div class="ff-filter"><span class="filter_name">yadif</span></div>"):::ff-filter
+    G2_yadif_jf_x("<div class="ff-filter"><span class="filter_name">yadif</span></div>"):::ff-filter
 
-    G0_Parsed_split_1("<div class="ff-filter"><span class="filter_name">split</span></div>"):::ff-filter
+    G2_Parsed_split_1("<div class="ff-filter"><span class="filter_name">split</span></div>"):::ff-filter
 
-    G0_Parsed_scale_2("<div class="ff-filter"><span class="filter_name">scale</span></div>"):::ff-filter
+    G2_Parsed_scale_2("<div class="ff-filter"><span class="filter_name">scale</span></div>"):::ff-filter
 
-    G0_Parsed_overlay_3("<div class="ff-filter"><span class="filter_name">overlay</span></div>"):::ff-filter
-
-    G0_format("<div class="ff-filter"><span class="filter_name">format</span></div>"):::ff-filter
-  end
-  class Graph_0_0 ff-filters
-
-  in_0_0 == "<span>yuv420p</span><br><span>1920x800</span><br><span>1:1</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G0_yadif_jf_x
-  G0_yadif_jf_x == "<span>yuv420p</span><br><span>1920x800</span><br><span>1:1</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G0_Parsed_split_1
-  G0_Parsed_split_1 == "<span>yuv420p</span><br><span>1920x800</span><br><span>1:1</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G0_Parsed_overlay_3
-  G0_Parsed_split_1 == "<span>yuv420p</span><br><span>1920x800</span><br><span>1:1</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G0_Parsed_scale_2
-  G0_Parsed_scale_2 == "<span>yuva420p</span><br><span>512x256</span><br><span>6:5</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G0_Parsed_overlay_3
-  G0_Parsed_overlay_3 == "<span>yuv420p</span><br><span>1920x800</span><br><span>1:1</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G0_format
-  G0_format == "<span>yuv420p</span><br><span>1920x800</span><br><span>1:1</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> out__0_0
-
-  subgraph Graph_2_1["<div class="ff-filters"><span class="name">Graph 2.1</span><span class="description">[0:2]asplit[f3_out],a3dscope,[0:0]overlay[f2_out]</span><span class="id">Graph_2_1</span></div>"]
-
-    G2_Parsed_asplit_0("<div class="ff-filter"><span class="filter_name">asplit</span></div>"):::ff-filter
-
-    G2_Parsed_a3dscope_1("<div class="ff-filter"><span class="filter_name">a3dscope</span></div>"):::ff-filter
-
-    G2_Parsed_overlay_2("<div class="ff-filter"><span class="filter_name">overlay</span></div>"):::ff-filter
-
-    G2_format_out__1_1("<div class="ff-filter"><span class="filter_name">aformat</span></div>"):::ff-filter
+    G2_Parsed_overlay_3("<div class="ff-filter"><span class="filter_name">overlay</span></div>"):::ff-filter
 
     G2_format("<div class="ff-filter"><span class="filter_name">format</span></div>"):::ff-filter
-
-    G2_auto_scale_0("<div class="ff-filter"><span class="filter_name">scale</span></div>"):::ff-filter
-
-    G2_auto_aresample_1("<div class="ff-filter"><span class="filter_name">aresample</span></div>"):::ff-filter
   end
-  class Graph_2_1 ff-filters
+  class Graph_2_0 ff-filters
 
-  in_0_2 audio-in_0_2-G2_Parsed_asplit_0@== "<span>5.1(side)</span><br><span>6 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G2_Parsed_asplit_0
-  G2_Parsed_asplit_0 audio-G2_Parsed_asplit_0-G2_auto_aresample_1@== "<span>5.1(side)</span><br><span>6 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G2_auto_aresample_1
-  G2_Parsed_asplit_0 audio-G2_Parsed_asplit_0-G2_Parsed_a3dscope_1@== "<span>5.1(side)</span><br><span>6 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G2_Parsed_a3dscope_1
-  G2_Parsed_a3dscope_1 video-G2_Parsed_a3dscope_1-G2_auto_scale_0@== "<span>rgba</span><br><span>1280x720</span><br><span>1:1</span><br><span>gbr</span><br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G2_auto_scale_0
-  in_0_0 video-in_0_0-G2_Parsed_overlay_2@== "<span>yuv420p</span><br><span>1920x800</span><br><span>1:1</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G2_Parsed_overlay_2
-  G2_auto_scale_0 video-G2_auto_scale_0-G2_Parsed_overlay_2@== "<span>yuva420p</span><br><span>1280x720</span><br><span>1:1</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G2_Parsed_overlay_2
-  G2_Parsed_overlay_2 video-G2_Parsed_overlay_2-G2_format@== "<span>yuv420p</span><br><span>1920x800</span><br><span>1:1</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G2_format
-  G2_auto_aresample_1 audio-G2_auto_aresample_1-G2_format_out__1_1@== "<span>stereo</span><br><span>2 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G2_format_out__1_1
-  G2_format_out__1_1 audio-G2_format_out__1_1-out__1_1@== "<span>stereo</span><br><span>2 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> out__1_1
-  G2_format video-G2_format-out__1_0@== "<span>yuv420p</span><br><span>1920x800</span><br><span>1:1</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> out__1_0
+  in_0_0 video-in_0_0-G2_yadif_jf_x@== "<span>yuv420p</span><br><span>1920x800</span><br><span>1:1</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G2_yadif_jf_x
+  G2_yadif_jf_x video-G2_yadif_jf_x-G2_Parsed_split_1@== "<span>yuv420p</span><br><span>1920x800</span><br><span>1:1</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G2_Parsed_split_1
+  G2_Parsed_split_1 video-G2_Parsed_split_1-G2_Parsed_overlay_3@== "<span>yuv420p</span><br><span>1920x800</span><br><span>1:1</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G2_Parsed_overlay_3
+  G2_Parsed_split_1 video-G2_Parsed_split_1-G2_Parsed_scale_2@== "<span>yuv420p</span><br><span>1920x800</span><br><span>1:1</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G2_Parsed_scale_2
+  G2_Parsed_scale_2 video-G2_Parsed_scale_2-G2_Parsed_overlay_3@== "<span>yuva420p</span><br><span>512x256</span><br><span>6:5</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G2_Parsed_overlay_3
+  G2_Parsed_overlay_3 video-G2_Parsed_overlay_3-G2_format@== "<span>yuv420p</span><br><span>1920x800</span><br><span>1:1</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G2_format
+  G2_format video-G2_format-out__0_0@== "<span>yuv420p</span><br><span>1920x800</span><br><span>1:1</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> out__0_0
 
-  subgraph Graph_3_-1["<div class="ff-filters"><span class="name">Graph 3.-1</span><span class="description">aecho,volume</span><span class="id">Graph_3_-1</span></div>"]
+  subgraph Graph_3_1["<div class="ff-filters"><span class="name">Graph 3.1</span><span class="description">[0:2]asplit[f3_out],a3dscope,[0:0]overlay[f2_out]</span><span class="id">Graph_3_1</span></div>"]
 
-    G3_Parsed_aecho_0("<div class="ff-filter"><span class="filter_name">aecho</span></div>"):::ff-filter
+    G3_Parsed_asplit_0("<div class="ff-filter"><span class="filter_name">asplit</span></div>"):::ff-filter
 
-    G3_Parsed_volume_1("<div class="ff-filter"><span class="filter_name">volume</span></div>"):::ff-filter
+    G3_Parsed_a3dscope_1("<div class="ff-filter"><span class="filter_name">a3dscope</span></div>"):::ff-filter
 
-    G3_format_out__0_1("<div class="ff-filter"><span class="filter_name">aformat</span></div>"):::ff-filter
+    G3_Parsed_overlay_2("<div class="ff-filter"><span class="filter_name">overlay</span></div>"):::ff-filter
+
+    G3_format_out__1_1("<div class="ff-filter"><span class="filter_name">aformat</span></div>"):::ff-filter
+
+    G3_format("<div class="ff-filter"><span class="filter_name">format</span></div>"):::ff-filter
+
+    G3_auto_scale_0("<div class="ff-filter"><span class="filter_name">scale</span></div>"):::ff-filter
+
+    G3_auto_aresample_1("<div class="ff-filter"><span class="filter_name">aresample</span></div>"):::ff-filter
   end
-  class Graph_3_-1 ff-filters
+  class Graph_3_1 ff-filters
 
-  in_0_2 audio-in_0_2-G3_Parsed_aecho_0@== "<span>5.1(side)</span><br><span>6 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G3_Parsed_aecho_0
-  G3_Parsed_aecho_0 audio-G3_Parsed_aecho_0-G3_Parsed_volume_1@== "<span>5.1(side)</span><br><span>6 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G3_Parsed_volume_1
-  G3_Parsed_volume_1 audio-G3_Parsed_volume_1-G3_format_out__0_1@== "<span>5.1(side)</span><br><span>6 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G3_format_out__0_1
-  G3_format_out__0_1 audio-G3_format_out__0_1-out__0_1@== "<span>5.1(side)</span><br><span>6 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> out__0_1
+  in_0_2 audio-in_0_2-G3_Parsed_asplit_0@== "<span>5.1(side)</span><br><span>6 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G3_Parsed_asplit_0
+  G3_Parsed_asplit_0 audio-G3_Parsed_asplit_0-G3_auto_aresample_1@== "<span>5.1(side)</span><br><span>6 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G3_auto_aresample_1
+  G3_Parsed_asplit_0 audio-G3_Parsed_asplit_0-G3_Parsed_a3dscope_1@== "<span>5.1(side)</span><br><span>6 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G3_Parsed_a3dscope_1
+  G3_Parsed_a3dscope_1 video-G3_Parsed_a3dscope_1-G3_auto_scale_0@== "<span>rgba</span><br><span>1280x720</span><br><span>1:1</span><br><span>gbr</span><br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G3_auto_scale_0
+  in_0_0 video-in_0_0-G3_Parsed_overlay_2@== "<span>yuv420p</span><br><span>1920x800</span><br><span>1:1</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G3_Parsed_overlay_2
+  G3_auto_scale_0 video-G3_auto_scale_0-G3_Parsed_overlay_2@== "<span>yuva420p</span><br><span>1280x720</span><br><span>1:1</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G3_Parsed_overlay_2
+  G3_Parsed_overlay_2 video-G3_Parsed_overlay_2-G3_format@== "<span>yuv420p</span><br><span>1920x800</span><br><span>1:1</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G3_format
+  G3_auto_aresample_1 audio-G3_auto_aresample_1-G3_format_out__1_1@== "<span>stereo</span><br><span>2 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G3_format_out__1_1
+  G3_format_out__1_1 audio-G3_format_out__1_1-out__1_1@== "<span>stereo</span><br><span>2 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> out__1_1
+  G3_format video-G3_format-out__1_0@== "<span>yuv420p</span><br><span>1920x800</span><br><span>1:1</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> out__1_0
 
   subgraph Graph_1_-1["<div class="ff-filters"><span class="name">Graph 1.-1</span><span class="description">aecho,volume</span><span class="id">Graph_1_-1</span></div>"]
 
@@ -75,17 +60,32 @@ flowchart LR
 
     G1_Parsed_volume_1("<div class="ff-filter"><span class="filter_name">volume</span></div>"):::ff-filter
 
-    G1_format_out__0_2("<div class="ff-filter"><span class="filter_name">aformat</span></div>"):::ff-filter
-
-    G1_auto_aresample_0("<div class="ff-filter"><span class="filter_name">aresample</span></div>"):::ff-filter
+    G1_format_out__0_1("<div class="ff-filter"><span class="filter_name">aformat</span></div>"):::ff-filter
   end
   class Graph_1_-1 ff-filters
 
-  in_0_1 audio-in_0_1-G1_Parsed_aecho_0@== "<span>7.1</span><br><span>8 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G1_Parsed_aecho_0
-  G1_Parsed_aecho_0 audio-G1_Parsed_aecho_0-G1_auto_aresample_0@== "<span>7.1</span><br><span>8 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G1_auto_aresample_0
-  G1_auto_aresample_0 audio-G1_auto_aresample_0-G1_Parsed_volume_1@== "<span>7.1</span><br><span>8 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G1_Parsed_volume_1
-  G1_Parsed_volume_1 audio-G1_Parsed_volume_1-G1_format_out__0_2@== "<span>7.1</span><br><span>8 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G1_format_out__0_2
-  G1_format_out__0_2 audio-G1_format_out__0_2-out__0_2@== "<span>7.1</span><br><span>8 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> out__0_2
+  in_0_2 audio-in_0_2-G1_Parsed_aecho_0@== "<span>5.1(side)</span><br><span>6 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G1_Parsed_aecho_0
+  G1_Parsed_aecho_0 audio-G1_Parsed_aecho_0-G1_Parsed_volume_1@== "<span>5.1(side)</span><br><span>6 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G1_Parsed_volume_1
+  G1_Parsed_volume_1 audio-G1_Parsed_volume_1-G1_format_out__0_1@== "<span>5.1(side)</span><br><span>6 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G1_format_out__0_1
+  G1_format_out__0_1 audio-G1_format_out__0_1-out__0_1@== "<span>5.1(side)</span><br><span>6 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> out__0_1
+
+  subgraph Graph_0_-1["<div class="ff-filters"><span class="name">Graph 0.-1</span><span class="description">aecho,volume</span><span class="id">Graph_0_-1</span></div>"]
+
+    G0_Parsed_aecho_0("<div class="ff-filter"><span class="filter_name">aecho</span></div>"):::ff-filter
+
+    G0_Parsed_volume_1("<div class="ff-filter"><span class="filter_name">volume</span></div>"):::ff-filter
+
+    G0_format_out__0_2("<div class="ff-filter"><span class="filter_name">aformat</span></div>"):::ff-filter
+
+    G0_auto_aresample_0("<div class="ff-filter"><span class="filter_name">aresample</span></div>"):::ff-filter
+  end
+  class Graph_0_-1 ff-filters
+
+  in_0_1 == "<span>7.1</span><br><span>8 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G0_Parsed_aecho_0
+  G0_Parsed_aecho_0 == "<span>7.1</span><br><span>8 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G0_auto_aresample_0
+  G0_auto_aresample_0 == "<span>7.1</span><br><span>8 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G0_Parsed_volume_1
+  G0_Parsed_volume_1 == "<span>7.1</span><br><span>8 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G0_format_out__0_2
+  G0_format_out__0_2 == "<span>7.1</span><br><span>8 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> out__0_2
 
 
   subgraph G4_Inputs["<div class="ff-inputfiles"></div>"]
