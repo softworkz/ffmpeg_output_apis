@@ -2,14 +2,14 @@
     "graphs": [
         {
             "graph_index": 0,
-            "name": "Graph 0.0",
-            "id": "Graph_0_0",
+            "name": "Graph 1.0",
+            "id": "Graph_1_0",
             "description": "[0:0]scale_qsv=w=512:h=256[f1_out0]",
             "graph_inputs": [
                 {
                     "input_index": 0,
                     "link_label": "0:0",
-                    "filter_id": "G0_graph_0_input_from_stream_0_0",
+                    "filter_id": "G1_graph_0_input_from_stream_0_0",
                     "filter_name": "buffer",
                     "media_type": "video"
                 }
@@ -18,7 +18,7 @@
                 {
                     "output_index": 0,
                     "name": "#0:0",
-                    "filter_id": "G0_out__0_0",
+                    "filter_id": "G1_out__0_0",
                     "filter_name": "buffersink",
                     "media_type": "video"
                 }
@@ -26,76 +26,123 @@
             "filters": [
                 {
                     "filter_name": "scale_qsv",
+                    "description": "Quick Sync Video \"scaling and format conversion\"",
+                    "nb_inputs": 1,
+                    "nb_outputs": 1,
+                    "has_hw_device_context": 1,
+                    "hw_device_type": "qsv",
                     "filter_inputs": [
                         {
+                            "input_index": 0,
+                            "pad_name": "default",
                             "source_filter_id": "in_0_0",
-                            "filter_id": "G0_Parsed_scale_qsv_0",
+                            "source_pad_name": "default",
+                            "filter_id": "G1_Parsed_scale_qsv_0",
+                            "media_type": "video",
                             "format": "qsv | nv12",
                             "width": 1920,
                             "height": 800,
                             "sar": "1:1",
-                            "time_base": "1/1000",
+                            "color_range": "tv",
+                            "sample_rate": "1/1000",
                             "hw_frames_context": {
+                                "has_hw_frames_context": 1,
                                 "hw_device_type": "qsv",
                                 "hw_pixel_format": "qsv",
-                                "sw_pixel_format": "nv12"
+                                "sw_pixel_format": "nv12",
+                                "width": 1920,
+                                "height": 800,
+                                "initial_pool_size": 34
                             }
                         }
                     ],
                     "filter_outputs": [
                         {
-                            "dest_filter_id": "G0_format",
-                            "filter_id": "G0_Parsed_scale_qsv_0",
+                            "dest_filter_id": "G1_format",
+                            "output_index": 0,
+                            "pad_name": "default",
+                            "dest_pad_name": "default",
+                            "filter_id": "G1_Parsed_scale_qsv_0",
+                            "media_type": "video",
                             "format": "qsv | nv12",
                             "width": 512,
                             "height": 256,
                             "sar": "1:1",
-                            "time_base": "583/13978",
+                            "color_range": "tv",
+                            "sample_rate": "583/13978",
                             "hw_frames_context": {
+                                "has_hw_frames_context": 1,
                                 "hw_device_type": "qsv",
                                 "hw_pixel_format": "qsv",
-                                "sw_pixel_format": "nv12"
+                                "sw_pixel_format": "nv12",
+                                "width": 512,
+                                "height": 256,
+                                "initial_pool_size": 64
                             }
                         }
                     ]
                 },
                 {
                     "filter_name": "buffer",
+                    "description": "Buffer video frames, and make them accessible to the filterchain.",
+                    "nb_inputs": 0,
+                    "nb_outputs": 1,
                     "filter_inputs": [
 
                     ],
                     "filter_outputs": [
                         {
-                            "dest_filter_id": "G0_Parsed_scale_qsv_0",
-                            "filter_id": "G0_graph_0_input_from_stream_0_0",
+                            "dest_filter_id": "G1_Parsed_scale_qsv_0",
+                            "output_index": 0,
+                            "pad_name": "default",
+                            "dest_pad_name": "default",
+                            "filter_id": "G1_graph_0_input_from_stream_0_0",
+                            "media_type": "video",
                             "format": "qsv | nv12",
                             "width": 1920,
                             "height": 800,
                             "sar": "1:1",
-                            "time_base": "1/1000",
+                            "color_range": "tv",
+                            "sample_rate": "1/1000",
                             "hw_frames_context": {
+                                "has_hw_frames_context": 1,
                                 "hw_device_type": "qsv",
                                 "hw_pixel_format": "qsv",
-                                "sw_pixel_format": "nv12"
+                                "sw_pixel_format": "nv12",
+                                "width": 1920,
+                                "height": 800,
+                                "initial_pool_size": 34
                             }
                         }
                     ]
                 },
                 {
                     "filter_name": "buffersink",
+                    "description": "Buffer video frames, and make them available to the end of the filter graph.",
+                    "nb_inputs": 1,
+                    "nb_outputs": 0,
                     "filter_inputs": [
                         {
-                            "source_filter_id": "G0_format",
-                            "filter_id": "G0_out__0_0",
+                            "input_index": 0,
+                            "pad_name": "default",
+                            "source_filter_id": "G1_format",
+                            "source_pad_name": "default",
+                            "filter_id": "G1_out__0_0",
+                            "media_type": "video",
                             "format": "qsv | nv12",
                             "width": 512,
                             "height": 256,
                             "sar": "1:1",
-                            "time_base": "583/13978",
+                            "color_range": "tv",
+                            "sample_rate": "583/13978",
                             "hw_frames_context": {
+                                "has_hw_frames_context": 1,
                                 "hw_device_type": "qsv",
                                 "hw_pixel_format": "qsv",
-                                "sw_pixel_format": "nv12"
+                                "sw_pixel_format": "nv12",
+                                "width": 512,
+                                "height": 256,
+                                "initial_pool_size": 64
                             }
                         }
                     ],
@@ -105,35 +152,56 @@
                 },
                 {
                     "filter_name": "format",
+                    "description": "Convert the input video to one of the specified pixel formats.",
+                    "nb_inputs": 1,
+                    "nb_outputs": 1,
                     "filter_inputs": [
                         {
-                            "source_filter_id": "G0_Parsed_scale_qsv_0",
-                            "filter_id": "G0_format",
+                            "input_index": 0,
+                            "pad_name": "default",
+                            "source_filter_id": "G1_Parsed_scale_qsv_0",
+                            "source_pad_name": "default",
+                            "filter_id": "G1_format",
+                            "media_type": "video",
                             "format": "qsv | nv12",
                             "width": 512,
                             "height": 256,
                             "sar": "1:1",
-                            "time_base": "583/13978",
+                            "color_range": "tv",
+                            "sample_rate": "583/13978",
                             "hw_frames_context": {
+                                "has_hw_frames_context": 1,
                                 "hw_device_type": "qsv",
                                 "hw_pixel_format": "qsv",
-                                "sw_pixel_format": "nv12"
+                                "sw_pixel_format": "nv12",
+                                "width": 512,
+                                "height": 256,
+                                "initial_pool_size": 64
                             }
                         }
                     ],
                     "filter_outputs": [
                         {
                             "dest_filter_id": "out__0_0",
-                            "filter_id": "G0_format",
+                            "output_index": 0,
+                            "pad_name": "default",
+                            "dest_pad_name": "default",
+                            "filter_id": "G1_format",
+                            "media_type": "video",
                             "format": "qsv | nv12",
                             "width": 512,
                             "height": 256,
                             "sar": "1:1",
-                            "time_base": "583/13978",
+                            "color_range": "tv",
+                            "sample_rate": "583/13978",
                             "hw_frames_context": {
+                                "has_hw_frames_context": 1,
                                 "hw_device_type": "qsv",
                                 "hw_pixel_format": "qsv",
-                                "sw_pixel_format": "nv12"
+                                "sw_pixel_format": "nv12",
+                                "width": 512,
+                                "height": 256,
+                                "initial_pool_size": 64
                             }
                         }
                     ]
@@ -142,13 +210,13 @@
         },
         {
             "graph_index": -1,
-            "name": "Graph 1.-1",
-            "id": "Graph_1_-1",
+            "name": "Graph 0.-1",
+            "id": "Graph_0_-1",
             "description": "aecho,volume",
             "graph_inputs": [
                 {
                     "input_index": 0,
-                    "filter_id": "G1_graph__1_in_0_1",
+                    "filter_id": "G0_graph__1_in_0_1",
                     "filter_name": "abuffer",
                     "media_type": "audio"
                 }
@@ -157,7 +225,7 @@
                 {
                     "output_index": 0,
                     "name": "#0:1",
-                    "filter_id": "G1_out__0_1",
+                    "filter_id": "G0_out__0_1",
                     "filter_name": "abuffersink",
                     "media_type": "audio"
                 }
@@ -165,76 +233,112 @@
             "filters": [
                 {
                     "filter_name": "aecho",
+                    "description": "Add echoing to the audio.",
+                    "nb_inputs": 1,
+                    "nb_outputs": 1,
                     "filter_inputs": [
                         {
+                            "input_index": 0,
+                            "pad_name": "default",
                             "source_filter_id": "in_0_1",
-                            "filter_id": "G1_Parsed_aecho_0",
+                            "source_pad_name": "default",
+                            "filter_id": "G0_Parsed_aecho_0",
+                            "media_type": "audio",
                             "channel_layout": "7.1",
                             "channels": "8",
                             "sample_rate": "48000",
-                            "time_base": "1/48000"
+                            "sample_rate": "1/48000"
                         }
                     ],
                     "filter_outputs": [
                         {
-                            "dest_filter_id": "G1_auto_aresample_0",
-                            "filter_id": "G1_Parsed_aecho_0",
+                            "dest_filter_id": "G0_auto_aresample_0",
+                            "output_index": 0,
+                            "pad_name": "default",
+                            "dest_pad_name": "default",
+                            "filter_id": "G0_Parsed_aecho_0",
+                            "media_type": "audio",
                             "channel_layout": "7.1",
                             "channels": "8",
                             "sample_rate": "48000",
-                            "time_base": "1/48000"
+                            "sample_rate": "1/48000"
                         }
                     ]
                 },
                 {
                     "filter_name": "volume",
+                    "description": "Change input volume.",
+                    "nb_inputs": 1,
+                    "nb_outputs": 1,
                     "filter_inputs": [
                         {
-                            "source_filter_id": "G1_auto_aresample_0",
-                            "filter_id": "G1_Parsed_volume_1",
+                            "input_index": 0,
+                            "pad_name": "default",
+                            "source_filter_id": "G0_auto_aresample_0",
+                            "source_pad_name": "default",
+                            "filter_id": "G0_Parsed_volume_1",
+                            "media_type": "audio",
                             "channel_layout": "7.1",
                             "channels": "8",
                             "sample_rate": "48000",
-                            "time_base": "1/48000"
+                            "sample_rate": "1/48000"
                         }
                     ],
                     "filter_outputs": [
                         {
-                            "dest_filter_id": "G1_format_out__0_1",
-                            "filter_id": "G1_Parsed_volume_1",
+                            "dest_filter_id": "G0_format_out__0_1",
+                            "output_index": 0,
+                            "pad_name": "default",
+                            "dest_pad_name": "default",
+                            "filter_id": "G0_Parsed_volume_1",
+                            "media_type": "audio",
                             "channel_layout": "7.1",
                             "channels": "8",
                             "sample_rate": "48000",
-                            "time_base": "1/48000"
+                            "sample_rate": "1/48000"
                         }
                     ]
                 },
                 {
                     "filter_name": "abuffer",
+                    "description": "Buffer audio frames, and make them accessible to the filterchain.",
+                    "nb_inputs": 0,
+                    "nb_outputs": 1,
                     "filter_inputs": [
 
                     ],
                     "filter_outputs": [
                         {
-                            "dest_filter_id": "G1_Parsed_aecho_0",
-                            "filter_id": "G1_graph__1_in_0_1",
+                            "dest_filter_id": "G0_Parsed_aecho_0",
+                            "output_index": 0,
+                            "pad_name": "default",
+                            "dest_pad_name": "default",
+                            "filter_id": "G0_graph__1_in_0_1",
+                            "media_type": "audio",
                             "channel_layout": "7.1",
                             "channels": "8",
                             "sample_rate": "48000",
-                            "time_base": "1/48000"
+                            "sample_rate": "1/48000"
                         }
                     ]
                 },
                 {
                     "filter_name": "abuffersink",
+                    "description": "Buffer audio frames, and make them available to the end of the filter graph.",
+                    "nb_inputs": 1,
+                    "nb_outputs": 0,
                     "filter_inputs": [
                         {
-                            "source_filter_id": "G1_format_out__0_1",
-                            "filter_id": "G1_out__0_1",
+                            "input_index": 0,
+                            "pad_name": "default",
+                            "source_filter_id": "G0_format_out__0_1",
+                            "source_pad_name": "default",
+                            "filter_id": "G0_out__0_1",
+                            "media_type": "audio",
                             "channel_layout": "7.1",
                             "channels": "8",
                             "sample_rate": "48000",
-                            "time_base": "1/48000"
+                            "sample_rate": "1/48000"
                         }
                     ],
                     "filter_outputs": [
@@ -243,47 +347,69 @@
                 },
                 {
                     "filter_name": "aformat",
+                    "description": "Convert the input audio to one of the specified formats.",
+                    "nb_inputs": 1,
+                    "nb_outputs": 1,
                     "filter_inputs": [
                         {
-                            "source_filter_id": "G1_Parsed_volume_1",
-                            "filter_id": "G1_format_out__0_1",
+                            "input_index": 0,
+                            "pad_name": "default",
+                            "source_filter_id": "G0_Parsed_volume_1",
+                            "source_pad_name": "default",
+                            "filter_id": "G0_format_out__0_1",
+                            "media_type": "audio",
                             "channel_layout": "7.1",
                             "channels": "8",
                             "sample_rate": "48000",
-                            "time_base": "1/48000"
+                            "sample_rate": "1/48000"
                         }
                     ],
                     "filter_outputs": [
                         {
                             "dest_filter_id": "out__0_1",
-                            "filter_id": "G1_format_out__0_1",
+                            "output_index": 0,
+                            "pad_name": "default",
+                            "dest_pad_name": "default",
+                            "filter_id": "G0_format_out__0_1",
+                            "media_type": "audio",
                             "channel_layout": "7.1",
                             "channels": "8",
                             "sample_rate": "48000",
-                            "time_base": "1/48000"
+                            "sample_rate": "1/48000"
                         }
                     ]
                 },
                 {
                     "filter_name": "aresample",
+                    "description": "Resample audio data.",
+                    "nb_inputs": 1,
+                    "nb_outputs": 1,
                     "filter_inputs": [
                         {
-                            "source_filter_id": "G1_Parsed_aecho_0",
-                            "filter_id": "G1_auto_aresample_0",
+                            "input_index": 0,
+                            "pad_name": "default",
+                            "source_filter_id": "G0_Parsed_aecho_0",
+                            "source_pad_name": "default",
+                            "filter_id": "G0_auto_aresample_0",
+                            "media_type": "audio",
                             "channel_layout": "7.1",
                             "channels": "8",
                             "sample_rate": "48000",
-                            "time_base": "1/48000"
+                            "sample_rate": "1/48000"
                         }
                     ],
                     "filter_outputs": [
                         {
-                            "dest_filter_id": "G1_Parsed_volume_1",
-                            "filter_id": "G1_auto_aresample_0",
+                            "dest_filter_id": "G0_Parsed_volume_1",
+                            "output_index": 0,
+                            "pad_name": "default",
+                            "dest_pad_name": "default",
+                            "filter_id": "G0_auto_aresample_0",
+                            "media_type": "audio",
                             "channel_layout": "7.1",
                             "channels": "8",
                             "sample_rate": "48000",
-                            "time_base": "1/48000"
+                            "sample_rate": "1/48000"
                         }
                     ]
                 }
@@ -295,47 +421,55 @@
             "index": "0",
             "demuxer_name": "matroska,webm",
             "file_extension": "mkv",
-            "url": "U:\\TestMedia\\Test.mkv",
+            "url": "media\\video_1.mkv",
             "inputstreams": [
                 {
                     "id": "r_in_0_0",
                     "name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
-                    "index": "0"
+                    "index": "0",
+                    "media_type": "video"
                 },
                 {
                     "id": "r_in_0_1",
                     "name": "DCA (DTS Coherent Acoustics)",
-                    "index": "1"
+                    "index": "1",
+                    "media_type": "audio"
                 },
                 {
                     "id": "r_in_0_2",
                     "name": "DCA (DTS Coherent Acoustics)",
-                    "index": "2"
+                    "index": "2",
+                    "media_type": "audio"
                 },
                 {
                     "id": "r_in_0_3",
                     "name": "HDMV Presentation Graphic Stream subtitles",
-                    "index": "3"
+                    "index": "3",
+                    "media_type": "subtitle"
                 },
                 {
                     "id": "r_in_0_4",
                     "name": "DVD subtitles",
-                    "index": "4"
+                    "index": "4",
+                    "media_type": "subtitle"
                 },
                 {
                     "id": "r_in_0_5",
                     "name": "HDMV Presentation Graphic Stream subtitles",
-                    "index": "5"
+                    "index": "5",
+                    "media_type": "subtitle"
                 },
                 {
                     "id": "r_in_0_6",
                     "name": "HDMV Presentation Graphic Stream subtitles",
-                    "index": "6"
+                    "index": "6",
+                    "media_type": "subtitle"
                 },
                 {
                     "id": "r_in_0_7",
                     "name": "DVD subtitles",
-                    "index": "7"
+                    "index": "7",
+                    "media_type": "subtitle"
                 }
             ]
         }
@@ -344,34 +478,40 @@
         {
             "source_id": "r_in_0_0",
             "id": "in_0_0",
-            "name": "h264_qsv"
+            "name": "h264_qsv",
+            "media_type": "video"
         },
         {
             "source_id": "r_in_0_1",
             "id": "in_0_1",
-            "name": "dca"
+            "name": "dca",
+            "media_type": "audio"
         },
         {
             "source_id": "r_in_0_3",
             "id": "in_0_3",
-            "name": "pgssub"
+            "name": "pgssub",
+            "media_type": "subtitle"
         }
     ],
     "encoders": [
         {
             "id": "out__0_0",
             "dest_id": "r_out__0_0",
-            "name": "hevc_qsv"
+            "name": "hevc_qsv",
+            "media_type": "video"
         },
         {
             "id": "out__0_1",
             "dest_id": "r_out__0_1",
-            "name": "libvorbis"
+            "name": "libvorbis",
+            "media_type": "audio"
         },
         {
             "id": "out__0_2",
             "dest_id": "r_out__0_2",
-            "name": "dvbsub"
+            "name": "dvbsub",
+            "media_type": "subtitle"
         }
     ],
     "outputfiles": [
@@ -379,27 +519,31 @@
             "index": "0",
             "muxer_name": "matroska",
             "file_extension": "mkv",
-            "url": "out1.mkv",
+            "url": "temp.mkv",
             "outputstreams": [
                 {
                     "id": "r_out__0_0",
                     "name": "H.265 / HEVC (High Efficiency Video Coding)",
-                    "index": "0"
+                    "index": "0",
+                    "media_type": "video"
                 },
                 {
                     "id": "r_out__0_1",
                     "name": "Vorbis",
-                    "index": "1"
+                    "index": "1",
+                    "media_type": "audio"
                 },
                 {
                     "id": "r_out__0_2",
                     "name": "DVB subtitles",
-                    "index": "2"
+                    "index": "2",
+                    "media_type": "subtitle"
                 },
                 {
                     "id": "r_out__0_3",
                     "name": "DVD subtitles",
-                    "index": "3"
+                    "index": "3",
+                    "media_type": "subtitle"
                 }
             ]
         }
@@ -408,12 +552,14 @@
         {
             "dest_stream_id": "out__0_2",
             "source_stream_id": "in_0_3",
-            "operation": "Transcode"
+            "operation": "Transcode",
+            "media_type": "subtitle"
         },
         {
             "dest_stream_id": "r_out__0_3",
             "source_stream_id": "r_in_0_7",
-            "operation": "Stream Copy"
+            "operation": "Stream Copy",
+            "media_type": "subtitle"
         }
     ]
 }

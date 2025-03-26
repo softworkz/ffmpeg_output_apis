@@ -27,11 +27,11 @@ flowchart LR
   end
   class Graph_0_-1 ff-filters
 
-  in_0_1 audio-in_0_1-G0_Parsed_aecho_0@== "<span>7.1</span><br><span>8 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G0_Parsed_aecho_0
-  G0_Parsed_aecho_0 audio-G0_Parsed_aecho_0-G0_auto_aresample_0@== "<span>7.1</span><br><span>8 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G0_auto_aresample_0
-  G0_auto_aresample_0 audio-G0_auto_aresample_0-G0_Parsed_volume_1@== "<span>7.1</span><br><span>8 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G0_Parsed_volume_1
-  G0_Parsed_volume_1 audio-G0_Parsed_volume_1-G0_format_out__0_1@== "<span>7.1</span><br><span>8 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G0_format_out__0_1
-  G0_format_out__0_1 audio-G0_format_out__0_1-out__0_1@== "<span>7.1</span><br><span>8 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> out__0_1
+  in_0_1 == "<span>7.1</span><br><span>8 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G0_Parsed_aecho_0
+  G0_Parsed_aecho_0 == "<span>7.1</span><br><span>8 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G0_auto_aresample_0
+  G0_auto_aresample_0 == "<span>7.1</span><br><span>8 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G0_Parsed_volume_1
+  G0_Parsed_volume_1 == "<span>7.1</span><br><span>8 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G0_format_out__0_1
+  G0_format_out__0_1 == "<span>7.1</span><br><span>8 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> out__0_1
 
 
   subgraph G2_Inputs["<div class="ff-inputfiles"></div>"]

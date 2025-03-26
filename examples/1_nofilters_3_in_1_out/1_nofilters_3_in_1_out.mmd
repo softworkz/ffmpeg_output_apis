@@ -3,38 +3,28 @@
 flowchart LR
   gradient_def@{ shape: text, label: "<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"><defs><linearGradient id="ff-filtergradient" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:hsla(0, 0%, 30%, 0.02);"/><stop offset="50%" style="stop-color:hsla(0, 0%, 30%, 0);"/><stop offset="100%" style="stop-color:hsla(0, 0%, 30%, 0.05);"/></linearGradient></defs></svg>" }
 
-  subgraph Graph_1_0["<div class="ff-filters"><span class="name">Graph 1.0</span><span class="description">[0:0]scale_qsv=w=512:h=256[f1_out0]</span><span class="id">Graph_1_0</span></div>"]
 
-    G1_Parsed_scale_qsv_0("<div class="ff-filter"><span class="filter_name">scale_qsv</span></div>"):::ff-filter
+  subgraph G0_Inputs["<div class="ff-inputfiles"></div>"]
 
-    G1_format("<div class="ff-filter"><span class="filter_name">format</span></div>"):::ff-filter
-  end
-  class Graph_1_0 ff-filters
+    subgraph Input_2["<div class="ff-inputfile"><span class="index">2</span><span class="demuxer_name">ass</span><span class="file_extension">ssa</span><span class="url">media\video_1.de.ssa</span></div>"]
 
-  in_0_0 video-in_0_0-G1_Parsed_scale_qsv_0@== "<span>qsv | nv12</span><br><span>1920x800</span><br><span>1:1</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G1_Parsed_scale_qsv_0
-  G1_Parsed_scale_qsv_0 video-G1_Parsed_scale_qsv_0-G1_format@== "<span>qsv | nv12</span><br><span>512x256</span><br><span>1:1</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G1_format
-  G1_format video-G1_format-out__0_0@== "<span>qsv | nv12</span><br><span>512x256</span><br><span>1:1</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> out__0_0
+      subgraph InputStreams_2["<div class="ff-inputstreams"></div>"]
 
-  subgraph Graph_0_-1["<div class="ff-filters"><span class="name">Graph 0.-1</span><span class="description">aecho,volume</span><span class="id">Graph_0_-1</span></div>"]
+        r_in_2_0("<div class="ff-inputstream subtitle"><span class="name">ASS (Advanced SSA) subtitle</span><span class="index">0</span></div>"):::ff-inputstream
+      end
+      class InputStreams_2 ff-inputstreams
+    end
+    class Input_2 ff-inputfile
 
-    G0_Parsed_aecho_0("<div class="ff-filter"><span class="filter_name">aecho</span></div>"):::ff-filter
+    subgraph Input_1["<div class="ff-inputfile"><span class="index">1</span><span class="demuxer_name">srt</span><span class="file_extension">srt</span><span class="url">media\video_1.en.srt</span></div>"]
 
-    G0_Parsed_volume_1("<div class="ff-filter"><span class="filter_name">volume</span></div>"):::ff-filter
+      subgraph InputStreams_1["<div class="ff-inputstreams"></div>"]
 
-    G0_format_out__0_1("<div class="ff-filter"><span class="filter_name">aformat</span></div>"):::ff-filter
-
-    G0_auto_aresample_0("<div class="ff-filter"><span class="filter_name">aresample</span></div>"):::ff-filter
-  end
-  class Graph_0_-1 ff-filters
-
-  in_0_1 audio-in_0_1-G0_Parsed_aecho_0@== "<span>7.1</span><br><span>8 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G0_Parsed_aecho_0
-  G0_Parsed_aecho_0 audio-G0_Parsed_aecho_0-G0_auto_aresample_0@== "<span>7.1</span><br><span>8 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G0_auto_aresample_0
-  G0_auto_aresample_0 audio-G0_auto_aresample_0-G0_Parsed_volume_1@== "<span>7.1</span><br><span>8 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G0_Parsed_volume_1
-  G0_Parsed_volume_1 audio-G0_Parsed_volume_1-G0_format_out__0_1@== "<span>7.1</span><br><span>8 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> G0_format_out__0_1
-  G0_format_out__0_1 audio-G0_format_out__0_1-out__0_1@== "<span>7.1</span><br><span>8 ch</span><br><span>48.1 kHz</span><br>&nbsp;<br>&nbsp;<br>&nbsp;" ==> out__0_1
-
-
-  subgraph G2_Inputs["<div class="ff-inputfiles"></div>"]
+        r_in_1_0("<div class="ff-inputstream subtitle"><span class="name">SubRip subtitle</span><span class="index">0</span></div>"):::ff-inputstream
+      end
+      class InputStreams_1 ff-inputstreams
+    end
+    class Input_1 ff-inputfile
 
     subgraph Input_0["<div class="ff-inputfile"><span class="index">0</span><span class="demuxer_name">matroska,webm</span><span class="file_extension">mkv</span><span class="url">media\video_1.mkv</span></div>"]
 
@@ -60,58 +50,60 @@ flowchart LR
     end
     class Input_0 ff-inputfile
   end
-  class G2_Inputs ff-inputfiles
+  class G0_Inputs ff-inputfiles
 
 
-  subgraph G2_Decoders["<div class="ff-decoders"></div>"]
+  subgraph G0_Decoders["<div class="ff-decoders"></div>"]
 
-    in_0_0(["<div class="ff-decoder video"><span class="name">h264_qsv</span></div>"]):::ff-decoder
+    in_0_7(["<div class="ff-decoder subtitle"><span class="name">dvdsub</span></div>"]):::ff-decoder
 
-    in_0_1(["<div class="ff-decoder audio"><span class="name">dca</span></div>"]):::ff-decoder
-
-    in_0_3(["<div class="ff-decoder subtitle"><span class="name">pgssub</span></div>"]):::ff-decoder
+    in_1_0(["<div class="ff-decoder subtitle"><span class="name">srt</span></div>"]):::ff-decoder
   end
-  class G2_Decoders ff-decoders
+  class G0_Decoders ff-decoders
 
-  r_in_0_0 video-r_in_0_0-in_0_0@==> in_0_0
-  r_in_0_1 audio-r_in_0_1-in_0_1@==> in_0_1
-  r_in_0_3 subtitle-r_in_0_3-in_0_3@==> in_0_3
+  r_in_0_7 subtitle-r_in_0_7-in_0_7@==> in_0_7
+  r_in_1_0 subtitle-r_in_1_0-in_1_0@==> in_1_0
 
-  subgraph G2_Encoders["<div class="ff-encoders"></div>"]
+  subgraph G0_Encoders["<div class="ff-encoders"></div>"]
 
-    out__0_0(["<div class="ff-encoder video"><span class="name">hevc_qsv</span></div>"]):::ff-encoder
+    out__0_3(["<div class="ff-encoder subtitle"><span class="name">dvbsub</span></div>"]):::ff-encoder
 
-    out__0_1(["<div class="ff-encoder audio"><span class="name">libvorbis</span></div>"]):::ff-encoder
-
-    out__0_2(["<div class="ff-encoder subtitle"><span class="name">dvbsub</span></div>"]):::ff-encoder
+    out__0_4(["<div class="ff-encoder subtitle"><span class="name">ass</span></div>"]):::ff-encoder
   end
-  class G2_Encoders ff-encoders
+  class G0_Encoders ff-encoders
 
-  out__0_0 video-out__0_0-r_out__0_0@==> r_out__0_0
-  out__0_1 audio-out__0_1-r_out__0_1@==> r_out__0_1
-  out__0_2 subtitle-out__0_2-r_out__0_2@==> r_out__0_2
+  out__0_3 subtitle-out__0_3-r_out__0_3@==> r_out__0_3
+  out__0_4 subtitle-out__0_4-r_out__0_4@==> r_out__0_4
 
-  subgraph G2_Outputs["<div class="ff-outputfiles"></div>"]
+  subgraph G0_Outputs["<div class="ff-outputfiles"></div>"]
 
     subgraph Output_0["<div class="ff-outputfile"><span class="index">0</span><span class="muxer_name">matroska</span><span class="file_extension">mkv</span><span class="url">temp.mkv</span></div>"]
 
       subgraph OutputStreams_0["<div class="ff-outputstreams"></div>"]
 
-        r_out__0_0("<div class="ff-outputstream video"><span class="name">H.265 / HEVC (High Efficiency Video Coding)</span><span class="index">0</span></div>"):::ff-outputstream
+        r_out__0_0("<div class="ff-outputstream video"><span class="name">H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10</span><span class="index">0</span></div>"):::ff-outputstream
 
-        r_out__0_1("<div class="ff-outputstream audio"><span class="name">Vorbis</span><span class="index">1</span></div>"):::ff-outputstream
+        r_out__0_1("<div class="ff-outputstream audio"><span class="name">DCA (DTS Coherent Acoustics)</span><span class="index">1</span></div>"):::ff-outputstream
 
-        r_out__0_2("<div class="ff-outputstream subtitle"><span class="name">DVB subtitles</span><span class="index">2</span></div>"):::ff-outputstream
+        r_out__0_2("<div class="ff-outputstream audio"><span class="name">DCA (DTS Coherent Acoustics)</span><span class="index">2</span></div>"):::ff-outputstream
 
-        r_out__0_3("<div class="ff-outputstream subtitle"><span class="name">DVD subtitles</span><span class="index">3</span></div>"):::ff-outputstream
+        r_out__0_3("<div class="ff-outputstream subtitle"><span class="name">DVB subtitles</span><span class="index">3</span></div>"):::ff-outputstream
+
+        r_out__0_4("<div class="ff-outputstream subtitle"><span class="name">ASS (Advanced SSA) subtitle</span><span class="index">4</span></div>"):::ff-outputstream
+
+        r_out__0_5("<div class="ff-outputstream subtitle"><span class="name">ASS (Advanced SSA) subtitle</span><span class="index">5</span></div>"):::ff-outputstream
       end
       class OutputStreams_0 ff-outputstreams
     end
     class Output_0 ff-outputfile
   end
-  class G2_Outputs ff-outputfiles
+  class G0_Outputs ff-outputfiles
 
 
-  in_0_3 subtitle-in_0_3-out__0_2@== "<span>Transcode</span><br>&nbsp;" ==> out__0_2
-  r_in_0_7 subtitle-r_in_0_7-r_out__0_3@== "<span>Stream Copy</span><br>&nbsp;" ==> r_out__0_3
+  r_in_0_0 video-r_in_0_0-r_out__0_0@== "<span>Stream Copy</span><br>&nbsp;" ==> r_out__0_0
+  r_in_0_1 audio-r_in_0_1-r_out__0_1@== "<span>Stream Copy</span><br>&nbsp;" ==> r_out__0_1
+  r_in_0_2 audio-r_in_0_2-r_out__0_2@== "<span>Stream Copy</span><br>&nbsp;" ==> r_out__0_2
+  in_0_7 subtitle-in_0_7-out__0_3@== "<span>Transcode</span><br>&nbsp;" ==> out__0_3
+  in_1_0 subtitle-in_1_0-out__0_4@== "<span>Transcode</span><br>&nbsp;" ==> out__0_4
+  r_in_2_0 subtitle-r_in_2_0-r_out__0_5@== "<span>Stream Copy</span><br>&nbsp;" ==> r_out__0_5
 

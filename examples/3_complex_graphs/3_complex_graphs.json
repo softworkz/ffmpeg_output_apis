@@ -1,0 +1,1302 @@
+{
+    "graphs": [
+        {
+            "graph_index": 0,
+            "name": "Graph 0.0",
+            "id": "Graph_0_0",
+            "description": "[0:0]yadif@jf_x,split[split_1][split_2];[split_2]scale=size=512x256[scaled_1];[split_1][scaled_1]overlay[f1_out0]",
+            "graph_inputs": [
+                {
+                    "input_index": 0,
+                    "link_label": "0:0",
+                    "filter_id": "G0_graph_0_input_from_stream_0_0",
+                    "filter_name": "buffer",
+                    "media_type": "video"
+                }
+            ],
+            "graph_outputs": [
+                {
+                    "output_index": 0,
+                    "name": "#0:0",
+                    "filter_id": "G0_out__0_0",
+                    "filter_name": "buffersink",
+                    "media_type": "video"
+                }
+            ],
+            "filters": [
+                {
+                    "filter_name": "yadif",
+                    "description": "Deinterlace the input image.",
+                    "nb_inputs": 1,
+                    "nb_outputs": 1,
+                    "filter_inputs": [
+                        {
+                            "input_index": 0,
+                            "pad_name": "default",
+                            "source_filter_id": "in_0_0",
+                            "source_pad_name": "default",
+                            "filter_id": "G0_yadif_jf_x",
+                            "media_type": "video",
+                            "format": "yuv420p",
+                            "width": 1920,
+                            "height": 800,
+                            "sar": "1:1",
+                            "color_range": "tv",
+                            "sample_rate": "1/1000"
+                        }
+                    ],
+                    "filter_outputs": [
+                        {
+                            "dest_filter_id": "G0_Parsed_split_1",
+                            "output_index": 0,
+                            "pad_name": "default",
+                            "dest_pad_name": "default",
+                            "filter_id": "G0_yadif_jf_x",
+                            "media_type": "video",
+                            "format": "yuv420p",
+                            "width": 1920,
+                            "height": 800,
+                            "sar": "1:1",
+                            "color_range": "tv",
+                            "sample_rate": "1/2000"
+                        }
+                    ]
+                },
+                {
+                    "filter_name": "split",
+                    "description": "Pass on the input to N video outputs.",
+                    "nb_inputs": 1,
+                    "nb_outputs": 0,
+                    "filter_inputs": [
+                        {
+                            "input_index": 0,
+                            "pad_name": "default",
+                            "source_filter_id": "G0_yadif_jf_x",
+                            "source_pad_name": "default",
+                            "filter_id": "G0_Parsed_split_1",
+                            "media_type": "video",
+                            "format": "yuv420p",
+                            "width": 1920,
+                            "height": 800,
+                            "sar": "1:1",
+                            "color_range": "tv",
+                            "sample_rate": "1/2000"
+                        }
+                    ],
+                    "filter_outputs": [
+                        {
+                            "dest_filter_id": "G0_Parsed_overlay_3",
+                            "output_index": 0,
+                            "pad_name": "output0",
+                            "dest_pad_name": "main",
+                            "filter_id": "G0_Parsed_split_1",
+                            "media_type": "video",
+                            "format": "yuv420p",
+                            "width": 1920,
+                            "height": 800,
+                            "sar": "1:1",
+                            "color_range": "tv",
+                            "sample_rate": "1/2000"
+                        },
+                        {
+                            "dest_filter_id": "G0_Parsed_scale_2",
+                            "output_index": 1,
+                            "pad_name": "output1",
+                            "dest_pad_name": "default",
+                            "filter_id": "G0_Parsed_split_1",
+                            "media_type": "video",
+                            "format": "yuv420p",
+                            "width": 1920,
+                            "height": 800,
+                            "sar": "1:1",
+                            "color_range": "tv",
+                            "sample_rate": "1/2000"
+                        }
+                    ]
+                },
+                {
+                    "filter_name": "scale",
+                    "description": "Scale the input video size and/or convert the image format.",
+                    "nb_inputs": 1,
+                    "nb_outputs": 1,
+                    "filter_inputs": [
+                        {
+                            "input_index": 0,
+                            "pad_name": "default",
+                            "source_filter_id": "G0_Parsed_split_1",
+                            "source_pad_name": "output1",
+                            "filter_id": "G0_Parsed_scale_2",
+                            "media_type": "video",
+                            "format": "yuv420p",
+                            "width": 1920,
+                            "height": 800,
+                            "sar": "1:1",
+                            "color_range": "tv",
+                            "sample_rate": "1/2000"
+                        }
+                    ],
+                    "filter_outputs": [
+                        {
+                            "dest_filter_id": "G0_Parsed_overlay_3",
+                            "output_index": 0,
+                            "pad_name": "default",
+                            "dest_pad_name": "overlay",
+                            "filter_id": "G0_Parsed_scale_2",
+                            "media_type": "video",
+                            "format": "yuva420p",
+                            "width": 512,
+                            "height": 256,
+                            "sar": "6:5",
+                            "color_range": "tv",
+                            "sample_rate": "1/2000"
+                        }
+                    ]
+                },
+                {
+                    "filter_name": "overlay",
+                    "description": "Overlay a video source on top of the input.",
+                    "nb_inputs": 2,
+                    "nb_outputs": 1,
+                    "filter_inputs": [
+                        {
+                            "input_index": 0,
+                            "pad_name": "main",
+                            "source_filter_id": "G0_Parsed_split_1",
+                            "source_pad_name": "output0",
+                            "filter_id": "G0_Parsed_overlay_3",
+                            "media_type": "video",
+                            "format": "yuv420p",
+                            "width": 1920,
+                            "height": 800,
+                            "sar": "1:1",
+                            "color_range": "tv",
+                            "sample_rate": "1/2000"
+                        },
+                        {
+                            "input_index": 1,
+                            "pad_name": "overlay",
+                            "source_filter_id": "G0_Parsed_scale_2",
+                            "source_pad_name": "default",
+                            "filter_id": "G0_Parsed_overlay_3",
+                            "media_type": "video",
+                            "format": "yuva420p",
+                            "width": 512,
+                            "height": 256,
+                            "sar": "6:5",
+                            "color_range": "tv",
+                            "sample_rate": "1/2000"
+                        }
+                    ],
+                    "filter_outputs": [
+                        {
+                            "dest_filter_id": "G0_format",
+                            "output_index": 0,
+                            "pad_name": "default",
+                            "dest_pad_name": "default",
+                            "filter_id": "G0_Parsed_overlay_3",
+                            "media_type": "video",
+                            "format": "yuv420p",
+                            "width": 1920,
+                            "height": 800,
+                            "sar": "1:1",
+                            "color_range": "tv",
+                            "sample_rate": "1/2000"
+                        }
+                    ]
+                },
+                {
+                    "filter_name": "buffer",
+                    "description": "Buffer video frames, and make them accessible to the filterchain.",
+                    "nb_inputs": 0,
+                    "nb_outputs": 1,
+                    "filter_inputs": [
+
+                    ],
+                    "filter_outputs": [
+                        {
+                            "dest_filter_id": "G0_yadif_jf_x",
+                            "output_index": 0,
+                            "pad_name": "default",
+                            "dest_pad_name": "default",
+                            "filter_id": "G0_graph_0_input_from_stream_0_0",
+                            "media_type": "video",
+                            "format": "yuv420p",
+                            "width": 1920,
+                            "height": 800,
+                            "sar": "1:1",
+                            "color_range": "tv",
+                            "sample_rate": "1/1000"
+                        }
+                    ]
+                },
+                {
+                    "filter_name": "buffersink",
+                    "description": "Buffer video frames, and make them available to the end of the filter graph.",
+                    "nb_inputs": 1,
+                    "nb_outputs": 0,
+                    "filter_inputs": [
+                        {
+                            "input_index": 0,
+                            "pad_name": "default",
+                            "source_filter_id": "G0_format",
+                            "source_pad_name": "default",
+                            "filter_id": "G0_out__0_0",
+                            "media_type": "video",
+                            "format": "yuv420p",
+                            "width": 1920,
+                            "height": 800,
+                            "sar": "1:1",
+                            "color_range": "tv",
+                            "sample_rate": "1/2000"
+                        }
+                    ],
+                    "filter_outputs": [
+
+                    ]
+                },
+                {
+                    "filter_name": "format",
+                    "description": "Convert the input video to one of the specified pixel formats.",
+                    "nb_inputs": 1,
+                    "nb_outputs": 1,
+                    "filter_inputs": [
+                        {
+                            "input_index": 0,
+                            "pad_name": "default",
+                            "source_filter_id": "G0_Parsed_overlay_3",
+                            "source_pad_name": "default",
+                            "filter_id": "G0_format",
+                            "media_type": "video",
+                            "format": "yuv420p",
+                            "width": 1920,
+                            "height": 800,
+                            "sar": "1:1",
+                            "color_range": "tv",
+                            "sample_rate": "1/2000"
+                        }
+                    ],
+                    "filter_outputs": [
+                        {
+                            "dest_filter_id": "out__0_0",
+                            "output_index": 0,
+                            "pad_name": "default",
+                            "dest_pad_name": "default",
+                            "filter_id": "G0_format",
+                            "media_type": "video",
+                            "format": "yuv420p",
+                            "width": 1920,
+                            "height": 800,
+                            "sar": "1:1",
+                            "color_range": "tv",
+                            "sample_rate": "1/2000"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "graph_index": 1,
+            "name": "Graph 2.1",
+            "id": "Graph_2_1",
+            "description": "[0:2]asplit[f3_out],a3dscope,[0:0]overlay[f2_out]",
+            "graph_inputs": [
+                {
+                    "input_index": 0,
+                    "link_label": "0:2",
+                    "filter_id": "G2_graph_1_in_0_2",
+                    "filter_name": "abuffer",
+                    "media_type": "audio"
+                },
+                {
+                    "input_index": 1,
+                    "link_label": "0:0",
+                    "filter_id": "G2_graph_1_input_from_stream_0_0",
+                    "filter_name": "buffer",
+                    "media_type": "video"
+                }
+            ],
+            "graph_outputs": [
+                {
+                    "output_index": 0,
+                    "name": "#1:1",
+                    "filter_id": "G2_out__1_1",
+                    "filter_name": "abuffersink",
+                    "media_type": "audio"
+                },
+                {
+                    "output_index": 1,
+                    "name": "#1:0",
+                    "filter_id": "G2_out__1_0",
+                    "filter_name": "buffersink",
+                    "media_type": "video"
+                }
+            ],
+            "filters": [
+                {
+                    "filter_name": "asplit",
+                    "description": "Pass on the audio input to N audio outputs.",
+                    "nb_inputs": 1,
+                    "nb_outputs": 0,
+                    "filter_inputs": [
+                        {
+                            "input_index": 0,
+                            "pad_name": "default",
+                            "source_filter_id": "in_0_2",
+                            "source_pad_name": "default",
+                            "filter_id": "G2_Parsed_asplit_0",
+                            "media_type": "audio",
+                            "channel_layout": "5.1(side)",
+                            "channels": "6",
+                            "sample_rate": "48000",
+                            "sample_rate": "1/48000"
+                        }
+                    ],
+                    "filter_outputs": [
+                        {
+                            "dest_filter_id": "G2_auto_aresample_1",
+                            "output_index": 0,
+                            "pad_name": "output0",
+                            "dest_pad_name": "default",
+                            "filter_id": "G2_Parsed_asplit_0",
+                            "media_type": "audio",
+                            "channel_layout": "5.1(side)",
+                            "channels": "6",
+                            "sample_rate": "48000",
+                            "sample_rate": "1/48000"
+                        },
+                        {
+                            "dest_filter_id": "G2_Parsed_a3dscope_1",
+                            "output_index": 1,
+                            "pad_name": "output1",
+                            "dest_pad_name": "default",
+                            "filter_id": "G2_Parsed_asplit_0",
+                            "media_type": "audio",
+                            "channel_layout": "5.1(side)",
+                            "channels": "6",
+                            "sample_rate": "48000",
+                            "sample_rate": "1/48000"
+                        }
+                    ]
+                },
+                {
+                    "filter_name": "a3dscope",
+                    "description": "Convert input audio to 3d scope video output.",
+                    "nb_inputs": 1,
+                    "nb_outputs": 1,
+                    "filter_inputs": [
+                        {
+                            "input_index": 0,
+                            "pad_name": "default",
+                            "source_filter_id": "G2_Parsed_asplit_0",
+                            "source_pad_name": "output1",
+                            "filter_id": "G2_Parsed_a3dscope_1",
+                            "media_type": "audio",
+                            "channel_layout": "5.1(side)",
+                            "channels": "6",
+                            "sample_rate": "48000",
+                            "sample_rate": "1/48000"
+                        }
+                    ],
+                    "filter_outputs": [
+                        {
+                            "dest_filter_id": "G2_auto_scale_0",
+                            "output_index": 0,
+                            "pad_name": "default",
+                            "dest_pad_name": "default",
+                            "filter_id": "G2_Parsed_a3dscope_1",
+                            "media_type": "video",
+                            "format": "rgba",
+                            "width": 1280,
+                            "height": 720,
+                            "sar": "1:1",
+                            "color_range": "pc",
+                            "color_space": "gbr",
+                            "sample_rate": "1/25"
+                        }
+                    ]
+                },
+                {
+                    "filter_name": "overlay",
+                    "description": "Overlay a video source on top of the input.",
+                    "nb_inputs": 2,
+                    "nb_outputs": 1,
+                    "filter_inputs": [
+                        {
+                            "input_index": 0,
+                            "pad_name": "main",
+                            "source_filter_id": "in_0_0",
+                            "source_pad_name": "default",
+                            "filter_id": "G2_Parsed_overlay_2",
+                            "media_type": "video",
+                            "format": "yuv420p",
+                            "width": 1920,
+                            "height": 800,
+                            "sar": "1:1",
+                            "color_range": "tv",
+                            "sample_rate": "1/1000"
+                        },
+                        {
+                            "input_index": 1,
+                            "pad_name": "overlay",
+                            "source_filter_id": "G2_auto_scale_0",
+                            "source_pad_name": "default",
+                            "filter_id": "G2_Parsed_overlay_2",
+                            "media_type": "video",
+                            "format": "yuva420p",
+                            "width": 1280,
+                            "height": 720,
+                            "sar": "1:1",
+                            "color_range": "tv",
+                            "sample_rate": "1/25"
+                        }
+                    ],
+                    "filter_outputs": [
+                        {
+                            "dest_filter_id": "G2_format",
+                            "output_index": 0,
+                            "pad_name": "default",
+                            "dest_pad_name": "default",
+                            "filter_id": "G2_Parsed_overlay_2",
+                            "media_type": "video",
+                            "format": "yuv420p",
+                            "width": 1920,
+                            "height": 800,
+                            "sar": "1:1",
+                            "color_range": "tv",
+                            "sample_rate": "1/1000"
+                        }
+                    ]
+                },
+                {
+                    "filter_name": "abuffer",
+                    "description": "Buffer audio frames, and make them accessible to the filterchain.",
+                    "nb_inputs": 0,
+                    "nb_outputs": 1,
+                    "filter_inputs": [
+
+                    ],
+                    "filter_outputs": [
+                        {
+                            "dest_filter_id": "G2_Parsed_asplit_0",
+                            "output_index": 0,
+                            "pad_name": "default",
+                            "dest_pad_name": "default",
+                            "filter_id": "G2_graph_1_in_0_2",
+                            "media_type": "audio",
+                            "channel_layout": "5.1(side)",
+                            "channels": "6",
+                            "sample_rate": "48000",
+                            "sample_rate": "1/48000"
+                        }
+                    ]
+                },
+                {
+                    "filter_name": "buffer",
+                    "description": "Buffer video frames, and make them accessible to the filterchain.",
+                    "nb_inputs": 0,
+                    "nb_outputs": 1,
+                    "filter_inputs": [
+
+                    ],
+                    "filter_outputs": [
+                        {
+                            "dest_filter_id": "G2_Parsed_overlay_2",
+                            "output_index": 0,
+                            "pad_name": "default",
+                            "dest_pad_name": "main",
+                            "filter_id": "G2_graph_1_input_from_stream_0_0",
+                            "media_type": "video",
+                            "format": "yuv420p",
+                            "width": 1920,
+                            "height": 800,
+                            "sar": "1:1",
+                            "color_range": "tv",
+                            "sample_rate": "1/1000"
+                        }
+                    ]
+                },
+                {
+                    "filter_name": "abuffersink",
+                    "description": "Buffer audio frames, and make them available to the end of the filter graph.",
+                    "nb_inputs": 1,
+                    "nb_outputs": 0,
+                    "filter_inputs": [
+                        {
+                            "input_index": 0,
+                            "pad_name": "default",
+                            "source_filter_id": "G2_format_out__1_1",
+                            "source_pad_name": "default",
+                            "filter_id": "G2_out__1_1",
+                            "media_type": "audio",
+                            "channel_layout": "stereo",
+                            "channels": "2",
+                            "sample_rate": "48000",
+                            "sample_rate": "1/48000"
+                        }
+                    ],
+                    "filter_outputs": [
+
+                    ]
+                },
+                {
+                    "filter_name": "aformat",
+                    "description": "Convert the input audio to one of the specified formats.",
+                    "nb_inputs": 1,
+                    "nb_outputs": 1,
+                    "filter_inputs": [
+                        {
+                            "input_index": 0,
+                            "pad_name": "default",
+                            "source_filter_id": "G2_auto_aresample_1",
+                            "source_pad_name": "default",
+                            "filter_id": "G2_format_out__1_1",
+                            "media_type": "audio",
+                            "channel_layout": "stereo",
+                            "channels": "2",
+                            "sample_rate": "48000",
+                            "sample_rate": "1/48000"
+                        }
+                    ],
+                    "filter_outputs": [
+                        {
+                            "dest_filter_id": "out__1_1",
+                            "output_index": 0,
+                            "pad_name": "default",
+                            "dest_pad_name": "default",
+                            "filter_id": "G2_format_out__1_1",
+                            "media_type": "audio",
+                            "channel_layout": "stereo",
+                            "channels": "2",
+                            "sample_rate": "48000",
+                            "sample_rate": "1/48000"
+                        }
+                    ]
+                },
+                {
+                    "filter_name": "buffersink",
+                    "description": "Buffer video frames, and make them available to the end of the filter graph.",
+                    "nb_inputs": 1,
+                    "nb_outputs": 0,
+                    "filter_inputs": [
+                        {
+                            "input_index": 0,
+                            "pad_name": "default",
+                            "source_filter_id": "G2_format",
+                            "source_pad_name": "default",
+                            "filter_id": "G2_out__1_0",
+                            "media_type": "video",
+                            "format": "yuv420p",
+                            "width": 1920,
+                            "height": 800,
+                            "sar": "1:1",
+                            "color_range": "tv",
+                            "sample_rate": "1/1000"
+                        }
+                    ],
+                    "filter_outputs": [
+
+                    ]
+                },
+                {
+                    "filter_name": "format",
+                    "description": "Convert the input video to one of the specified pixel formats.",
+                    "nb_inputs": 1,
+                    "nb_outputs": 1,
+                    "filter_inputs": [
+                        {
+                            "input_index": 0,
+                            "pad_name": "default",
+                            "source_filter_id": "G2_Parsed_overlay_2",
+                            "source_pad_name": "default",
+                            "filter_id": "G2_format",
+                            "media_type": "video",
+                            "format": "yuv420p",
+                            "width": 1920,
+                            "height": 800,
+                            "sar": "1:1",
+                            "color_range": "tv",
+                            "sample_rate": "1/1000"
+                        }
+                    ],
+                    "filter_outputs": [
+                        {
+                            "dest_filter_id": "out__1_0",
+                            "output_index": 0,
+                            "pad_name": "default",
+                            "dest_pad_name": "default",
+                            "filter_id": "G2_format",
+                            "media_type": "video",
+                            "format": "yuv420p",
+                            "width": 1920,
+                            "height": 800,
+                            "sar": "1:1",
+                            "color_range": "tv",
+                            "sample_rate": "1/1000"
+                        }
+                    ]
+                },
+                {
+                    "filter_name": "scale",
+                    "description": "Scale the input video size and/or convert the image format.",
+                    "nb_inputs": 1,
+                    "nb_outputs": 1,
+                    "filter_inputs": [
+                        {
+                            "input_index": 0,
+                            "pad_name": "default",
+                            "source_filter_id": "G2_Parsed_a3dscope_1",
+                            "source_pad_name": "default",
+                            "filter_id": "G2_auto_scale_0",
+                            "media_type": "video",
+                            "format": "rgba",
+                            "width": 1280,
+                            "height": 720,
+                            "sar": "1:1",
+                            "color_range": "pc",
+                            "color_space": "gbr",
+                            "sample_rate": "1/25"
+                        }
+                    ],
+                    "filter_outputs": [
+                        {
+                            "dest_filter_id": "G2_Parsed_overlay_2",
+                            "output_index": 0,
+                            "pad_name": "default",
+                            "dest_pad_name": "overlay",
+                            "filter_id": "G2_auto_scale_0",
+                            "media_type": "video",
+                            "format": "yuva420p",
+                            "width": 1280,
+                            "height": 720,
+                            "sar": "1:1",
+                            "color_range": "tv",
+                            "sample_rate": "1/25"
+                        }
+                    ]
+                },
+                {
+                    "filter_name": "aresample",
+                    "description": "Resample audio data.",
+                    "nb_inputs": 1,
+                    "nb_outputs": 1,
+                    "filter_inputs": [
+                        {
+                            "input_index": 0,
+                            "pad_name": "default",
+                            "source_filter_id": "G2_Parsed_asplit_0",
+                            "source_pad_name": "output0",
+                            "filter_id": "G2_auto_aresample_1",
+                            "media_type": "audio",
+                            "channel_layout": "5.1(side)",
+                            "channels": "6",
+                            "sample_rate": "48000",
+                            "sample_rate": "1/48000"
+                        }
+                    ],
+                    "filter_outputs": [
+                        {
+                            "dest_filter_id": "G2_format_out__1_1",
+                            "output_index": 0,
+                            "pad_name": "default",
+                            "dest_pad_name": "default",
+                            "filter_id": "G2_auto_aresample_1",
+                            "media_type": "audio",
+                            "channel_layout": "stereo",
+                            "channels": "2",
+                            "sample_rate": "48000",
+                            "sample_rate": "1/48000"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "graph_index": -1,
+            "name": "Graph 3.-1",
+            "id": "Graph_3_-1",
+            "description": "aecho,volume",
+            "graph_inputs": [
+                {
+                    "input_index": 0,
+                    "filter_id": "G3_graph__1_in_0_2",
+                    "filter_name": "abuffer",
+                    "media_type": "audio"
+                }
+            ],
+            "graph_outputs": [
+                {
+                    "output_index": 0,
+                    "name": "#0:1",
+                    "filter_id": "G3_out__0_1",
+                    "filter_name": "abuffersink",
+                    "media_type": "audio"
+                }
+            ],
+            "filters": [
+                {
+                    "filter_name": "aecho",
+                    "description": "Add echoing to the audio.",
+                    "nb_inputs": 1,
+                    "nb_outputs": 1,
+                    "filter_inputs": [
+                        {
+                            "input_index": 0,
+                            "pad_name": "default",
+                            "source_filter_id": "in_0_2",
+                            "source_pad_name": "default",
+                            "filter_id": "G3_Parsed_aecho_0",
+                            "media_type": "audio",
+                            "channel_layout": "5.1(side)",
+                            "channels": "6",
+                            "sample_rate": "48000",
+                            "sample_rate": "1/48000"
+                        }
+                    ],
+                    "filter_outputs": [
+                        {
+                            "dest_filter_id": "G3_Parsed_volume_1",
+                            "output_index": 0,
+                            "pad_name": "default",
+                            "dest_pad_name": "default",
+                            "filter_id": "G3_Parsed_aecho_0",
+                            "media_type": "audio",
+                            "channel_layout": "5.1(side)",
+                            "channels": "6",
+                            "sample_rate": "48000",
+                            "sample_rate": "1/48000"
+                        }
+                    ]
+                },
+                {
+                    "filter_name": "volume",
+                    "description": "Change input volume.",
+                    "nb_inputs": 1,
+                    "nb_outputs": 1,
+                    "filter_inputs": [
+                        {
+                            "input_index": 0,
+                            "pad_name": "default",
+                            "source_filter_id": "G3_Parsed_aecho_0",
+                            "source_pad_name": "default",
+                            "filter_id": "G3_Parsed_volume_1",
+                            "media_type": "audio",
+                            "channel_layout": "5.1(side)",
+                            "channels": "6",
+                            "sample_rate": "48000",
+                            "sample_rate": "1/48000"
+                        }
+                    ],
+                    "filter_outputs": [
+                        {
+                            "dest_filter_id": "G3_format_out__0_1",
+                            "output_index": 0,
+                            "pad_name": "default",
+                            "dest_pad_name": "default",
+                            "filter_id": "G3_Parsed_volume_1",
+                            "media_type": "audio",
+                            "channel_layout": "5.1(side)",
+                            "channels": "6",
+                            "sample_rate": "48000",
+                            "sample_rate": "1/48000"
+                        }
+                    ]
+                },
+                {
+                    "filter_name": "abuffer",
+                    "description": "Buffer audio frames, and make them accessible to the filterchain.",
+                    "nb_inputs": 0,
+                    "nb_outputs": 1,
+                    "filter_inputs": [
+
+                    ],
+                    "filter_outputs": [
+                        {
+                            "dest_filter_id": "G3_Parsed_aecho_0",
+                            "output_index": 0,
+                            "pad_name": "default",
+                            "dest_pad_name": "default",
+                            "filter_id": "G3_graph__1_in_0_2",
+                            "media_type": "audio",
+                            "channel_layout": "5.1(side)",
+                            "channels": "6",
+                            "sample_rate": "48000",
+                            "sample_rate": "1/48000"
+                        }
+                    ]
+                },
+                {
+                    "filter_name": "abuffersink",
+                    "description": "Buffer audio frames, and make them available to the end of the filter graph.",
+                    "nb_inputs": 1,
+                    "nb_outputs": 0,
+                    "filter_inputs": [
+                        {
+                            "input_index": 0,
+                            "pad_name": "default",
+                            "source_filter_id": "G3_format_out__0_1",
+                            "source_pad_name": "default",
+                            "filter_id": "G3_out__0_1",
+                            "media_type": "audio",
+                            "channel_layout": "5.1(side)",
+                            "channels": "6",
+                            "sample_rate": "48000",
+                            "sample_rate": "1/48000"
+                        }
+                    ],
+                    "filter_outputs": [
+
+                    ]
+                },
+                {
+                    "filter_name": "aformat",
+                    "description": "Convert the input audio to one of the specified formats.",
+                    "nb_inputs": 1,
+                    "nb_outputs": 1,
+                    "filter_inputs": [
+                        {
+                            "input_index": 0,
+                            "pad_name": "default",
+                            "source_filter_id": "G3_Parsed_volume_1",
+                            "source_pad_name": "default",
+                            "filter_id": "G3_format_out__0_1",
+                            "media_type": "audio",
+                            "channel_layout": "5.1(side)",
+                            "channels": "6",
+                            "sample_rate": "48000",
+                            "sample_rate": "1/48000"
+                        }
+                    ],
+                    "filter_outputs": [
+                        {
+                            "dest_filter_id": "out__0_1",
+                            "output_index": 0,
+                            "pad_name": "default",
+                            "dest_pad_name": "default",
+                            "filter_id": "G3_format_out__0_1",
+                            "media_type": "audio",
+                            "channel_layout": "5.1(side)",
+                            "channels": "6",
+                            "sample_rate": "48000",
+                            "sample_rate": "1/48000"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "graph_index": -1,
+            "name": "Graph 1.-1",
+            "id": "Graph_1_-1",
+            "description": "aecho,volume",
+            "graph_inputs": [
+                {
+                    "input_index": 0,
+                    "filter_id": "G1_graph__1_in_0_1",
+                    "filter_name": "abuffer",
+                    "media_type": "audio"
+                }
+            ],
+            "graph_outputs": [
+                {
+                    "output_index": 0,
+                    "name": "#0:2",
+                    "filter_id": "G1_out__0_2",
+                    "filter_name": "abuffersink",
+                    "media_type": "audio"
+                }
+            ],
+            "filters": [
+                {
+                    "filter_name": "aecho",
+                    "description": "Add echoing to the audio.",
+                    "nb_inputs": 1,
+                    "nb_outputs": 1,
+                    "filter_inputs": [
+                        {
+                            "input_index": 0,
+                            "pad_name": "default",
+                            "source_filter_id": "in_0_1",
+                            "source_pad_name": "default",
+                            "filter_id": "G1_Parsed_aecho_0",
+                            "media_type": "audio",
+                            "channel_layout": "7.1",
+                            "channels": "8",
+                            "sample_rate": "48000",
+                            "sample_rate": "1/48000"
+                        }
+                    ],
+                    "filter_outputs": [
+                        {
+                            "dest_filter_id": "G1_auto_aresample_0",
+                            "output_index": 0,
+                            "pad_name": "default",
+                            "dest_pad_name": "default",
+                            "filter_id": "G1_Parsed_aecho_0",
+                            "media_type": "audio",
+                            "channel_layout": "7.1",
+                            "channels": "8",
+                            "sample_rate": "48000",
+                            "sample_rate": "1/48000"
+                        }
+                    ]
+                },
+                {
+                    "filter_name": "volume",
+                    "description": "Change input volume.",
+                    "nb_inputs": 1,
+                    "nb_outputs": 1,
+                    "filter_inputs": [
+                        {
+                            "input_index": 0,
+                            "pad_name": "default",
+                            "source_filter_id": "G1_auto_aresample_0",
+                            "source_pad_name": "default",
+                            "filter_id": "G1_Parsed_volume_1",
+                            "media_type": "audio",
+                            "channel_layout": "7.1",
+                            "channels": "8",
+                            "sample_rate": "48000",
+                            "sample_rate": "1/48000"
+                        }
+                    ],
+                    "filter_outputs": [
+                        {
+                            "dest_filter_id": "G1_format_out__0_2",
+                            "output_index": 0,
+                            "pad_name": "default",
+                            "dest_pad_name": "default",
+                            "filter_id": "G1_Parsed_volume_1",
+                            "media_type": "audio",
+                            "channel_layout": "7.1",
+                            "channels": "8",
+                            "sample_rate": "48000",
+                            "sample_rate": "1/48000"
+                        }
+                    ]
+                },
+                {
+                    "filter_name": "abuffer",
+                    "description": "Buffer audio frames, and make them accessible to the filterchain.",
+                    "nb_inputs": 0,
+                    "nb_outputs": 1,
+                    "filter_inputs": [
+
+                    ],
+                    "filter_outputs": [
+                        {
+                            "dest_filter_id": "G1_Parsed_aecho_0",
+                            "output_index": 0,
+                            "pad_name": "default",
+                            "dest_pad_name": "default",
+                            "filter_id": "G1_graph__1_in_0_1",
+                            "media_type": "audio",
+                            "channel_layout": "7.1",
+                            "channels": "8",
+                            "sample_rate": "48000",
+                            "sample_rate": "1/48000"
+                        }
+                    ]
+                },
+                {
+                    "filter_name": "abuffersink",
+                    "description": "Buffer audio frames, and make them available to the end of the filter graph.",
+                    "nb_inputs": 1,
+                    "nb_outputs": 0,
+                    "filter_inputs": [
+                        {
+                            "input_index": 0,
+                            "pad_name": "default",
+                            "source_filter_id": "G1_format_out__0_2",
+                            "source_pad_name": "default",
+                            "filter_id": "G1_out__0_2",
+                            "media_type": "audio",
+                            "channel_layout": "7.1",
+                            "channels": "8",
+                            "sample_rate": "48000",
+                            "sample_rate": "1/48000"
+                        }
+                    ],
+                    "filter_outputs": [
+
+                    ]
+                },
+                {
+                    "filter_name": "aformat",
+                    "description": "Convert the input audio to one of the specified formats.",
+                    "nb_inputs": 1,
+                    "nb_outputs": 1,
+                    "filter_inputs": [
+                        {
+                            "input_index": 0,
+                            "pad_name": "default",
+                            "source_filter_id": "G1_Parsed_volume_1",
+                            "source_pad_name": "default",
+                            "filter_id": "G1_format_out__0_2",
+                            "media_type": "audio",
+                            "channel_layout": "7.1",
+                            "channels": "8",
+                            "sample_rate": "48000",
+                            "sample_rate": "1/48000"
+                        }
+                    ],
+                    "filter_outputs": [
+                        {
+                            "dest_filter_id": "out__0_2",
+                            "output_index": 0,
+                            "pad_name": "default",
+                            "dest_pad_name": "default",
+                            "filter_id": "G1_format_out__0_2",
+                            "media_type": "audio",
+                            "channel_layout": "7.1",
+                            "channels": "8",
+                            "sample_rate": "48000",
+                            "sample_rate": "1/48000"
+                        }
+                    ]
+                },
+                {
+                    "filter_name": "aresample",
+                    "description": "Resample audio data.",
+                    "nb_inputs": 1,
+                    "nb_outputs": 1,
+                    "filter_inputs": [
+                        {
+                            "input_index": 0,
+                            "pad_name": "default",
+                            "source_filter_id": "G1_Parsed_aecho_0",
+                            "source_pad_name": "default",
+                            "filter_id": "G1_auto_aresample_0",
+                            "media_type": "audio",
+                            "channel_layout": "7.1",
+                            "channels": "8",
+                            "sample_rate": "48000",
+                            "sample_rate": "1/48000"
+                        }
+                    ],
+                    "filter_outputs": [
+                        {
+                            "dest_filter_id": "G1_Parsed_volume_1",
+                            "output_index": 0,
+                            "pad_name": "default",
+                            "dest_pad_name": "default",
+                            "filter_id": "G1_auto_aresample_0",
+                            "media_type": "audio",
+                            "channel_layout": "7.1",
+                            "channels": "8",
+                            "sample_rate": "48000",
+                            "sample_rate": "1/48000"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "inputfiles": [
+        {
+            "index": "0",
+            "demuxer_name": "matroska,webm",
+            "file_extension": "mkv",
+            "url": "media\\video_1.mkv",
+            "inputstreams": [
+                {
+                    "id": "r_in_0_0",
+                    "name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+                    "index": "0",
+                    "media_type": "video"
+                },
+                {
+                    "id": "r_in_0_1",
+                    "name": "DCA (DTS Coherent Acoustics)",
+                    "index": "1",
+                    "media_type": "audio"
+                },
+                {
+                    "id": "r_in_0_2",
+                    "name": "DCA (DTS Coherent Acoustics)",
+                    "index": "2",
+                    "media_type": "audio"
+                },
+                {
+                    "id": "r_in_0_3",
+                    "name": "HDMV Presentation Graphic Stream subtitles",
+                    "index": "3",
+                    "media_type": "subtitle"
+                },
+                {
+                    "id": "r_in_0_4",
+                    "name": "DVD subtitles",
+                    "index": "4",
+                    "media_type": "subtitle"
+                },
+                {
+                    "id": "r_in_0_5",
+                    "name": "HDMV Presentation Graphic Stream subtitles",
+                    "index": "5",
+                    "media_type": "subtitle"
+                },
+                {
+                    "id": "r_in_0_6",
+                    "name": "HDMV Presentation Graphic Stream subtitles",
+                    "index": "6",
+                    "media_type": "subtitle"
+                },
+                {
+                    "id": "r_in_0_7",
+                    "name": "DVD subtitles",
+                    "index": "7",
+                    "media_type": "subtitle"
+                }
+            ]
+        }
+    ],
+    "decoders": [
+        {
+            "source_id": "r_in_0_0",
+            "id": "in_0_0",
+            "name": "h264",
+            "media_type": "video"
+        },
+        {
+            "source_id": "r_in_0_1",
+            "id": "in_0_1",
+            "name": "dca",
+            "media_type": "audio"
+        },
+        {
+            "source_id": "r_in_0_2",
+            "id": "in_0_2",
+            "name": "dca",
+            "media_type": "audio"
+        },
+        {
+            "source_id": "r_in_0_3",
+            "id": "in_0_3",
+            "name": "pgssub",
+            "media_type": "subtitle"
+        },
+        {
+            "source_id": "r_in_0_6",
+            "id": "in_0_6",
+            "name": "pgssub",
+            "media_type": "subtitle"
+        }
+    ],
+    "encoders": [
+        {
+            "id": "out__0_0",
+            "dest_id": "r_out__0_0",
+            "name": "libx264",
+            "media_type": "video"
+        },
+        {
+            "id": "out__0_1",
+            "dest_id": "r_out__0_1",
+            "name": "libvorbis",
+            "media_type": "audio"
+        },
+        {
+            "id": "out__0_2",
+            "dest_id": "r_out__0_2",
+            "name": "libvorbis",
+            "media_type": "audio"
+        },
+        {
+            "id": "out__0_3",
+            "dest_id": "r_out__0_3",
+            "name": "dvbsub",
+            "media_type": "subtitle"
+        },
+        {
+            "id": "out__1_0",
+            "dest_id": "r_out__1_0",
+            "name": "libx264",
+            "media_type": "video"
+        },
+        {
+            "id": "out__1_1",
+            "dest_id": "r_out__1_1",
+            "name": "mp2",
+            "media_type": "audio"
+        },
+        {
+            "id": "out__1_2",
+            "dest_id": "r_out__1_2",
+            "name": "dvbsub",
+            "media_type": "subtitle"
+        }
+    ],
+    "outputfiles": [
+        {
+            "index": "1",
+            "muxer_name": "mpegts",
+            "file_extension": "ts",
+            "url": "temp.ts",
+            "outputstreams": [
+                {
+                    "id": "r_out__1_0",
+                    "name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+                    "index": "0",
+                    "media_type": "video"
+                },
+                {
+                    "id": "r_out__1_1",
+                    "name": "MP2 (MPEG audio layer 2)",
+                    "index": "1",
+                    "media_type": "audio"
+                },
+                {
+                    "id": "r_out__1_2",
+                    "name": "DVB subtitles",
+                    "index": "2",
+                    "media_type": "subtitle"
+                }
+            ]
+        },
+        {
+            "index": "0",
+            "muxer_name": "matroska",
+            "file_extension": "mkv",
+            "url": "out1.mkv",
+            "outputstreams": [
+                {
+                    "id": "r_out__0_0",
+                    "name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+                    "index": "0",
+                    "media_type": "video"
+                },
+                {
+                    "id": "r_out__0_1",
+                    "name": "Vorbis",
+                    "index": "1",
+                    "media_type": "audio"
+                },
+                {
+                    "id": "r_out__0_2",
+                    "name": "Vorbis",
+                    "index": "2",
+                    "media_type": "audio"
+                },
+                {
+                    "id": "r_out__0_3",
+                    "name": "DVB subtitles",
+                    "index": "3",
+                    "media_type": "subtitle"
+                }
+            ]
+        }
+    ],
+    "streamlinks": [
+        {
+            "dest_stream_id": "out__0_3",
+            "source_stream_id": "in_0_3",
+            "operation": "Transcode",
+            "media_type": "subtitle"
+        },
+        {
+            "dest_stream_id": "out__1_2",
+            "source_stream_id": "in_0_6",
+            "operation": "Transcode",
+            "media_type": "subtitle"
+        }
+    ]
+}

@@ -1,0 +1,1 @@
+ffmpeg  -noauto_conversion_filters -print_graphs_file <graph_file> -print_graphs_format <output_format> -hide_banner -i media\video_1.mkv -i media\video_1.en.srt -i media\video_1.de.ssa -map 0:0 -c:v copy -map 0:1 -c:a:0 copy -map 0:2 -c:a:1 copy -map 0:7 -c:s:0 dvbsub -map 1:0 -c:s:1 ass -map 2:0 -c:s:2 copy -y  temp.mkv
