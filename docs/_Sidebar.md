@@ -32,7 +32,7 @@
   - [Graph Schema Diagram](visualization/Graphs-Schema-Diagram.md)
   - [FFprobe Schema Diagram](visualization/FFprobe-Schema-Diagram.md)
 
-#  Tests & Tryout
+#  Tests and Tryout
 
 - WIP (see [here](https://github.com/softworkz/ffmpeg_output_apis/tree/master/tests))
 
