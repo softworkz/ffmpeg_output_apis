@@ -30,7 +30,7 @@ config:
   er:
     layoutDirection: LR
     layout: dagre
-    diagramPadding: 50
+    diagramPadding: 5
     entityPadding: 12
   themeCSS:
     - '.er.entityBox { fill: orange; rx: 5; ry: 5; stroke-width: 1px !important;      stroke: #e9e9e9 !important;      fill: url(#ff-filtergradient) !important;      filter: drop-shadow(0px 0px 5.5px rgba(0, 0, 0, 0.15));  fill: white !important;  } '
@@ -117,6 +117,128 @@ Let's go through the elements briefly:
   ...
 - **filter**
   ...
+
+  ## InputFiles and OutputFiles
+
+
+```mermaid
+---
+config:
+  curve: step
+  er:
+    layoutDirection: LR
+    layout: dagre
+    diagramPadding: 5
+    entityPadding: 12
+  themeCSS:
+    - '.er.entityBox { fill: orange; rx: 5; ry: 5; stroke-width: 1px !important;      stroke: #e9e9e9 !important;      fill: url(#ff-filtergradient) !important;      filter: drop-shadow(0px 0px 5.5px rgba(0, 0, 0, 0.15));  fill: white !important;  } '
+    - '.entityLabel { fill: #33333394;  } '
+    - 'g  .entityLabel:first-of-type {
+        font-size: 0.85rem !important;   
+        font-weight: 600 !important;   
+        text-transform: uppercase;
+        min-width: 5.5rem;
+        fill: #33333394 !important; 
+        margin-bottom: 0.1rem; } '
+    - '.attributeBoxEven, .attributeBoxOdd {
+        fill: transparent; 
+        stroke: #dfdfdf;
+        filter: drop-shadow(0px 0px 2.2px rgba(0, 0, 0, 0.15));
+        stroke-width: 0.4; rx: 2; ry: 2;
+        clip-path: fill-box; } '
+    - >-
+      path.er.relationshipLine { marker-end: none !important; marker-start: none
+      !important;  stroke: gray;      stroke-width: 1;      fill: none;     
+      filter: drop-shadow(0px 0px 9px rgba(0, 0, 0, 0.5));  } 
+    - null
+  theme: base
+---
+erDiagram
+    inputfiles {
+    }
+    inputfiles ||--o{ inputfile : ""
+    inputfile {
+    }
+    inputfile ||--|| inputstreams : ""
+    inputstreams {
+    }
+    inputstreams ||--o{ inputstream : ""
+    inputstream {
+    }
+    outputfiles {
+    }
+    outputfiles ||--o{ outputfile : ""
+    outputfile {
+    }
+    outputfile ||--|| outputstreams : ""
+    outputstreams {
+    }
+    outputstreams ||--o{ outputstream : ""
+    outputstream {
+    }
+    root ||--|| inputfiles : ""
+    root ||--|| outputfiles : ""
+```
+
+
+  ## Decoders, Encoders and StreamLinks
+
+
+```mermaid
+---
+config:
+  curve: step
+  er:
+    layoutDirection: LR
+    layout: dagre
+    diagramPadding: 5
+    entityPadding: 12
+  themeCSS:
+    - '.er.entityBox { fill: orange; rx: 5; ry: 5; stroke-width: 1px !important;      stroke: #e9e9e9 !important;      fill: url(#ff-filtergradient) !important;      filter: drop-shadow(0px 0px 5.5px rgba(0, 0, 0, 0.15));  fill: white !important;  } '
+    - '.entityLabel { fill: #33333394;  } '
+    - 'g  .entityLabel:first-of-type {
+        font-size: 0.85rem !important;   
+        font-weight: 600 !important;   
+        text-transform: uppercase;
+        min-width: 5.5rem;
+        fill: #33333394 !important; 
+        margin-bottom: 0.1rem; } '
+    - '.attributeBoxEven, .attributeBoxOdd {
+        fill: transparent; 
+        stroke: #dfdfdf;
+        filter: drop-shadow(0px 0px 2.2px rgba(0, 0, 0, 0.15));
+        stroke-width: 0.4; rx: 2; ry: 2;
+        clip-path: fill-box; } '
+    - >-
+      path.er.relationshipLine { marker-end: none !important; marker-start: none
+      !important;  stroke: gray;      stroke-width: 1;      fill: none;     
+      filter: drop-shadow(0px 0px 9px rgba(0, 0, 0, 0.5));  } 
+    - null
+  theme: base
+---
+    erDiagram
+
+    streamlinks {
+    }
+    streamlinks ||--o{ streamlink : ""
+    streamlink {
+    }
+    decoders {
+    }
+    decoders ||--o{ decoder : ""
+    decoder {
+    }
+    encoders {
+    }
+    encoders ||--o{ encoder : ""
+
+    encoder {
+    }
+    root ||--|| decoders : ""
+    root ||--|| encoders : ""
+    root ||--|| streamlinks : ""
+```
+
 
 
 ## Extended Information

@@ -2,10 +2,25 @@
 
 ## Tests
 
+Please see [**this repo folder**](https://github.com/softworkz/ffmpeg_output_apis/tree/master/tests)
 
-WIP - see this [repo folder](https://github.com/softworkz/ffmpeg_output_apis/tree/master/tests)
+### Files
 
-### Windows Binary
+#### config.txt
 
-The folder also contains a Windows binary and test scripts (executing   `runall.cmd` should work directly on Windows)
+Allows to configure paths and which tests to run:
 
+- TEST_NAMES  
+  Names of tests to run (as cmd files in this folder)
+- EXTENSION_PAIRS  
+  These pairs (separated by colon) define the outputs to generate:
+  - 1st part: output file extension
+  - 2nd part: output format
+
+### runall.cmd
+
+Execute tests
+
+### ffmpeg.exe
+
+Windows binary for testing

@@ -358,112 +358,6 @@ erDiagram
 
   programs ||--o{ program : ""
 
-  stream_group_stream_disposition {
-  }
-
-
-
-  stream_group_stream_tags {
-  }
-
-
-
-  stream_group {
-  }
-
-
-  stream_group ||--|| stream_group_tags : ""
-  stream_group ||--|| stream_group_disposition : ""
-  stream_group ||--|| stream_group_components : ""
-  stream_group ||--|| stream_group_streams : ""
-
-  stream_group_components {
-  }
-
-
-  stream_group_components ||--o{ stream_group_component : ""
-
-  stream_group_component {
-  }
-
-
-  stream_group_component ||--|| component : ""
-
-  component {
-  }
-
-
-  component ||--o{ subcomponent_entry : ""
-
-  subcomponent_entry {
-  }
-
-
-  subcomponent_entry ||--|| stream_group_pieces : ""
-
-  stream_group_pieces {
-  }
-
-
-  stream_group_pieces ||--o{ stream_group_piece : ""
-
-  stream_group_piece {
-  }
-
-
-  stream_group_piece ||--|| subpiece : ""
-
-  subpiece {
-  }
-
-
-  subpiece ||--o{ subpiece_entry : ""
-
-  subpiece_entry {
-  }
-
-
-  subpiece_entry ||--|| block : ""
-
-  block {
-  }
-
-
-  block ||--o{ block_entry : ""
-
-  block_entry {
-  }
-
-
-
-  stream_group_streams {
-  }
-
-
-  stream_group_streams ||--o{ stream_group_stream : ""
-
-  stream_group_stream {
-  }
-
-
-  stream_group_stream ||--|| stream_group_stream_disposition : ""
-  stream_group_stream ||--|| stream_group_stream_tags : ""
-
-  stream_group_disposition {
-  }
-
-
-
-  stream_group_tags {
-  }
-
-
-
-  stream_groups {
-  }
-
-
-  stream_groups ||--o{ stream_group : ""
 
   root {
   }
@@ -473,7 +367,6 @@ erDiagram
   root ||--|| format : ""
   root ||--|| frames : ""
   root ||--|| programs : ""
-  root ||--|| stream_groups : ""
   root ||--|| streams : ""
   root ||--|| packets : ""
   root ||--|| error : ""

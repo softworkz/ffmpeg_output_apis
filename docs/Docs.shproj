@@ -16,6 +16,9 @@
   <ItemGroup>
     <Folder Include="images\visualization\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="schema_printing\ffprobe_original.xsd" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <Import Project=".docproj\DocProj.props" />
   <Import Project=".docproj\DocProj.targets" />
