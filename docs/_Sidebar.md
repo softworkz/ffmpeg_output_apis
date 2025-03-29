@@ -13,12 +13,14 @@
 # Mermaid Formatter
 
 - [Translating Data to a Diagram](execution_graph/Translating-to-Diagram.md)
-- Examples
+- Examples: Full HTML
+  - [Simple](https://softworkz.github.io/ffmpeg_output_apis/1_nofilters_3_in_1_out.html)
+  - [Filtering and HWA](https://softworkz.github.io/ffmpeg_output_apis/2_hwa_qsv.html)
+  - [Complex Graphs](https://softworkz.github.io/ffmpeg_output_apis/3_complex_graphs.html)
+- Examples: GitHub Embedded
   - [Simple](visualization/Graphs-Example1.md)
   - [Filtering and HWA](visualization/Graphs-Example2.md)
   - [Complex Graphs](visualization/Graphs-Example3.md)
-  - [Simple &amp; Colored Links](visualization/Graphs-Example3%20-Link-Coloring.md)
-  - [2 Hwa Qsv](2_hwa_qsv.html)
 
 
 # Schema Printing
