@@ -16,12 +16,12 @@ This is a collection of efforts in improving output and presentation of FFmpeg. 
   It started with the idea of writing information about filtergraphs in ffmpeg and was extended to include data which provides a complete picture of ffmpeg execution runs  
   <sub>**STATUS:** Mostly done, some details need discussion</sub>  
   &nbsp;    
-  3.1 **As Formatted Data**  
+  3.1. **As Formatted Data**  
     Feature for outputting filtergraph and other details in machine-readable formats (like those supported by FFprobe), using the new AVTextFormat API (see 1).  
     see [Execution Graph Entities](execution_graph/Execution-Graph-Entities.md)  
     &nbsp;  
-  3.2 **As Diagram**  
-  Feature for outputting filtergraph and other details in machine-readable formats (like those that FFprobe includes), using the new AVTextFormat API (1)  
+  3.2. **As Diagram**  
+    Feature for outputting filtergraph and other details in machine-readable formats (like those that FFprobe includes), using the new AVTextFormat API (1)  
     see [Translating To Diagram](execution_graph/Translating-to-Diagram.md)
     &nbsp;<br>&nbsp;    
 4. **Self-Printing Data Schema**  
@@ -30,6 +30,6 @@ This is a collection of efforts in improving output and presentation of FFmpeg. 
 
 ## Questions?
 
-Feel free to open an issue or post on the FFmpeg Mailing list.
+Feel free to [open an issue](https://github.com/softworkz/ffmpeg_output_apis/issues/new/choose) or post on the FFmpeg Mailing list.
 
 
