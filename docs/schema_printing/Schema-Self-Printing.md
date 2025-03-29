@@ -120,6 +120,13 @@ It might not be a good practice in general, but the above will be executed only 
 This is nothing more than a cherry on top, and I wanted to try out anyway how the mermaid formatter would work out and need to be changed to handle a different type of diagram.
 For the execution graph it is using a "FlowChart" diagram (probably the most common one @mermaid) and what appears to make sense for the data schema case is an "erDiagram" (Entity Relationship).
 
+### Examples
+
+Here are two examples. For the first one, all fields are included, but the mocking of the fata for FFprobe isn't done yet, that's why the fields are available only for some but not all sections/elements:
+
+- [Graph Schema Diagram](https://softworkz.github.io/ffmpeg_output_apis/graph_schema.html)
+- [FFprobe Schema Diagram](https://softworkz.github.io/ffmpeg_output_apis/ffprobe_schema.html)
+
 
 
 

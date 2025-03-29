@@ -103,20 +103,25 @@ Let's go through the elements briefly:
 
 - **root**  
   just the main container of everything
-- **graphs**  
+- **graphs**    
   contains all filter graphs - complex and simple  
   this extra container is needed because there are other top-level containers and mixed elements are not allowed by all text formats
-- **graph**
+- **graph**  
   the top container for everything in a filter graph
-- **graph_inputs**, **graph_outputs**
+- **graph_inputs**, **graph_outputs**  
   container for inputs and outputs
-- **graph_input**, **graph_output**
+- **graph_input**, **graph_output**  
   these elements are markers to the actual filters that are at the entry or exit side of a fileraph.
   In a strict sense, these are redundant. It would also be possible to determine the entry and exit filters of a graph by following the paths of all links. For an interactive user looking that the data, this is a very tedious task and hence there's still  value in having that information included, allowing you to easily and quickly determine the edge filters.
-- **filters**
-  ...
-- **filter**
-  ...
+- **filters**  
+  container for filters in a graph
+- **filter**  
+  probably the most important element. Unfortunately, available data is limited at the moment because a lot has been made private for reasons unknown to me, so for whatever more we want to incliude will require to drll some hole into that isolation.
+- **filter_inputs**, **filter_outputs**  
+  containers for input and output links of a filter
+- **filter_input**, **filter_output**  
+  these are the links between filters on the input and output side
+
 
   ## InputFiles and OutputFiles
 
@@ -181,6 +186,18 @@ erDiagram
 ```
 
 
+- **inputfiles**, **outputfiles**  
+  containers for inputs and outputs of the FFmpeg session
+- **inputfile**, **outputfile**
+  represents a single input or output file, doesn't actually need to be a file
+- **inputstreamss**, **outputstreamss**  
+  containers for streams
+- **inputstreams**, **outputstreams**
+  only minimal information is included for streams like media_type and codec
+  by combining the `index` values from in/outputfile and in/outputstream you get a stream identifier like used in FFmpeg command lines, like: `#1.2`
+
+
+
   ## Decoders, Encoders and StreamLinks
 
 
@@ -239,7 +256,7 @@ config:
     root ||--|| streamlinks : ""
 ```
 
-
+(tbc)
 
 ## Extended Information
 

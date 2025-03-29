@@ -27,8 +27,8 @@
 
 - [Schema Self-Printing](schema_printing/Schema-Self-Printing.md)
 - Diagram Examples
-  - [Graph Schema Diagram](visualization/Graphs-Schema-Diagram.md)
-  - [FFprobe Schema Diagram](visualization/FFprobe-Schema-Diagram.md)
+  - [Graph Schema Diagram](https://softworkz.github.io/ffmpeg_output_apis/graph_schema.html)
+  - [FFprobe Schema Diagram](https://softworkz.github.io/ffmpeg_output_apis/ffprobe_schema.html)
 
 #  Tests and Tryout
 
