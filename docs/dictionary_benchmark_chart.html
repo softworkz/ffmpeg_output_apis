@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dictionary Benchmark Comparison</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .chart-container {
+            position: relative;
+            height: 600px;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+        .controls {
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dictionary Benchmark Comparison</h1>
+    
+    <div class="controls">
+        <div class="control-group">
+            <label>
+                <input type="radio" name="valueType" value="absolute" checked> Absolute Values (cycles)
+            </label>
+            <label>
+                <input type="radio" name="valueType" value="relative"> Relative Values (% of AVDictionary)
+            </label>
+        </div>
+        
+        <div class="control-group" style="margin-top: 15px;">
+            <div>
+                <label for="minEntries">Min Entries: <span id="minEntriesValue">1</span></label>
+                <input type="range" id="minEntries" min="0" max="17" value="0" style="width: 200px;">
+            </div>
+            <div style="margin-top: 5px;">
+                <label for="maxEntries">Max Entries: <span id="maxEntriesValue">200,000</span></label>
+                <input type="range" id="maxEntries" min="0" max="17" value="17" style="width: 200px;">
+            </div>
+        </div>
+    </div>
+    
+    <div class="chart-container">
+        <canvas id="insertionChart"></canvas>
+    </div>
+    
+    <div class="chart-container">
+        <canvas id="lookupFullChart"></canvas>
+    </div>
+    
+    <div class="chart-container">
+        <canvas id="lookupHalfChart"></canvas>
+    </div>
+
+    <script>
+        // Benchmark data
+        const benchmarkData = [
+            // [entries, AVDict_insertion, AVDict2_insertion, AVMap_insertion, 
+            //          AVDict_lookup100, AVDict2_lookup100, AVMap_lookup100,
+            //          AVDict_lookup50, AVDict2_lookup50, AVMap_lookup50]
+            [1, 310, 466, 214, 41213, 81205, 48939, 25610, 63738, 30859],
+            [2, 1111, 657, 563, 42563, 79977, 52504, 28497, 63147, 34309],
+            [3, 1307, 1080, 1068, 43016, 78491, 52500, 34417, 65345, 37534],
+            [5, 2253, 1426, 1611, 46239, 78133, 56785, 40070, 68731, 43399],
+            [10, 5019, 2699, 3933, 58752, 82146, 66605, 74699, 89139, 54566],
+            [25, 12823, 7146, 8176, 89609, 82302, 79883, 123457, 90002, 64624],
+            [50, 29978, 16420, 23558, 155116, 82615, 90493, 251623, 112692, 91424],
+            [100, 81115, 40204, 50393, 313071, 82780, 102494, 474283, 126364, 118218],
+            [250, 333125, 159356, 186784, 748016, 128249, 140113, 1030383, 154383, 141779],
+            [500, 1011189, 374018, 525409, 1479133, 182932, 184390, 2033581, 176236, 174391],
+            [1000, 3898727, 928904, 778864, 3152981, 249594, 224534, 3675493, 186528, 193777],
+            [2500, 20761246, 1966098, 1857357, 2950138, 234341, 222170, 8563196, 247513, 255538],
+            [5000, 84455803, 4225330, 3455363, 2963695, 250247, 238958, 17699182, 329159, 362946],
+            [10000, 362830859, 8866988, 7838390, 3117775, 277893, 291541, 39118446, 432935, 514603],
+            [25000, 2399516038, 27057229, 38317427, 2935091, 244981, 299864, 92590831, 403363, 728032],
+            [50000, 10073876706, 67559563, 101557773, 3062505, 284400, 349076, 191193034, 443757, 957559],
+            [100000, 45446026787, 150192824, 225821733, 3085317, 284027, 375552, 519644568, 492125, 1208417],
+            [200000, 281602757428, 327146262, 538823074, 3069747, 282565, 400410, 1557460485, 471980, 1347415]
+        ];
+
+        // Setup colors for each implementation
+        const colors = {
+            AVDictionary: 'rgb(54, 162, 235)',
+            AVDictionary2: 'rgb(255, 99, 132)',
+            AVMap: 'rgb(75, 192, 192)'
+        };
+
+        // Calculate relative values (percentage of AVDictionary)
+        const relativeData = benchmarkData.map(row => {
+            return [
+                row[0], // entries
+                100, // AVDict_insertion (baseline)
+                (row[2] / row[1] * 100), // AVDict2_insertion 
+                (row[3] / row[1] * 100), // AVMap_insertion
+                100, // AVDict_lookup100 (baseline)
+                (row[5] / row[4] * 100), // AVDict2_lookup100
+                (row[6] / row[4] * 100), // AVMap_lookup100
+                100, // AVDict_lookup50 (baseline)
+                (row[8] / row[7] * 100), // AVDict2_lookup50
+                (row[9] / row[7] * 100)  // AVMap_lookup50
+            ];
+        });
+
+        // Extract data for charts
+        const entries = benchmarkData.map(row => row[0]);
+
+        // Function to filter data based on selected range
+        function filterDataByRange(data, minIdx, maxIdx) {
+            return data.filter((_, index) => index >= minIdx && index <= maxIdx);
+        }
+        
+        // Function to create datasets with consistent colors
+        function createDatasets(dataIndex, relativeIndex, showRelative = false, minIdx = 0, maxIdx = benchmarkData.length - 1) {
+            const filteredData = filterDataByRange(showRelative ? relativeData : benchmarkData, minIdx, maxIdx);
+            const filteredEntries = filterDataByRange(entries, minIdx, maxIdx);
+            
+            return [
+                {
+                    label: 'AVDictionary',
+                    data: filteredData.map(row => row[dataIndex]),
+                    borderColor: colors.AVDictionary,
+                    backgroundColor: colors.AVDictionary + '40',
+                    borderWidth: 2,
+                    pointRadius: 3,
+                    pointHoverRadius: 5
+                },
+                {
+                    label: 'AVDictionary2',
+                    data: filteredData.map(row => row[relativeIndex]),
+                    borderColor: colors.AVDictionary2,
+                    backgroundColor: colors.AVDictionary2 + '40',
+                    borderWidth: 2,
+                    pointRadius: 3,
+                    pointHoverRadius: 5
+                },
+                {
+                    label: 'AVMap',
+                    data: filteredData.map(row => row[relativeIndex + 1]),
+                    borderColor: colors.AVMap,
+                    backgroundColor: colors.AVMap + '40', 
+                    borderWidth: 2,
+                    pointRadius: 3,
+                    pointHoverRadius: 5
+                }
+            ];
+        }
+
+        // Function to create a chart
+        function createChart(canvasId, title, datasetIndices, isRelative = false, minIdx = 0, maxIdx = benchmarkData.length - 1) {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            const filteredEntries = filterDataByRange(entries, minIdx, maxIdx);
+            
+            return new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: filteredEntries,
+                    datasets: createDatasets(datasetIndices[0], datasetIndices[1], isRelative, minIdx, maxIdx)
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: title,
+                            font: {
+                                size: 16,
+                                weight: 'bold'
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (isRelative) {
+                                        label += context.parsed.y.toFixed(1) + '%';
+                                    } else {
+                                        label += context.parsed.y.toLocaleString();
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            type: 'logarithmic',
+                            title: {
+                                display: true,
+                                text: 'Number of Entries',
+                                font: {
+                                    weight: 'bold'
+                                }
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: isRelative ? 'Percentage of AVDictionary (%)' : 'Average Cycles',
+                                font: {
+                                    weight: 'bold'
+                                }
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    if (isRelative) {
+                                        return value + '%';
+                                    } else {
+                                        if (value >= 1000000) {
+                                            return (value / 1000000).toFixed(1) + 'M';
+                                        } else if (value >= 1000) {
+                                            return (value / 1000).toFixed(1) + 'K';
+                                        } else {
+                                            return value;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initialize charts
+        let insertionChart = createChart('insertionChart', 
+            'Insertion Performance', [1, 2]);
+        
+        let lookupFullChart = createChart('lookupFullChart', 
+            'Lookup Performance (100% existing keys)', [4, 5]);
+        
+        let lookupHalfChart = createChart('lookupHalfChart', 
+            'Lookup Performance (50% existing keys)', [7, 8]);
+
+        // Entry size values for labels
+        const entrySizes = entries;
+        
+        // Initialize label display
+        document.getElementById('minEntriesValue').textContent = entrySizes[0].toLocaleString();
+        document.getElementById('maxEntriesValue').textContent = entrySizes[entrySizes.length - 1].toLocaleString();
+        
+        // Function to update all charts
+        function updateAllCharts() {
+            const isRelative = document.querySelector('input[name="valueType"]:checked').value === 'relative';
+            const minIdx = parseInt(document.getElementById('minEntries').value);
+            const maxIdx = parseInt(document.getElementById('maxEntries').value);
+            
+            // Update labels
+            document.getElementById('minEntriesValue').textContent = entrySizes[minIdx].toLocaleString();
+            document.getElementById('maxEntriesValue').textContent = entrySizes[maxIdx].toLocaleString();
+            
+            // Destroy existing charts
+            insertionChart.destroy();
+            lookupFullChart.destroy();
+            lookupHalfChart.destroy();
+            
+            // Recreate charts with new data
+            insertionChart = createChart('insertionChart', 
+                'Insertion Performance', [1, 2], isRelative, minIdx, maxIdx);
+            
+            lookupFullChart = createChart('lookupFullChart', 
+                'Lookup Performance (100% existing keys)', [4, 5], isRelative, minIdx, maxIdx);
+            
+            lookupHalfChart = createChart('lookupHalfChart', 
+                'Lookup Performance (50% existing keys)', [7, 8], isRelative, minIdx, maxIdx);
+        }
+        
+        // Range slider event listeners
+        document.getElementById('minEntries').addEventListener('input', function() {
+            const maxSlider = document.getElementById('maxEntries');
+            // Ensure min doesn't exceed max
+            if (parseInt(this.value) > parseInt(maxSlider.value)) {
+                maxSlider.value = this.value;
+            }
+            updateAllCharts();
+        });
+        
+        document.getElementById('maxEntries').addEventListener('input', function() {
+            const minSlider = document.getElementById('minEntries');
+            // Ensure max doesn't go below min
+            if (parseInt(this.value) < parseInt(minSlider.value)) {
+                minSlider.value = this.value;
+            }
+            updateAllCharts();
+        });
+        
+        // Toggle between absolute and relative values
+        document.querySelectorAll('input[name="valueType"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                updateAllCharts();
+            });
+        });
+    </script>
+</body>
+</html>
