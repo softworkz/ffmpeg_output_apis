@@ -6,15 +6,15 @@ This is a collection of efforts in improving output and presentation of FFmpeg. 
 
 1. **AVTextFormat API**  
   Reshaping the "writers api" (ffprobe output) into an independent and re-usable API within FFmpeg.  
-  <sub>**STATUS:** Completed, pending merge; available here: https://github.com/ffstaging/FFmpeg/pull/52</sub>
+  <sub>**STATUS:** Completed, merged into FFmpeg master.</sub>
   &nbsp;<br>&nbsp;    
 2. **YAML Output Format**  
   Implement a new TextFormatter for creating YAML output.  
-  <sub>**STATUS:** Ready for submission once (1) is meged</sub
+  <sub>**STATUS:** Pending - not submitted yet</sub
   &nbsp;<br>&nbsp;    
 3. **Execution Graph Output**  
   It started with the idea of writing information about filtergraphs in ffmpeg and was extended to include data which provides a complete picture of ffmpeg execution runs  
-  <sub>**STATUS:** Mostly done, some details need discussion</sub>  
+  <sub>**STATUS:** Completed, submitted for review: https://github.com/ffstaging/FFmpeg/pull/66</sub>  
   &nbsp;    
   3.1. **As Formatted Data**  
     Feature for outputting filtergraph and other details in machine-readable formats (like those supported by FFprobe), using the new AVTextFormat API (see 1).  
