@@ -10,7 +10,7 @@ This is a collection of efforts in improving output and presentation of FFmpeg. 
   &nbsp;<br>&nbsp;    
 2. **YAML Output Format**  
   Implement a new TextFormatter for creating YAML output.  
-  <sub>**STATUS:** Pending - not submitted yet</sub
+  <sub>**STATUS:** Pending - not submitted yet</sub>
   &nbsp;<br>&nbsp;    
 3. **Execution Graph Output**  
   It started with the idea of writing information about filtergraphs in ffmpeg and was extended to include data which provides a complete picture of ffmpeg execution runs  
