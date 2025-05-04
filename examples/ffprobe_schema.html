@@ -51,7 +51,8 @@
         flex: 1;
         justify-content: center;
         margin: 0;
-        overflow: overlay;
+        overflow: auto;
+        scrollbar-gutter: stable;
     }
 
     pre.mermaid svg {
@@ -96,8 +97,7 @@ config:
         stroke-width: 0.4; rx: 2; ry: 2;
         clip-path: fill-box; } '
     - >-
-      path.er.relationshipLine { marker-end: none !important; marker-start: none
-      !important;  stroke: gray;      stroke-width: 1;      fill: none;     
+      path.er.relationshipLine { stroke-width: 1;      fill: none;     
       filter: drop-shadow(0px 0px 9px rgba(0, 0, 0, 0.5));  } 
     - null
   theme: default
